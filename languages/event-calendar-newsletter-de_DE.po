@@ -1,0 +1,268 @@
+# Copyright (C) 2015 Event Calendar Newsletter
+# This file is distributed under the same license as the Event Calendar Newsletter package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Event Calendar Newsletter 1.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/event-calendar-newsletter\n"
+"POT-Creation-Date: 2015-10-11 18:14:54+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-10-19 22:59+0200\n"
+"Last-Translator: Johann Schmiedehausen <s_schmied@gmx.de>\n"
+"Language-Team: Johann Schmiedehausen <s_schmied@gmx.de>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#. Plugin Name of the plugin/theme
+#: includes/ecnadmin.class.php:32 includes/ecnadmin.class.php:132
+msgid "Event Calendar Newsletter"
+msgstr "Kalender Newsletter"
+
+#: includes/ecnadmin.class.php:58
+msgid "Invalid options array"
+msgstr "Ungülige Arraywerte"
+
+#: includes/ecnadmin.class.php:70
+msgid ""
+"<h2>{title}</h2>\n"
+"<p>{start_date} @ {start_time} to {end_time} at {location_name}</p>\n"
+"<p>{description}</p>"
+msgstr ""
+"<h2>{title}</h2>\n"
+"<p>{start_date} @ {start_time} to {end_time} at {location_name}</p>\n"
+"<p>{description}</p>"
+
+#: includes/ecnadmin.class.php:134
+msgid "No supported event calendar plugins available."
+msgstr "Kein unterstütztes Kalender-Plugin gefunden."
+
+#: includes/ecnadmin.class.php:135
+msgid ""
+"Supported calendars include <a href=\"%s\">The Events Calendar</a> and <a href=\"%s"
+"\">Ajax Event Calendar</a>"
+msgstr ""
+"Die unterstützten Kalender sind <a href=\"%s\">The Events Calendar</a> und <a href=\"%s"
+"\">Ajax Event Calendar</a>"
+
+#: includes/ecnadmin.class.php:136
+msgid "Have an events calendar you'd like supported?  <a href=\"%s\">Let me know</a>!"
+msgstr "Ein weiterer Kalender soll Unterstützt werden?  <a href=\"%s\">Sage es mir</a>!"
+
+#: includes/ecnadmin.class.php:143
+msgid "Event Calendar:"
+msgstr "Veranstaltungskalender:"
+
+#: includes/ecnadmin.class.php:151
+msgid ""
+"Can't find the calendar with your events that you'd like to use?  <a href=\"%s\">Let me "
+"know</a>!"
+msgstr ""
+"Der von dir genutzte Kalender ist nicht aufgeführt?  <a href=\"%s\">Lass es mich wissen</"
+"a>!"
+
+#: includes/ecnadmin.class.php:156
+msgid "Future Events to Use:"
+msgstr "Bevorstehende Veranstaltungen aus diesem Zeitraum einbeziehen:"
+
+#: includes/ecnadmin.class.php:160
+msgid "%d month"
+msgid_plural "%d months"
+msgstr[0] "%d Monat"
+msgstr[1] "%d Monate"
+
+#: includes/ecnadmin.class.php:166
+#, fuzzy
+msgid "Format:"
+msgstr "Format:"
+
+#: includes/ecnadmin.class.php:174
+msgid "Insert"
+msgstr "Einfügen"
+
+#: includes/ecnadmin.class.php:183
+msgid "Generate Newsletter Formatted Events"
+msgstr "Generiere newslettertauglich formatierte Veranstaltungsbeschreibungen"
+
+#: includes/ecnadmin.class.php:188
+msgid "Result:"
+msgstr "Ergebnis"
+
+#: includes/ecnadmin.class.php:194
+msgid "Result (HTML):"
+msgstr "Ergebnis (HTML):"
+
+#: includes/ecncalendarevent.class.php:88
+msgid "day"
+msgid_plural "days"
+msgstr[0] "Tag"
+msgstr[1] "Tage"
+
+#: includes/ecncalendarevent.class.php:92
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] "Woche"
+msgstr[1] "Wochen"
+
+#: includes/ecncalendarevent.class.php:96
+msgid "month"
+msgid_plural "months"
+msgstr[0] "Monat"
+msgstr[1] "Monate"
+
+#: includes/ecncalendarevent.class.php:100
+msgid "year"
+msgid_plural "years"
+msgstr[0] "Jahr"
+msgstr[1] "Jahre"
+
+#: includes/ecncalendarevent.class.php:106
+msgid "Title"
+msgstr "Titel"
+
+#: includes/ecncalendarevent.class.php:107
+msgid "Description"
+msgstr "Beschreibung"
+
+#: includes/ecncalendarevent.class.php:108
+msgid "Start Date"
+msgstr "Startdatum"
+
+#: includes/ecncalendarevent.class.php:109
+msgid "Start Time"
+msgstr "Startzeit"
+
+#: includes/ecncalendarevent.class.php:110
+msgid "End Date"
+msgstr "Enddatum"
+
+#: includes/ecncalendarevent.class.php:111
+msgid "End Time"
+msgstr "Endzeit"
+
+#: includes/ecncalendarevent.class.php:112
+msgid "Location Name"
+msgstr "Veranstaltungs-Ort"
+
+#: includes/ecncalendarevent.class.php:113
+msgid "Location Address"
+msgstr "Veranstaltungsadresse"
+
+#: includes/ecncalendarevent.class.php:114
+msgid "Location City"
+msgstr "Stadt"
+
+#: includes/ecncalendarevent.class.php:115
+msgid "Location State"
+msgstr "Staat"
+
+#: includes/ecncalendarevent.class.php:116
+msgid "Location Zip/Postal"
+msgstr "Postleitzahl"
+
+#: includes/ecncalendarevent.class.php:117
+msgid "Location Country"
+msgstr "Land"
+
+#: includes/ecncalendarevent.class.php:118
+msgid "Location Website"
+msgstr "Veranstaltungswebsite"
+
+#: includes/ecncalendarevent.class.php:119
+msgid "Contact Name"
+msgstr "Veranstalter"
+
+#: includes/ecncalendarevent.class.php:120
+msgid "Contact Info"
+msgstr "Veranstalter-Information"
+
+#: includes/ecncalendarevent.class.php:121
+msgid "Contact Phone"
+msgstr "Telefon des Veranstalters"
+
+#: includes/ecncalendarevent.class.php:122
+msgid "Contact Website"
+msgstr "Veranstalterwebsite"
+
+#: includes/ecncalendarevent.class.php:123
+msgid "Contact Email"
+msgstr "Veranstalter-Emailadresse"
+
+#: includes/ecncalendarevent.class.php:124
+msgid "Event Cost"
+msgstr "Kosten"
+
+#: includes/ecncalendarevent.class.php:125
+msgid "Excerpt"
+msgstr "Auszug"
+
+#: includes/ecncalendarevent.class.php:126
+msgid "Event Image"
+msgstr "Veranstaltungsbild"
+
+#: includes/ecncalendarevent.class.php:127
+msgid "All Day"
+msgstr "ganztägig"
+
+#: includes/ecncalendarevent.class.php:128
+msgid "Event Link"
+msgstr "Veranstaltungs-Link"
+
+#: includes/ecncalendarevent.class.php:129
+msgid "Recurring Description (if recurring)"
+msgstr "Frequenz der Wiederkehr (sofern wiederkehrend)"
+
+#: includes/ecncalendarevent.class.php:143
+msgid "Invalid date"
+msgstr "Ungültiges Datum"
+
+#: includes/ecncalendarevent.class.php:369
+msgid "All day"
+msgstr "ganztägig"
+
+#: includes/ecncalendarevent.class.php:385
+msgid "Occurs every %s %s"
+msgid_plural "Occurs every %s %s"
+msgstr[0] "Tritt %s mal pro %s ein"
+msgstr[1] "Tritt alle %s %s ein"
+
+#: includes/ecncalendarevent.class.php:391
+msgid "More information"
+msgstr "Weitere Informationen"
+
+#: includes/ecncalendarfeedajaxcalendar.class.php:41
+msgid "Ajax Event Calendar"
+msgstr "Ajax Veranstaltungskalender"
+
+#: includes/ecncalendarfeedfactory.class.php:13
+msgid "Invalid identifier %s"
+msgstr "Ungültige ID %s"
+
+#: includes/ecncalendarfeedgooglecalendarevents.class.php:56
+msgid "Google Calendar Events"
+msgstr "Google Kalender Veranstaltungen"
+
+#: includes/ecncalendarfeedtheeventscalendar.class.php:56
+msgid "The Events Calendar"
+msgstr "Der Veranstaltungskalender"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/event-calendar-newsletter/"
+msgstr "http://wordpress.org/extend/plugins/event-calendar-newsletter/"
+
+#. Description of the plugin/theme
+msgid ""
+"A plugin that fetches events from common event calendar plugins, and outputs newsletter-"
+"friendly text"
+msgstr ""
+"Ein Plugin, dass Einträge eines Veranstaltungskalender-Plugins einließt und in "
+"newsletter-tauglicher Formatierung ausgiibt."
+
+#. Author of the plugin/theme
+msgid "Brian Hogg"
+msgstr "Brian Hogg"
+
+#. Author URI of the plugin/theme
+msgid "http://brianhogg.com"
+msgstr "http://brianhogg.com"

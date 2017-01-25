@@ -1,0 +1,15 @@
+#ecn-admin .spinner { float: none; }
+#ecn-admin .nav-tab { cursor: pointer; }
+#ecn-admin #select_results, #ecn-admin #select_html_results { margin-top: 20px; }
+#ecn-admin .leftcol { width: 70%; float: left; }
+#ecn-admin .rightcol { width: 25%; float: right; }
+#ecn-admin .clearfix { clear: both; }
+#no-supported-calendars p { font-size: 16px; }
+#output_columns { clear: left; }
+#save_results_box .upgrade {
+    background-color: #f77530;
+    border: 1px solid #e15409;
+    box-shadow: 1px 0 #e15409;
+    -webkit-box-shadow: 1px 0 #e15409;
+    text-shadow: 0 -1px 1px #e15409, 1px 0 1px #e15409, 0 1px 1px #e15409, -1px 0 1px #e15409;
+}

@@ -67,7 +67,7 @@ class ECNCalendarFeedAi1ec extends ECNCalendarFeed {
 
 	        if ( apply_filters( 'ecn_ai1ec_recurring_once', false ) and in_array( $post->ID, $post_ids ) )
 		        continue;
-	        
+
 	        $post_ids[] = $post->ID;
 
             $image_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
@@ -94,7 +94,7 @@ class ECNCalendarFeedAi1ec extends ECNCalendarFeed {
                 'contact_email' => $event->get( 'contact_email' ),
                 'contact_website' => $event->get( 'contact_url' ),
                 'contact_phone' => $event->get( 'contact_phone' ),
-                'link' => get_the_permalink( $post->ID ),
+                'link' => get_the_permalink( $post->ID ) . ( $event->get( 'instance_id' ) ? '?instance_id=' . intval( $event->get( 'instance_id' ) ) : '' ),
 	            'event_website' => $event->get( 'ticket_url' ),
                 'event_image_url' => $image_url,
                 'event_cost' => ( $event->get( 'is_free' ) ? __( 'FREE', 'event-calendar-newsletter' ) : $event->get( 'cost' ) ),

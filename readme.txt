@@ -90,6 +90,10 @@ If you don't already have your event calendar plugin installed and configured, y
 
 == Changelog ==
 
+= 2.5 =
+* Adding default and compact designs
+* Adding {tags} and {tag_links} for certain calendars
+
 = 2.4.1 =
 * Compability change for older versions of PHP
 

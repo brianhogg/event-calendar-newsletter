@@ -3,8 +3,8 @@ Contributors: brianhogg
 Donate link: https://eventcalendarnewsletter.com/
 Tags: events, calendar, event, newsletter, all-in-one, calendar manager, custom calendar, custom calendars, events feed, google calendar, google
 Requires at least: 4.1
-Tested up to: 4.7.1
-Stable tag: 2.5.1
+Tested up to: 4.7.2
+Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,9 @@ If you don't already have your event calendar plugin installed and configured, y
 4. Choose which events to include by how far in the future, Pro version can filter by categories or tags
 
 == Changelog ==
+
+= 2.5.2 =
+* Fixes issues with links in all-in-one by time.ly
 
 = 2.5 =
 * Adding default and compact designs

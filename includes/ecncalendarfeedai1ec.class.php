@@ -76,6 +76,10 @@ class ECNCalendarFeedAi1ec extends ECNCalendarFeed {
             else
 	            $image_url = false;
 
+	        $permalink = get_the_permalink( $post->ID );
+	        if ( $event->get( 'instance_id' ) )
+	        	$permalink .= ( ( false !== strpos( $permalink, '?' ) ) ? '&instance_id=' : '?instance_id=' ) . intval( $event->get( 'instance_id' ) );
+
             $retval[] = new ECNCalendarEvent( array(
                 'start_date' => $event->get( 'start' )->format( 'Y-m-d H:i:s', $event->get( 'timezone_name' ) ),
 	            'instant_event' => $event->get( 'instant_event' ),
@@ -94,7 +98,7 @@ class ECNCalendarFeedAi1ec extends ECNCalendarFeed {
                 'contact_email' => $event->get( 'contact_email' ),
                 'contact_website' => $event->get( 'contact_url' ),
                 'contact_phone' => $event->get( 'contact_phone' ),
-                'link' => get_the_permalink( $post->ID ) . ( $event->get( 'instance_id' ) ? '?instance_id=' . intval( $event->get( 'instance_id' ) ) : '' ),
+                'link' => $permalink,
 	            'event_website' => $event->get( 'ticket_url' ),
                 'event_image_url' => $image_url,
                 'event_cost' => ( $event->get( 'is_free' ) ? __( 'FREE', 'event-calendar-newsletter' ) : $event->get( 'cost' ) ),

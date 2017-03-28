@@ -24,14 +24,18 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
             'contact_phone',
             'link',
 	        'link_url',
+	        'ical_link_url',
+	        'gcal_link_url',
             'event_image',
 	        'event_image_url',
             'event_cost',
+	        'event_website',
 	        'categories',
 	        'category_links',
 	        'tags',
 	        'tag_links',
 	        'all_day',
+	        'recurring',
         );
     }
 
@@ -45,7 +49,7 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
         global $post;
         $retval = array();
 
-	    $events = tribe_get_events( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => 10000, 'hide_upcoming' => true, 'post_status' => 'publish', 'start_date' => date( 'Y-m-d H:i', $start_date ), 'end_date' => date( 'Y-m-d H:i', $end_date ) ), $start_date, $end_date, $data ) );
+	    $events = tribe_get_events( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => -1, 'hide_upcoming' => true, 'post_status' => 'publish', 'start_date' => date( 'Y-m-d H:i', $start_date ), 'end_date' => date( 'Y-m-d H:i', $end_date ) ), $start_date, $end_date, $data ) );
 
         foreach ( $events as $post ) {
 			setup_postdata( $post );
@@ -67,6 +71,7 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
 	            'plugin' => $this->get_identifier(),
                 'start_date' => $current_start_date,
                 'end_date' => $current_end_date,
+	            'published_date' => get_the_date( 'Y-m-d H:i:s', $event->ID ),
                 'title' => stripslashes_deep( $event->post_title ),
 	            'categories' => get_the_terms( $event->ID, 'tribe_events_cat' ),
 	            'tags' => get_the_terms( $event->ID, 'post_tag' ),
@@ -87,7 +92,11 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
                 'link' => get_the_permalink(),
                 'event_image_url' => $image_url,
                 'event_cost' => tribe_get_formatted_cost(),
+	            'event_website' => ( function_exists( 'tribe_get_event_website_url' ) ? tribe_get_event_website_url() : '' ),
                 'all_day' => tribe_event_is_all_day(),
+	            'gcal_link_url' => ( function_exists( 'tribe_get_gcal_link' ) ? Tribe__Events__Main::instance()->esc_gcal_url( tribe_get_gcal_link() ) : '' ),
+	            'ical_link_url' => ( function_exists( 'tribe_get_single_ical_link' ) ? esc_url( tribe_get_single_ical_link() ) : '' ),
+				'recurrence_text' => ( function_exists( 'tribe_get_recurrence_text' ) ? tribe_get_recurrence_text() : '' ),
             ) ) );
             do_action( 'tribe_events_inside_after_loop' );
         }

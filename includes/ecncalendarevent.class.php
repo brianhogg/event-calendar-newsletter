@@ -5,6 +5,7 @@ class ECNCalendarEvent {
 	private $_categories = array();
 	private $_tags = array();
     private $_start_date;
+	private $_published_date;
 	private $_instant_event;
     private $_end_date;
     private $_description;
@@ -22,15 +23,22 @@ class ECNCalendarEvent {
     private $_contact_website;
     private $_contact_email;
     private $_contact_phone;
-    private $_event_website;
+	private $_organizer_name;
+	private $_organizer_website;
+	private $_organizer_email;
+	private $_organizer_phone;
+	private $_event_website;
     private $_event_cost;
     private $_excerpt;
     private $_event_image_url;
     private $_all_day;
     private $_link;
+	private $_gcal_link_url;
+	private $_ical_link_url;
     private $_repeat_frequency;
     private $_repeat_interval;
     private $_repeat_end;
+	private $_recurrence_text;
 	private $_colour;
 	private $_subtitle;
 	private $_featured;
@@ -50,6 +58,8 @@ class ECNCalendarEvent {
 	    	$this->set_tags( $args['tags'] );
         if ( isset( $args['start_date'] ) )
             $this->set_start_date( $args['start_date'] );
+	    if ( isset( $args['published_date'] ) )
+		    $this->set_published_date( $args['published_date'] );
         if ( isset( $args['end_date'] ) )
             $this->set_end_date( $args['end_date'] );
 	    if ( isset( $args['instant_event'] ) )
@@ -84,10 +94,22 @@ class ECNCalendarEvent {
             $this->set_contact_phone( $args['contact_phone'] );
         if ( isset( $args['contact_email'] ) )
             $this->set_contact_email( $args['contact_email'] );
+	    if ( isset( $args['organizer_name'] ) )
+		    $this->set_organizer_name( $args['organizer_name'] );
+	    if ( isset( $args['organizer_website'] ) )
+		    $this->set_organizer_website( $args['organizer_website'] );
+	    if ( isset( $args['organizer_phone'] ) )
+		    $this->set_organizer_phone( $args['organizer_phone'] );
+	    if ( isset( $args['organizer_email'] ) )
+		    $this->set_organizer_email( $args['organizer_email'] );
         if ( isset( $args['all_day'] ) )
             $this->set_all_day( $args['all_day'] );
         if ( isset( $args['link'] ) )
             $this->set_link( $args['link'] );
+	    if ( isset( $args['gcal_link_url'] ) )
+		    $this->set_gcal_link_url( $args['gcal_link_url'] );
+	    if ( isset( $args['ical_link_url'] ) )
+		    $this->set_ical_link_url( $args['ical_link_url'] );
         if ( isset( $args['event_cost'] ) )
             $this->set_event_cost( $args['event_cost'] );
         if ( isset( $args['event_website'] ) )
@@ -102,6 +124,8 @@ class ECNCalendarEvent {
             $this->set_repeat_interval( $args['repeat_interval'] );
         if ( isset( $args['repeat_end'] ) )
             $this->set_repeat_end( $args['repeat_end'] );
+	    if ( isset( $args['recurrence_text'] ) )
+	    	$this->set_recurrence_text( $args['recurrence_text'] );
 	    if ( isset( $args['colour'] ) )
 		    $this->set_colour( $args['colour'] );
 	    if ( isset( $args['featured'] ) )
@@ -151,6 +175,10 @@ class ECNCalendarEvent {
             'contact_phone' => __( 'Contact Phone', 'event-calendar-newsletter' ),
             'contact_website' => __( 'Contact Website', 'event-calendar-newsletter' ),
             'contact_email' => __( 'Contact Email', 'event-calendar-newsletter' ),
+	        'organizer_name' => __( 'Organizer Name', 'event-calendar-newsletter' ),
+            'organizer_email' => __( 'Organizer Email', 'event-calendar-newsletter' ),
+            'organizer_website' => __( 'Organizer Website', 'event-calendar-newsletter' ),
+            'organizer_phone' => __( 'Organizer Phone', 'event-calendar-newsletter' ),
             'event_cost' => __( 'Event Cost', 'event-calendar-newsletter' ),
 	        'event_website' => __( 'Event/Ticket Website', 'event-calendar-newsletter' ),
             'excerpt' => __( 'Excerpt', 'event-calendar-newsletter' ),
@@ -159,6 +187,8 @@ class ECNCalendarEvent {
             'all_day' => __( 'All Day', 'event-calendar-newsletter' ),
             'link' => __( 'Event Link', 'event-calendar-newsletter' ),
             'link_url' => __( 'Event Link (URL only)', 'event-calendar-newsletter' ),
+	        'ical_link_url' => __( 'iCal Link (URL only)', 'event-calendar-newsletter' ),
+	        'gcal_link_url' => __( 'Google Calendar Link (URL only)', 'event-calendar-newsletter' ),
             'recurring' => __( 'Recurring Description (if recurring)', 'event-calendar-newsletter' ),
 	        'categories' => __( 'Categories', 'event-calendar-newsletter' ),
 	        'category_links' => __( 'Category Links', 'event-calendar-newsletter' ),
@@ -241,6 +271,37 @@ class ECNCalendarEvent {
 		return $this->_featured;
 	}
 
+	public function set_organizer_phone( $organizer_phone ) {
+		$this->_organizer_phone = $organizer_phone;
+	}
+
+	public function get_organizer_phone() {
+		return $this->_organizer_phone;
+	}
+
+	public function set_organizer_website( $organizer_website ) {
+		$this->_organizer_website = $organizer_website;
+	}
+
+	public function get_organizer_website() {
+		return $this->_organizer_website;
+	}
+
+	public function set_organizer_email( $organizer_email ) {
+		$this->_organizer_email = $organizer_email;
+	}
+
+	public function get_organizer_email() {
+		return $this->_organizer_email;
+	}
+
+	public function set_organizer_name( $organizer_name ) {
+		$this->_organizer_name = $organizer_name;
+	}
+
+	public function get_organizer_name() {
+		return $this->_organizer_name;
+	}
 
 	public function set_contact_phone( $contact_phone ) {
         $this->_contact_phone = $contact_phone;
@@ -330,6 +391,14 @@ class ECNCalendarEvent {
         return $this->_excerpt;
     }
 
+    public function set_recurrence_text( $text ) {
+    	$this->_recurrence_text = trim( strip_tags( $text ) );
+    }
+
+    public function get_recurrence_text() {
+    	return $this->_recurrence_text;
+    }
+
     public function set_repeat_end( $repeat_end ) {
         $this->_repeat_end = $this->sanitize_date( $repeat_end );
     }
@@ -368,7 +437,24 @@ class ECNCalendarEvent {
         return $this->_link;
     }
 
-    public function set_all_day( $all_day ) {
+	public function set_gcal_link_url( $gcal_link_url ) {
+		$this->_gcal_link_url = $gcal_link_url;
+	}
+
+	public function get_gcal_link_url() {
+		return $this->_gcal_link_url;
+	}
+
+	public function set_ical_link_url( $ical_link_url ) {
+		$this->_ical_link_url = $ical_link_url;
+	}
+
+	public function get_ical_link_url() {
+		return $this->_ical_link_url;
+	}
+
+
+	public function set_all_day( $all_day ) {
         $this->_all_day = $all_day ? true : false;
     }
 
@@ -482,7 +568,16 @@ class ECNCalendarEvent {
         return $this->_start_date;
     }
 
-    public function set_end_date( $end_date ) {
+	public function set_published_date( $published_date ) {
+		$this->_published_date = $this->sanitize_date( $published_date );
+	}
+
+	public function get_published_date() {
+		return $this->_published_date;
+	}
+
+
+	public function set_end_date( $end_date ) {
         $this->_end_date = $this->sanitize_date( $end_date );
     }
 
@@ -594,7 +689,9 @@ class ECNCalendarEvent {
 						$output = str_replace( '{event_cost}', '', $output );
 					break;
 				case 'recurring':
-					if ( $this->get_repeat_frequency() > 0 and $this->get_repeat_interval() )
+					if ( $this->get_recurrence_text() )
+						$output = str_replace( '{recurring}', $this->get_recurrence_text(), $output );
+					elseif ( $this->get_repeat_frequency() > 0 and $this->get_repeat_interval() )
 						$output = str_replace( '{recurring}', sprintf( _n( 'Occurs every %s %s', 'Occurs every %s %s', $this->get_repeat_frequency(), 'event-calendar-newsletter' ), $this->get_repeat_frequency(), $this->get_repeat_interval_text( $this->get_repeat_frequency() ) ), $output );
 					else
 						$output = str_replace( '{recurring}', '', $output );

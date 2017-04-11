@@ -63,6 +63,7 @@ class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
             $retval[] = new ECNCalendarEvent( array(
                 'start_date' => $event->event_start_date . ' ' . $event->event_start_time,
                 'end_date' => $event->event_end_date . ' ' . $event->event_end_time,
+                'published_date' => get_the_date( 'Y-m-d H:i:s', $post->ID ),
                 'title' => stripslashes_deep( $event->event_name ),
                 'description' => stripslashes_deep( $event->post_content ),
 	            'excerpt' => stripslashes_deep( $event->post_excerpt ),

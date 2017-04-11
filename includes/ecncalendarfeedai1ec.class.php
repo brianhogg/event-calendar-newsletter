@@ -86,6 +86,7 @@ class ECNCalendarFeedAi1ec extends ECNCalendarFeed {
                 'end_date' => $event->get( 'end' )->format( 'Y-m-d H:i:s', $event->get( 'timezone_name' ) ),
                 'title' => stripslashes_deep( $post->post_title ),
                 'description' => stripslashes_deep( $post->post_content ),
+                'published_date' => get_the_date( 'Y-m-d H:i:s', $post->ID ),
 	            'excerpt' => stripslashes_deep( $post->post_excerpt ),
 	            'categories' => get_the_terms( $post->ID, 'events_categories' ),
                 'location_name' => $event->get( 'venue' ),

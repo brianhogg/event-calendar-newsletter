@@ -60,6 +60,7 @@ class ECNCalendarFeedEventOrganiser extends ECNCalendarFeed {
 	            'plugin' => $this->get_identifier(),
                 'start_date' => $current_start_date,
                 'end_date' => $current_end_date,
+	            'published_date' => get_the_date( 'Y-m-d H:i:s', $event->ID ),
                 'title' => stripslashes_deep( $event->post_title ),
 	            'categories' => get_the_terms( $event->ID, 'event-category' ),
                 'description' => stripslashes_deep( $event->post_content ),

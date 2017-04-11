@@ -3,12 +3,12 @@ Contributors: brianhogg
 Donate link: https://eventcalendarnewsletter.com/
 Tags: events, calendar, event, newsletter, all-in-one, calendar manager, custom calendar, custom calendars, events feed, google calendar, google
 Requires at least: 4.1
-Tested up to: 4.7.2
+Tested up to: 4.7.3
 Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easy put events from your WordPress event calendar inside of a newsletter. Spend less time promoting your events and get more attendees!
+Easy put events from your WordPress event calendar inside of a newsletter. Quickly use an included design or create your own!
 
 == Description ==
 

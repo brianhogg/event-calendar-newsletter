@@ -92,6 +92,7 @@ If you don't already have your event calendar plugin installed and configured, y
 
 = 2.5.3 =
 * Better handling for all day events in the default template
+* Additional tags for The Events Calendar
 
 = 2.5.2 =
 * Fixes issues with links in all-in-one by time.ly

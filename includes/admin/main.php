@@ -14,6 +14,7 @@
 	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&s=simple+calendar+google' ); ?>"><?= esc_html( __( 'Simple Calendar - Google Calendar Events by Moonstone Media', 'event-calendar-newsletter' ) ); ?></a></li>
 	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&type=term&s=all+in+one+event+calendar+time.ly' ); ?>"><?= esc_html( __( 'All-in-One Event Calendar by time.ly', 'event-calendar-newsletter' ) ); ?></a></li>
 	            </ul>
+                <div><?= sprintf( esc_html( __( 'Note that certain calendars like %sEvent Espresso%s are only supported %sin the PRO version of Event Calendar Newsletter%s', 'event-calendar-newsletter' ) ), '<a href="https://eventcalendarnewsletter.com/features/#calendars?utm_source=plugin&utm_campaign=pro-cal-support-ee" target="_blank">', '</a>', '<a href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_campaign=pro-cal-support" target="_blank">', '</a>' ); ?></div>
 		    </p>
 		    <p><?= sprintf( esc_html( __( "Have another events calendar you'd like supported?  %sLet us know%s!", 'event-calendar-newsletter' ) ), '<a href="mailto:info@eventcalendarnewsletter.com">', '</a>' ); ?></p>
 		    <p>

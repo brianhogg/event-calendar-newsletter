@@ -3,8 +3,7 @@
 // https://unit-tests.svn.wordpress.org/trunk/
 //
 // The path to wordpress-tests
-//$_tests_dir = getenv('WP_TESTS_DIR');
-$_tests_dir = '/srv/www/wordpress-develop/tests/phpunit/';
+$_tests_dir = getenv('WP_TESTS_DIR');
 require_once $_tests_dir . '/includes/bootstrap.php';
 
 // Include the main plugin files

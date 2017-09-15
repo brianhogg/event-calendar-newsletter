@@ -1,6 +1,6 @@
 <?php
 
-define( 'ECN_VERSION', 8 );
+define( 'ECN_VERSION', 9 );
 define( 'ECN_SAVED_OPTIONS_NAME', 'ecn_saved_options' );
 define( 'ECN_CUSTOM_DATE_RANGE_DAYS', 0 );
 /**

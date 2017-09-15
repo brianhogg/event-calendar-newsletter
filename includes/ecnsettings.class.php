@@ -12,8 +12,8 @@ class ECNSettings {
 	function admin_menu() {
 		add_submenu_page(
 			'eventcalendarnewsletter',
-			__( 'Event Calendar Newsletter Pro', 'event-calendar-newsletter-pro' ),
-			__( 'Settings', 'event-calendar-newsletter-pro' ),
+			__( 'Event Calendar Newsletter Pro', 'event-calendar-newsletter' ),
+			__( 'Settings', 'event-calendar-newsletter' ),
 			apply_filters( 'ecn_admin_capability', 'add_users' ),
 			'ecn-settings',
 			array( &$this, 'settings_page' )

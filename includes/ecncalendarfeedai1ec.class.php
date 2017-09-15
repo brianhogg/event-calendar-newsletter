@@ -115,7 +115,7 @@ class ECNCalendarFeedAi1ec extends ECNCalendarFeed {
     }
 
     function get_description() {
-        return __( 'All-in-One Event Calendar', 'event-calendar-newsletter' );
+        return 'All-in-One Event Calendar';
     }
 
     function get_identifier() {

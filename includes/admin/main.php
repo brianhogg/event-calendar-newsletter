@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2><?= esc_html( apply_filters( 'ecn_settings_title', __( 'Event Calendar Newsletter', 'event-calendar-newsletter' ) ) ) ?></h2>
+    <h2><?= esc_html( apply_filters( 'ecn_settings_title', _x( 'Event Calendar Newsletter', 'Settings title', 'event-calendar-newsletter' ) ) ) ?></h2>
 	<?php do_action( 'ecn_after_settings_title' ); ?>
     <?php if ( ! $data['available_plugins'] ): ?>
 	    <div id="no-supported-calendars">
@@ -10,9 +10,9 @@
 	        <p>
 	            <strong><?= esc_html( __( 'Install one of the supported calendars, which include:', 'event-calendar-newsletter' ) ); ?></strong>
 	            <ul>
-	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&type=term&s=the+events+calendar' ); ?>"><?= esc_html( __( 'The Events Calendar by Modern Tribe, Inc', 'event-calendar-newsletter' ) ) ?></a></li>
-	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&s=simple+calendar+google' ); ?>"><?= esc_html( __( 'Simple Calendar - Google Calendar Events by Moonstone Media', 'event-calendar-newsletter' ) ); ?></a></li>
-	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&type=term&s=all+in+one+event+calendar+time.ly' ); ?>"><?= esc_html( __( 'All-in-One Event Calendar by time.ly', 'event-calendar-newsletter' ) ); ?></a></li>
+	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&type=term&s=the+events+calendar' ); ?>">The Events Calendar by Modern Tribe, Inc</a></li>
+	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&s=simple+calendar+google' ); ?>">Simple Calendar - Google Calendar Events</a></li>
+	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&type=term&s=all+in+one+event+calendar+time.ly' ); ?>">All-in-One Event Calendar by time.ly</a></li>
 	            </ul>
                 <div><?= sprintf( esc_html( __( 'Note that certain calendars like %sEvent Espresso%s are only supported %sin the PRO version of Event Calendar Newsletter%s', 'event-calendar-newsletter' ) ), '<a href="https://eventcalendarnewsletter.com/features/#calendars?utm_source=plugin&utm_campaign=pro-cal-support-ee" target="_blank">', '</a>', '<a href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_campaign=pro-cal-support" target="_blank">', '</a>' ); ?></div>
 		    </p>
@@ -20,7 +20,7 @@
 		    <p>
 			    <?= sprintf( esc_html( __( 'Still need help?  View %sfull instructions for setting up a supported calendar%s' ) ), '<a target="_blank" href="https://eventcalendarnewsletter.com/docs/set-event-calendar-wordpress-site/">', '</a>' ); ?>
 		    </p>
-		    <h1>Preview of Event Calendar Newsletter</h1>
+		    <h1><?php echo esc_html__( 'Preview of Event Calendar Newsletter', 'event-calendar-newsletter' ); ?></h1>
 		    <iframe width="560" height="315" src="https://www.youtube.com/embed/rTwus0wTzX4" frameborder="0" allowfullscreen></iframe>
 	    </div>
     <?php else: ?>
@@ -158,8 +158,8 @@
                 <?php if ( ! class_exists( 'ECNPro' ) ): ?>
                     <p><a target="_blank" href="https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=rightcol"><img src="<?= ECN_PLUGINS_URL . '/includes/images/ecn-upgrade-to-pro-2.png' ?>" alt="<?php echo esc_attr( __( 'Need to filter by category, tags, or only include specific calendars in the results?', 'event-calendar-newsletter' ) ) ?>" /></a></p>
                     <hr/>
-	                <p><h2>Get 20% Off!</h2></p>
-	                <p><h4>Just enter your name and email and we'll send you a coupon for 20% off your upgrade to the Pro version</h4></p>
+	                <p><h2><?php echo esc_html__( 'Get 20% Off!', 'event-calendar-newsletter' ); ?></h2></p>
+	                <p><h4><?php echo esc_html__( "Just enter your name and email and we'll send you a coupon for 20% off your upgrade to the Pro version", 'event-calendar-newsletter' ); ?></h4></p>
 
 	                <?php $current_user = wp_get_current_user(); ?>
 
@@ -168,10 +168,10 @@
 					<form action="//eventcalendarnewsletter.us12.list-manage.com/subscribe/post?u=e405fe6a082aafe2887019794&amp;id=09f1cd0668" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 					    <div id="mc_embed_signup_scroll">
 					<div class="mc-field-group">
-						<input type="email" value="<?= esc_attr( $current_user->user_email ) ?>" name="EMAIL" class="required email" placeholder="<?= __( 'Email' ) ?>" id="mce-EMAIL">
+						<input type="email" value="<?= esc_attr( $current_user->user_email ) ?>" name="EMAIL" class="required email" placeholder="<?= __( 'Email', 'event-calendar-newsletter' ) ?>" id="mce-EMAIL">
 					</div>
 					<div class="mc-field-group">
-						<input type="text" placeholder="<?= __( 'First name' ) ?>" value="<?= esc_attr( $current_user->user_firstname ) ?>" name="FNAME" class="" id="mce-FNAME">
+						<input type="text" placeholder="<?= __( 'First name', 'event-calendar-newsletter' ) ?>" value="<?= esc_attr( $current_user->user_firstname ) ?>" name="FNAME" class="" id="mce-FNAME">
 					</div>
 					<input type="hidden" name="SIGNUP" id="SIGNUP" value="plugin" />
 
@@ -180,18 +180,18 @@
 							<div class="response" id="mce-success-response" style="display:none"></div>
 						</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 					    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_e405fe6a082aafe2887019794_09f1cd0668" tabindex="-1" value=""></div>
-					    <div class="clear"><input type="submit" value="Send me the coupon" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+					    <div class="clear"><input type="submit" value="<?php echo esc_attr__( 'Send me the coupon', 'event-calendar-newsletter' ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 					    </div>
 					</form>
 					</div>
 
 
-					<p color="#555555">We promise not to use your email for anything else and you can unsubscribe with 1-click anytime.</p>
+					<p color="#555555"><?php echo esc_html__( 'We promise not to use your email for anything else and you can unsubscribe with 1-click anytime.', 'event-calendar-newsletter' ); ?></p>
 
 					<!--End mc_embed_signup-->
 
 	                <hr/>
-	                <p><?php echo sprintf( __( "<strong>Like this plugin?</strong><br/>We'd love if you could show your support by leaving a %s&#9733;&#9733;&#9733;&#9733;&#9733; 5 star review on WordPress.org%s!", 'event-calendar-newsletter' ), '<a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/event-calendar-newsletter?filter=5#postform">', '</a>' ); ?></p>
+	                <p><?php echo wp_kses( sprintf( __( "<strong>Like this plugin?</strong><br>We'd love if you could show your support by leaving a %s&#9733;&#9733;&#9733;&#9733;&#9733; 5 star review on WordPress.org%s!", 'event-calendar-newsletter' ), '<a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/event-calendar-newsletter?filter=5#postform">', '</a>' ), array( 'strong' => array(), 'br' => array() ) ); ?></p>
                 <?php endif; ?>
 
             </div>

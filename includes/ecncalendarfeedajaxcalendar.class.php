@@ -61,7 +61,7 @@ class ECNCalendarFeedAjaxCalendar extends ECNCalendarFeed {
     }
 
     function get_description() {
-        return __( 'Ajax Event Calendar', 'event-calendar-newsletter' );
+        return 'Ajax Event Calendar';
     }
 
     function get_identifier() {

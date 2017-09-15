@@ -72,7 +72,7 @@ class ECNCalendarFeedGoogleCalendarEvents extends ECNCalendarFeed {
     }
 
     function get_description() {
-        return __( 'Simple Calendar (Google Calendar Events)', 'event-calendar-newsletter' );
+        return 'Simple Calendar (Google Calendar Events)';
     }
 
     function get_identifier() {

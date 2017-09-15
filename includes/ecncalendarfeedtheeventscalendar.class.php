@@ -22,7 +22,11 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
             'contact_email',
             'contact_website',
             'contact_phone',
-            'link',
+	        'organizer_name',
+	        'organizer_email',
+	        'organizer_website',
+	        'organizer_phone',
+	        'link',
 	        'link_url',
 	        'ical_link_url',
 	        'gcal_link_url',
@@ -89,6 +93,10 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
                 'contact_email' => ( tribe_get_organizer() ? tribe_get_organizer_email() : '' ),
                 'contact_website' => ( tribe_get_organizer() ? tribe_get_organizer_website_url() : '' ),
                 'contact_phone' => ( tribe_get_organizer() ? tribe_get_organizer_phone() : '' ),
+	            'organizer_name' => tribe_get_organizer(),
+	            'organizer_email' => ( tribe_get_organizer() ? tribe_get_organizer_email() : '' ),
+	            'organizer_website' => ( tribe_get_organizer() ? tribe_get_organizer_website_url() : '' ),
+	            'organizer_phone' => ( tribe_get_organizer() ? tribe_get_organizer_phone() : '' ),
                 'link' => get_the_permalink(),
                 'event_image_url' => $image_url,
                 'event_cost' => tribe_get_formatted_cost(),
@@ -104,7 +112,7 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
     }
 
     function get_description() {
-        return __( 'The Events Calendar', 'event-calendar-newsletter' );
+        return 'The Events Calendar';
     }
 
     function get_identifier() {

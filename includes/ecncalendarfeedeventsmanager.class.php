@@ -91,7 +91,7 @@ class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
     }
 
     function get_description() {
-        return __( 'Events Manager', 'event-calendar-newsletter' );
+        return 'Events Manager';
     }
 
     function get_identifier() {

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Event Calendar Newsletter
 Plugin URI: http://wordpress.org/extend/plugins/event-calendar-newsletter/
-Description: Easy put events from your WordPress event calendar inside of a newsletter. Spend less time promoting your events and get more attendees!
+Description: Easily put events from your WordPress event calendar inside of a newsletter. Spend less time promoting your events!
 Version: 2.5.4
 Author: Event Calendar Newsletter
 Author URI: https://eventcalendarnewsletter.com/?utm_source=plugin&utm_campaign=author-link&utm_medium=link

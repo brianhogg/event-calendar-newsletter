@@ -82,7 +82,7 @@ class ECNCalendarFeedEventOrganiser extends ECNCalendarFeed {
     }
 
     function get_description() {
-        return __( 'Event Organiser', 'event-calendar-newsletter' );
+        return 'Event Organiser';
     }
 
     function get_identifier() {

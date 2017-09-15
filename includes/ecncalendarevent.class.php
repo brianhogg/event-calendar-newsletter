@@ -386,9 +386,9 @@ class ECNCalendarEvent {
 	    if ( ! $this->_excerpt ) {
 		    $excerpt = strip_shortcodes( $this->get_description() );
 		    $excerpt = strip_tags( $excerpt );
-		    return wp_trim_words( $excerpt, 55, apply_filters( 'ecn_excerpt_more', ' [&hellip;]', $this ) );
+		    return apply_filters( 'ecn_get_excerpt', wp_trim_words( $excerpt, 55, apply_filters( 'ecn_excerpt_more', ' [&hellip;]', $this ) ), $this );
 	    }
-        return $this->_excerpt;
+        return apply_filters( 'ecn_get_excerpt', $this->_excerpt, $this );
     }
 
     public function set_recurrence_text( $text ) {

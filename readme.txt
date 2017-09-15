@@ -8,7 +8,7 @@ Stable tag: 2.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easy put events from your WordPress event calendar inside of a newsletter. Quickly use an included design or create your own!
+Easily put events from your WordPress event calendar inside of a newsletter. Quickly use an included design or create your own!
 
 == Description ==
 

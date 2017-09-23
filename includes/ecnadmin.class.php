@@ -33,6 +33,7 @@ class ECNAdmin {
             if ( isset( $_GET['page'] ) and 'eventcalendarnewsletter' == $_GET['page'] ) {
                 add_action( 'admin_enqueue_scripts', array( &$this, 'enqueue_scripts' ) );
             }
+            add_action( 'admin_enqueue_scripts', array( $this, 'admin_menu_css' ) );
 
 	        add_action( 'ecn_main_before_results', array( &$this, 'save_templates_notice' ) );
 
@@ -47,10 +48,15 @@ class ECNAdmin {
     function admin_init() {
     }
 
+    function admin_menu_css() {
+	    wp_register_style( 'ecn.icon.css', plugins_url( 'css/icon.css', __FILE__ ), false, ECN_VERSION );
+	    wp_enqueue_style( 'ecn.icon.css' );
+    }
+
     function enqueue_scripts() {
         wp_register_script( 'ecn.admin.js', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery', 'backbone', 'underscore', 'jquery-ui-core', 'jquery-ui-sortable' ), ECN_VERSION );
         wp_enqueue_script( 'ecn.admin.js' );
-        wp_register_Style( 'ecn.admin.css', plugins_url( 'css/admin.css', __FILE__ ), false, ECN_VERSION );
+        wp_register_style( 'ecn.admin.css', plugins_url( 'css/admin.css', __FILE__ ), false, ECN_VERSION );
         wp_enqueue_style( 'ecn.admin.css' );
     }
 

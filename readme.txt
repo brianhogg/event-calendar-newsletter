@@ -3,8 +3,8 @@ Contributors: brianhogg
 Donate link: https://eventcalendarnewsletter.com/
 Tags: events, calendar, event, newsletter, all-in-one, calendar manager, custom calendar, custom calendars, events feed, google calendar, google
 Requires at least: 4.1
-Tested up to: 4.8.1
-Stable tag: 2.5.6
+Tested up to: 4.8.2
+Stable tag: 2.6
 Requires PHP: 5.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -91,8 +91,9 @@ If you don't already have your event calendar plugin installed and configured, y
 
 == Changelog ==
 
-= 2.9.26 =
+= 2.6 =
 * Removing non-working 'select all' button
+* Demo video for pasting the HTML
 * Help text tweaks
 
 = 2.5.5 =

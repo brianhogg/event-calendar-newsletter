@@ -50,7 +50,6 @@ var ecn = ecn || {};
             'click #fetch_events': 'fetchEvents',
             'click #insert_placeholder': 'insertPlaceholder',
             'change select[name="event_calendar"]': 'pluginChanged',
-            'click #select_results': 'selectResults',
             'click #select_html_results': 'selectHTMLResults',
             'click .nav-tab': 'selectNavTab',
             'change input[name="design"]': 'changeDesign'
@@ -62,22 +61,6 @@ var ecn = ecn || {};
             } else {
                 this.$('.format_editor').hide();
             }
-        },
-
-        selectText: function(containerid) {
-            if (document.selection) {
-                var range = document.body.createTextRange();
-                range.moveToElementText(document.getElementById(containerid));
-                range.select();
-            } else if (window.getSelection) {
-                var range = document.createRange();
-                range.selectNode(document.getElementById(containerid));
-                window.getSelection().addRange(range);
-            }
-        },
-
-        selectResults: function() {
-            this.selectText('output');
         },
 
         selectHTMLResults: function() {

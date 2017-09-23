@@ -1,6 +1,6 @@
 <?php
 
-define( 'ECN_VERSION', 9 );
+define( 'ECN_VERSION', 10 );
 define( 'ECN_SAVED_OPTIONS_NAME', 'ecn_saved_options' );
 define( 'ECN_CUSTOM_DATE_RANGE_DAYS', 0 );
 /**
@@ -63,10 +63,10 @@ class ECNAdmin {
 		<div id="poststuff">
 			<div id="save_results_box" class="postbox">
 				<h2 class="hndle">
-					<span>Save as Template</span>
+					<span><?php echo esc_html__( 'Save as Template', 'event-calendar-newsletter' ) ?></span>
 				</h2>
 				<div class="inside">
-					<p>Allows you to automatically create newsletters with MailChimp and quickly re-generate the results from saved templates.</p>
+					<p><?php echo esc_html__( 'This pro-only feature allows you to automatically add your events into newsletters with MailChimp, Active Campaign and more.  You can also save and quickly re-generate these results with Saved Templates.', 'event-calendar-newsletter' ); ?></p>
 					<a target="_blank" href="https://eventcalendarnewsletter.com/pro/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=savedtemplates" class="upgrade button button-primary">Get Event Calendar Newsletter Pro</a>
 				</div>
 			</div>

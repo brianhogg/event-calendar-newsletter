@@ -132,9 +132,9 @@
                 </div>
 
                 <div class="result">
-                    <p><?php echo esc_html( __( 'Copy and paste the result into your MailChimp, ActiveCampaign, MailPoet or other newsletter sending services', 'event-calendar-newsletter' ) ); ?></p>
-
 	                <?php do_action( 'ecn_main_before_results' ); ?>
+
+                    <div id="copy_paste_info"><?php echo sprintf( esc_html__( 'Copy and paste the result into your MailChimp, ActiveCampaign, MailPoet or other newsletter sending service.  You will likely want to use the "Results (HTML)" version. %sView a Quick Demo%s', 'event-calendar-newsletter' ), '<a target="_blank" href="http://www.youtube.com/watch?v=4oSIlU541Bo">', '</a>' ); ?></div>
 
                     <h2 class="nav-tab-wrapper">
                         <a id="results_tab" class="nav-tab nav-tab-active"><?= esc_html( __( 'Result', 'event-calendar-newsletter' ) ) ?></a>
@@ -142,7 +142,6 @@
                     </h2>
 
                     <div id="results" class="tab_container">
-                        <p><button id="select_results" class="btn"><?= esc_html( __( 'Select All Text', 'event-calendar-newsletter' ) ) ?></button></p>
                         <span id="output"></span>
                     </div>
                     <div id="results_html" class="tab_container">

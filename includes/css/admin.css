@@ -1,6 +1,11 @@
+#adminmenu #toplevel_page_eventcalendarnewsletter div.wp-menu-image:before {
+    content: "\f524";
+}
 #ecn-admin .spinner { float: none; }
 #ecn-admin .nav-tab { cursor: pointer; }
-#ecn-admin #select_results, #ecn-admin #select_html_results { margin-top: 20px; }
+#ecn-admin #select_html_results { margin-top: 20px; }
+#ecn-admin #results { padding-top: 20px; }
+#copy_paste_info { padding: 20px; background-color: white; }
 #ecn-admin .leftcol { width: 70%; float: left; }
 #ecn-admin .rightcol { width: 25%; float: right; }
 #ecn-admin .clearfix { clear: both; }

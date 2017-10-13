@@ -73,7 +73,7 @@ class ECNAdmin {
 				</h2>
 				<div class="inside">
 					<p><?php echo esc_html__( 'This pro-only feature allows you to automatically add your events into newsletters with MailChimp, Active Campaign and more.  You can also save and quickly re-generate these results with Saved Templates.', 'event-calendar-newsletter' ); ?></p>
-					<a target="_blank" href="https://eventcalendarnewsletter.com/pro/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=savedtemplates" class="upgrade button button-primary">Get Event Calendar Newsletter Pro</a>
+					<a target="_blank" href="https://eventcalendarnewsletter.com/pro/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=savedtemplates" class="upgrade button button-primary"><?php echo esc_html__( 'Get Event Calendar Newsletter Pro', 'event-calendar-newsletter' ) ?></a>
 				</div>
 			</div>
 		</div>

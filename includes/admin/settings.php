@@ -12,7 +12,7 @@
 							<option value="<?= esc_attr( $image_size ) ?>" <?= ( get_ecn_option( 'image_size', 'medium' ) == $image_size ? ' SELECTED' : '' ) ?>><?= esc_html( $description ) ?></option>
 						<?php endforeach; ?>
 					</select><br/>
-					If your images are not showing in the correct size, try another or you may need to <a href="https://en-ca.wordpress.org/plugins/regenerate-thumbnails/" target="_blank">regenerate your thumbnails</a>
+					<?= sprintf( esc_html__( 'If your images are not showing in the correct size, try another or you may need to %sregenerate your thumbnails%s', 'event-calendar-newsletter' ), '<a href="https://en-ca.wordpress.org/plugins/regenerate-thumbnails/" target="_blank">', '</a>' ) ?>
 				</td>
 			</tr>
 			<tr valign="top">

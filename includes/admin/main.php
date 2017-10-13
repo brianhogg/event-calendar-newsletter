@@ -155,7 +155,7 @@
             </div>
             <div class="rightcol">
                 <?php if ( ! class_exists( 'ECNPro' ) ): ?>
-                    <p><a target="_blank" href="https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=rightcol"><img src="<?= ECN_PLUGINS_URL . '/includes/images/ecn-upgrade-to-pro-2.png' ?>" alt="<?php echo esc_attr( __( 'Need to filter by category, tags, or only include specific calendars in the results?', 'event-calendar-newsletter' ) ) ?>" /></a></p>
+                    <p><a target="_blank" href="https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=rightcol"><img src="<?= ECN_PLUGINS_URL . '/includes/images/ecn-upgrade-to-pro-3.png' ?>" alt="<?php echo esc_attr( __( 'Need to filter by category, tags, or only include specific calendars in the results?', 'event-calendar-newsletter' ) ) ?>" /></a></p>
                     <hr/>
 	                <p><h2><?php echo esc_html__( 'Get 20% Off!', 'event-calendar-newsletter' ); ?></h2></p>
 	                <p><h4><?php echo esc_html__( "Just enter your name and email and we'll send you a coupon for 20% off your upgrade to the Pro version", 'event-calendar-newsletter' ); ?></h4></p>

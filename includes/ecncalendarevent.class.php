@@ -31,6 +31,7 @@ class ECNCalendarEvent {
     private $_event_cost;
     private $_excerpt;
     private $_event_image_url;
+    private $_event_image_alt;
     private $_all_day;
     private $_link;
 	private $_gcal_link_url;
@@ -118,6 +119,8 @@ class ECNCalendarEvent {
             $this->set_excerpt( $args['excerpt'] );
         if ( isset( $args['event_image_url'] ) )
             $this->set_event_image_url( $args['event_image_url'] );
+	    if ( isset( $args['event_image_alt'] ) )
+		    $this->set_event_image_alt( $args['event_image_alt'] );
         if ( isset( $args['repeat_frequency'] ) )
             $this->set_repeat_frequency( $args['repeat_frequency'] );
         if ( isset( $args['repeat_interval'] ) )
@@ -361,13 +364,22 @@ class ECNCalendarEvent {
 
     public function get_event_image() {
 	    if ( $this->get_event_image_url() )
-		    return '<img src="' . $this->get_event_image_url() . '" />';
+		    return '<img src="' . esc_url( $this->get_event_image_url() ) . '" alt="' . esc_attr( $this->get_event_image_alt() ) . '" />';
 	    return '';
     }
 
+	public function set_event_image_alt( $event_image_alt ) {
+		$this->_event_image_alt = sanitize_text_field( $event_image_alt );
+	}
+
+	public function get_event_image_alt() {
+		return $this->_event_image_alt;
+	}
+
     public function set_event_image_url( $event_image_url ) {
-        $this->_event_image_url = $this->sanitize_link( $event_image_url );
+        $this->_event_image_url = $event_image_url;
     }
+
 
     public function get_event_image_url() {
 	    if ( ! $this->_event_image_url ) {
@@ -637,7 +649,7 @@ class ECNCalendarEvent {
 	}
 
 	function get_category_link( $category ) {
-		return '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '" alt="' . esc_attr( sprintf( __( 'View all events in %s', 'event-calendar-newsletter' ), $category->name ) ) . '">' . esc_html( $category->name ) . '</a>';
+		return '<a href="' . esc_url( get_term_link( $category ) ) . '" alt="' . esc_attr( sprintf( __( 'View all events in %s', 'event-calendar-newsletter' ), $category->name ) ) . '">' . esc_html( $category->name ) . '</a>';
 	}
 
 	function handle_format_tags( $output, $options = array() ) {

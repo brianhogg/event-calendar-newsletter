@@ -66,10 +66,12 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
 	        if ( strtotime( $current_start_date ) > $end_date )
 		        break;
             $image_src = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), apply_filters( 'ecn_image_size', 'medium', get_the_ID() ) );
-            if ( !empty( $image_src ) )
+            if ( !empty( $image_src ) ) {
                 $image_url = $image_src[0];
-            else
-                $image_url = false;
+                $image_alt = get_post_meta( get_post_thumbnail_id( get_the_ID() ), '_wp_attachment_image_alt', true);
+            } else {
+                $image_url = $image_alt = false;
+            }
 
             $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), array(
 	            'plugin' => $this->get_identifier(),
@@ -99,6 +101,7 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
 	            'organizer_phone' => ( tribe_get_organizer() ? tribe_get_organizer_phone() : '' ),
                 'link' => get_the_permalink(),
                 'event_image_url' => $image_url,
+                'event_image_alt' => $image_alt,
                 'event_cost' => tribe_get_formatted_cost(),
 	            'event_website' => ( function_exists( 'tribe_get_event_website_url' ) ? tribe_get_event_website_url() : '' ),
                 'all_day' => tribe_event_is_all_day(),

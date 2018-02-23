@@ -164,7 +164,7 @@
 
 	                <!-- Begin MailChimp Signup Form -->
 					<div id="mc_embed_signup">
-					<form action="//eventcalendarnewsletter.us12.list-manage.com/subscribe/post?u=e405fe6a082aafe2887019794&amp;id=09f1cd0668" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+					<form action="https://brianhogg.us3.list-manage.com/subscribe/post?u=98b752164e5f27815c50336ea&amp;id=f67eaf5c6b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 					    <div id="mc_embed_signup_scroll">
 					<div class="mc-field-group">
 						<input type="email" value="<?= esc_attr( $current_user->user_email ) ?>" name="EMAIL" class="required email" placeholder="<?= __( 'Email', 'event-calendar-newsletter' ) ?>" id="mce-EMAIL">
@@ -173,12 +173,12 @@
 						<input type="text" placeholder="<?= __( 'First name', 'event-calendar-newsletter' ) ?>" value="<?= esc_attr( $current_user->user_firstname ) ?>" name="FNAME" class="" id="mce-FNAME">
 					</div>
 					<input type="hidden" name="SIGNUP" id="SIGNUP" value="plugin" />
-
+                            <input type="hidden" value="1" name="group[18831][1]" id="mce-group[18831]-18831-0">
 						<div id="mce-responses" class="clear">
 							<div class="response" id="mce-error-response" style="display:none"></div>
 							<div class="response" id="mce-success-response" style="display:none"></div>
 						</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-					    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_e405fe6a082aafe2887019794_09f1cd0668" tabindex="-1" value=""></div>
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_98b752164e5f27815c50336ea_f67eaf5c6b" tabindex="-1" value=""></div>
 					    <div class="clear"><input type="submit" value="<?php echo esc_attr__( 'Send me the coupon', 'event-calendar-newsletter' ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 					    </div>
 					</form>
@@ -190,7 +190,7 @@
 					<!--End mc_embed_signup-->
 
 	                <hr/>
-	                <p><?php echo wp_kses( sprintf( __( "<strong>Like this plugin?</strong><br>We'd love if you could show your support by leaving a %s&#9733;&#9733;&#9733;&#9733;&#9733; 5 star review on WordPress.org%s!", 'event-calendar-newsletter' ), '<a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/event-calendar-newsletter?filter=5#postform">', '</a>' ), array( 'strong' => array(), 'br' => array() ) ); ?></p>
+	                <p><?php echo sprintf( wp_kses( __( "<strong>Like this plugin?</strong><br>We'd love if you could show your support by leaving a %s&#9733;&#9733;&#9733;&#9733;&#9733; 5 star review on WordPress.org%s!", 'event-calendar-newsletter' ), array( 'strong' => array(), 'br' => array() ) ), '<a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/event-calendar-newsletter?filter=5#postform">', '</a>' ); ?></p>
                 <?php endif; ?>
 
             </div>

@@ -44,7 +44,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><?php echo esc_html( __( 'Future Events to Use:', 'event-calendar-newsletter' ) ) ?></th>
+                            <th scope="row"><label for="events_future_in_days"><?php echo esc_html( __( 'Future Events to Use:', 'event-calendar-newsletter' ) ) ?></label></th>
                             <td>
                                 <select id="events_future_in_days" name="events_future_in_days">
                                     <?php do_action( 'ecn_events_future_in_days_before', $data['events_future_in_days'] ); ?>
@@ -59,6 +59,7 @@
 	                            <?php do_action( 'ecn_events_future_in_days_after_select', $data ); ?>
                             </td>
                         </tr>
+                        <?php do_action( 'ecn_events_future_in_days_after_tr', $data ); ?>
                         </tbody>
                         <tbody id="additional_filters">
                             <?php

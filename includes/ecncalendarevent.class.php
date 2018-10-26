@@ -398,7 +398,7 @@ class ECNCalendarEvent {
 	    if ( ! $this->_excerpt ) {
 		    $excerpt = strip_shortcodes( $this->get_description() );
 		    $excerpt = strip_tags( $excerpt );
-		    return apply_filters( 'ecn_get_excerpt', wp_trim_words( $excerpt, 55, apply_filters( 'ecn_excerpt_more', ' [&hellip;]', $this ) ), $this );
+		    return apply_filters( 'ecs_get_excerpt_from_description', apply_filters( 'ecn_get_excerpt', wp_trim_words( $excerpt, apply_filters( 'ecn_get_excerpt_words', 55, $this ), apply_filters( 'ecn_excerpt_more', ' [&hellip;]', $this ) ), $this ), $this );
 	    }
         return apply_filters( 'ecn_get_excerpt', $this->_excerpt, $this );
     }
@@ -668,22 +668,22 @@ class ECNCalendarEvent {
 					$output = str_replace( '{category_links}', implode( ', ', array_map( array( $this, 'get_category_link' ), $this->get_categories() ) ), $output );
 					break;
 				case 'start_date':
-					$output = str_replace( '{start_date}', apply_filters( 'ecn_start_date_output', date_i18n( get_option( 'date_format' ), $this->get_start_date() ), $this, $options ), $output );
+					$output = str_replace( '{start_date}', apply_filters( 'ecn_start_date_output', date_i18n( apply_filters( 'ecn_start_date_format', get_option( 'date_format' ) ), $this->get_start_date() ), $this, $options ), $output );
 					break;
 				case 'start_time':
-					$output = str_replace( '{start_time}', apply_filters( 'ecn_start_time_output', date_i18n( get_option( 'time_format' ), $this->get_start_date() ), $this, $options ), $output );
+					$output = str_replace( '{start_time}', apply_filters( 'ecn_start_time_output', date_i18n( apply_filters( 'ecn_start_time_format', get_option( 'time_format' ) ), $this->get_start_date() ), $this, $options ), $output );
 					break;
 				case 'end_date':
 					if ( $this->get_instant_event() )
 						$output = str_replace( '{end_date}', '', $output );
 					else
-						$output = str_replace( '{end_date}', apply_filters( 'ecn_end_date_output', date_i18n( get_option( 'date_format' ), $this->get_end_date() ), $this, $options ), $output );
+						$output = str_replace( '{end_date}', apply_filters( 'ecn_end_date_output', date_i18n( apply_filters( 'ecn_end_date_format', get_option( 'date_format' ) ), $this->get_end_date() ), $this, $options ), $output );
 					break;
 				case 'end_time':
 					if ( $this->get_instant_event() )
 						$output = str_replace( '{end_time}', '', $output );
 					else
-						$output = str_replace( '{end_time}', date_i18n( get_option( 'time_format' ), $this->get_end_date() ), $output );
+						$output = str_replace( '{end_time}', date_i18n( apply_filters( 'ecn_end_time_format', get_option( 'time_format' ) ), $this->get_end_date() ), $output );
 					break;
 				case 'instant_event':
 					$output = str_replace( '{instant_event}', ( $this->get_instant_event() ? 'instant' : '' ), $output );

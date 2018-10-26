@@ -111,6 +111,7 @@ class ECNAdmin {
     private function save_ecn_options( $options ) {
         if ( ! is_array( $options ) )
             throw new Exception( __( 'Invalid options array', 'event-calendar-newsletter' ) );
+        $options['wisdom_registered_setting'] = 1;
         add_option( ECN_SAVED_OPTIONS_NAME, $options );
         update_option( ECN_SAVED_OPTIONS_NAME, $options );
     }

@@ -367,7 +367,10 @@ class ECNAdmin {
 			$start_date = strtotime( $data['custom_date_from'] . ' 00:00:00' );
 			// Calculate the end date as the very beginning of the next day
 			$end_date = strtotime( $data['custom_date_to'] . ' 00:00:00' ) + 86400;
-		}
+		} elseif ( isset( $data['events_offset_in_days'] ) and intval( $data['events_offset_in_days'] ) > 0 ) {
+			$start_date += ( 86400 * ( intval( $data['events_offset_in_days'] ) ) );
+			$end_date += ( 86400 * ( intval( $data['events_offset_in_days'] ) ) );
+        }
 		return $feed->get_events( $start_date, $end_date, $data );
 	}
 

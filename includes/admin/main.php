@@ -156,7 +156,19 @@
             </div>
             <div class="rightcol">
                 <?php if ( ! class_exists( 'ECNPro' ) ): ?>
-                    <p><a target="_blank" href="https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=rightcol"><img src="<?= ECN_PLUGINS_URL . '/includes/images/ecn-upgrade-to-pro-3.png' ?>" alt="<?php echo esc_attr( __( 'Need to filter by category, tags, or only include specific calendars in the results?', 'event-calendar-newsletter' ) ) ?>" /></a></p>
+                    <div id="ecn-pro-description">
+                        <h3><?php echo esc_html__( 'Want more control over what events are displayed?', 'event-calendar-newsletter' ) ?></h3>
+                        <p><?php echo sprintf( esc_html__( 'Check out %sEvent Calendar Newsletter Pro%s:', 'event-calendar-newsletter' ), '<a target="_blank" href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_medium=link&utm_campaign=ecn-upgrade-sidebar&utm_content=description">', '</a>' ); ?></p>
+                        <h4><?php echo esc_html__( 'Additional Filter Options', 'event-calendar-newsletter' ) ?></h4>
+                        <p><?php echo esc_html__( 'Filter by one or more categories, tags, and things like Featured Events depending on your calendar', 'event-calendar-newsletter' ) ?></p>
+                        <h4><?php echo esc_html__( 'Group Events', 'event-calendar-newsletter' ) ?></h4>
+                        <p><?php echo esc_html__( 'Group events by day or month, making it easier for users to see the events they are interested in', 'event-calendar-newsletter' ) ?></p>
+                        <h4><?php echo esc_html__( 'Custom date range', 'event-calendar-newsletter' ) ?></h4>
+                        <p><?php echo esc_html__( 'Choose events in a specific range, or even starting a certain time in the future', 'event-calendar-newsletter' ) ?></p>
+                        <h4><?php echo esc_html__( 'Automate sending', 'event-calendar-newsletter' ) ?></h4>
+                        <p><?php echo esc_html__( 'Automatically include events in your MailChimp, MailPoet, Active Campaign and several other newsletter sending tools!', 'event-calendar-newsletter' ) ?></p>
+                        <p><?php echo sprintf( esc_html__( '%sLearn More About Event Calendar Newsletter Pro%s', 'event-calendar-newsletter' ), '<a class="ecs-button" target="_blank" href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_medium=link&utm_campaign=ecn-help-after-options&utm_content=description">', '</a>' ); ?></p>
+                    </div>
                     <hr/>
 	                <p><h2><?php echo esc_html__( 'Get 20% Off!', 'event-calendar-newsletter' ); ?></h2></p>
 	                <p><h4><?php echo esc_html__( "Just enter your name and email and we'll send you a coupon for 20% off your upgrade to the Pro version", 'event-calendar-newsletter' ); ?></h4></p>

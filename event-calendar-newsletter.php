@@ -1,14 +1,16 @@
 <?php
+
 /*
 Plugin Name: Event Calendar Newsletter
 Plugin URI: http://wordpress.org/extend/plugins/event-calendar-newsletter/
 Description: Easily put events from your WordPress event calendar inside of a newsletter. Spend less time promoting your events!
-Version: 2.6.1
+Version: 2.7
 Author: Event Calendar Newsletter
 Author URI: https://eventcalendarnewsletter.com/?utm_source=plugin&utm_campaign=author-link&utm_medium=link
 Text Domain: event-calendar-newsletter
 License: GPL2
 */
+
 
 /*  Copyright Brian Hogg <email: brian@brianhogg.com>
 
@@ -81,4 +83,28 @@ if ( ! function_exists( 'ecn_load_textdomain' ) ) {
         load_plugin_textdomain( 'event-calendar-newsletter', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
     }
     add_action( 'plugins_loaded', 'ecn_load_textdomain' );
+}
+
+if ( ! class_exists( 'ECNPro' ) ) {
+    /**
+     * This function allows you to track usage of your plugin
+     * Place in your main plugin file
+     * Refer to https://wisdomplugin.com/support for help
+     */
+    if ( ! class_exists( 'ECN_Plugin_Usage_Tracker') ) {
+        require_once dirname( __FILE__ ) . '/tracking/class-plugin-usage-tracker.php';
+    }
+    if ( ! function_exists( 'event_calendar_newsletter_start_plugin_tracking' ) ) {
+        function event_calendar_newsletter_start_plugin_tracking() {
+            $wisdom = new ECN_Plugin_Usage_Tracker(
+                __FILE__,
+                'https://track.eventcalendarnewsletter.com/',
+                array('ecn_saved_options'),
+                true,
+                true,
+                2
+            );
+        }
+        event_calendar_newsletter_start_plugin_tracking();
+    }
 }

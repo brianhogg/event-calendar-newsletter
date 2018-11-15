@@ -366,7 +366,16 @@ class ECNAdmin {
 			$start_date = strtotime( $data['custom_date_from'] . ' 00:00:00' );
 			// Calculate the end date as the very beginning of the next day
 			$end_date = strtotime( $data['custom_date_to'] . ' 00:00:00' ) + 86400;
-		} elseif ( isset( $data['events_offset_in_days'] ) and intval( $data['events_offset_in_days'] ) > 0 ) {
+		} elseif ( isset( $data['events_offset_in_days'] ) and ( intval( $data['events_offset_in_days'] ) > 0 or false !== strtotime( $data['events_offset_in_days'] ) ) ) {
+			if ( ! is_numeric( $data['events_offset_in_days'] ) && false !== strtotime( $data['events_offset_in_days'] ) ) {
+			    $add_days = 0;
+			    if ( false !== strpos( $data['events_offset_in_days'],  'next ' ) ) {
+				    $data['events_offset_in_days'] = str_replace( 'next ', '', $data['events_offset_in_days'] );
+				    $add_days = 7;
+                }
+				$data['events_offset_in_days'] = $add_days + intval( ( strtotime( $data['events_offset_in_days'], current_time( 'timestamp' ) ) - strtotime( date( 'l', current_time( 'timestamp' ) ) ) ) / 86400 );
+			}
+
 			$start_date += ( 86400 * ( intval( $data['events_offset_in_days'] ) ) );
 			$end_date += ( 86400 * ( intval( $data['events_offset_in_days'] ) ) );
         }

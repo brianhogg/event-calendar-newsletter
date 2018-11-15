@@ -9,6 +9,7 @@ class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
 	        'end_time',
             'title',
             'description',
+            'excerpt',
             'location_name',
             'location_address',
             'location_city',
@@ -61,7 +62,8 @@ class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
 		        break;
 
 
-            $retval[] = new ECNCalendarEvent( array(
+            $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), array(
+	            'plugin' => $this->get_identifier(),
                 'start_date' => $event->event_start_date . ' ' . $event->event_start_time,
                 'end_date' => $event->event_end_date . ' ' . $event->event_end_time,
                 'published_date' => get_the_date( 'Y-m-d H:i:s', $post->ID ),
@@ -85,7 +87,7 @@ class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
 //                'repeat_interval' => $this->get_repeat_frequency_from_feed_frequency( $aec_event->repeat_int ),
 //                'repeat_end' => $aec_event->repeat_end,
 
-            ) );
+            ), $post ) );
         }
         return $retval;
     }

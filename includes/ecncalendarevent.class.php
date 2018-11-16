@@ -634,7 +634,7 @@ class ECNCalendarEvent {
 	}
 
 	function handle_conditional_tags( $output, $options = array() ) {
-		$output = $this->replace_conditional_tag( 'if_end_time', ( $this->get_end_date() and ( ! $this->get_all_day() and $this->get_start_date() != $this->get_end_date() or ( $this->get_all_day() and date( 'Y-m-d', $this->get_start_date() ) != date( 'Y-m-d', $this->get_end_date() ) ) ) ), $output );
+		$output = $this->replace_conditional_tag( 'if_end_time', ( $this->get_end_date() and ! $this->get_instant_event() and ( ! $this->get_all_day() and $this->get_start_date() != $this->get_end_date() or ( $this->get_all_day() and date( 'Y-m-d', $this->get_start_date() ) != date( 'Y-m-d', $this->get_end_date() ) ) ) ), $output );
 		// Only use the default tags for conditional values (ie. no param to get_available_format_tags)
 		foreach ( $this->get_available_format_tags() as $format_tag => $description ) {
 			if ( ! in_array( $format_tag, array( 'end_time' ) ) and method_exists( $this, "get_" . $format_tag ) ) {

@@ -39,6 +39,7 @@ the [pro version](https://eventcalendarnewsletter.com/?utm_source=wordpress.org&
 
 * [Event Espresso](https://eventcalendarnewsletter.com/event-espresso/?utm_source=wordpress.org&utm_medium=link&utm_campaign=eventum-pro-calendar)
 * [EventON](http://www.myeventon.com/)
+* Calendarize it!
 * [Eventum (by Templatic)](https://eventcalendarnewsletter.com/eventum/?utm_source=wordpress.org&utm_medium=link&utm_campaign=eventum-pro-calendar)
 
 **Free version**
@@ -54,10 +55,11 @@ Event Calendar Newsletter is available as a pro version with lots of extra featu
 * Filter events - by category, tag or a specific calendar so you get only the events you want in your newsletter
 * Group events - by day or month so they're easier to read
 * Save multiple templates - quickly get the events you want in the right format
-* Ability to automatically insert events into MailChimp, MailPoet, Active Campaign, Aweber and others
+* Ability to automatically insert events into MailChimp, MailPoet and Newsletter plugins for WordPress, Active Campaign, Aweber and others
 * Ability to configure automatic mailings and reminders of upcoming events
 * Selecting less than a week (1-6 days) of events
 * Custom date range - select only the events you want, ie. if you're creating a future newsletter in advance
+* Start from date - start events a number of days in the future, letting you easily create sections in your newsletter (ie. next week, next weekend)
 * Email support - get questions quickly answered and submit feature requests
 
 [https://eventcalendarnewsletter.com](https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-readme&utm_content=description)

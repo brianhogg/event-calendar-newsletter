@@ -117,7 +117,7 @@
 	                                &nbsp; <a target="_blank" href="https://eventcalendarnewsletter.com/docs/tags/">View documentation on available tags</a>
                                 </div>
                                 <div class="format_editor">
-	                                <?php wp_editor( $data['format'], 'format', array( 'textarea_rows' => 8, 'wpautop' => false, 'media_buttons' => false ) ); ?>
+	                                <?php wp_editor( $data['format'], 'format', array( 'editor_height' => 150, 'wpautop' => false, 'media_buttons' => false ) ); ?>
                                 </div>
 	                            <?php do_action( 'ecn_end_settings_page', $current_plugin, $data ) ?>
                             </td>

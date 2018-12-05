@@ -56,6 +56,7 @@ class ECNCalendarFeedEventOrganiser extends ECNCalendarFeed {
             else
                 $image_url = false;
 
+            $address = eo_get_venue_address();
             $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), array(
 	            'plugin' => $this->get_identifier(),
                 'start_date' => $current_start_date,
@@ -66,11 +67,11 @@ class ECNCalendarFeedEventOrganiser extends ECNCalendarFeed {
                 'description' => stripslashes_deep( $event->post_content ),
                 'excerpt' => stripslashes_deep( $event->post_excerpt ),
                 'location_name' => eo_get_venue_name(),
-                'location_address' => eo_get_venue_address(),
-                'location_city' => eo_get_venue_address(),
-                'location_state' => eo_get_venue_address(),
-                'location_zip' => eo_get_venue_address(),
-                'location_country' => eo_get_venue_address(),
+                'location_address' => $address['address'],
+                'location_city' => $address['city'],
+                'location_state' => $address['state'],
+                'location_zip' => $address['postcode'],
+                'location_country' => $address['country'],
 	            'location_website' => ( !is_wp_error( eo_get_venue_link() ) ? eo_get_venue_link() : '' ),
                 'link' => eo_get_permalink(),
                 'event_image_url' => $image_url,

@@ -93,6 +93,12 @@ If you don't already have your event calendar plugin installed and configured, y
 
 == Changelog ==
 
+= 2.8 =
+* Fix for WordPress 5.0 not showing custom editor at the right height
+* Allowing custom added fields to be used with conditional checks
+* Ensuring excerpt is an option for Events Manager
+* Fix for Event Organiser not getting location_* field data properly
+
 = 2.7 =
 * Additional WP filters for date/time formatting and excerpt length
 * Optional tracking to improve performance and compatibility

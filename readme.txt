@@ -4,7 +4,7 @@ Donate link: https://eventcalendarnewsletter.com/
 Tags: events, calendar, event, newsletter, all-in-one, calendar manager, custom calendar, custom calendars, events feed, google calendar, google
 Requires at least: 4.1
 Tested up to: 5.1
-Stable tag: 2.8
+Stable tag: 2.9
 Requires PHP: 5.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -92,6 +92,9 @@ If you don't already have your event calendar plugin installed and configured, y
 4. Choose which events to include by how far in the future, Pro version can filter by categories or tags
 
 == Changelog ==
+
+= 2.9 =
+* Fix for if_end_date condition not really doing anything
 
 = 2.8 =
 * Fix for WordPress 5.0 not showing custom editor at the right height

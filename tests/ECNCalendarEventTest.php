@@ -49,7 +49,7 @@ class ECNCalendarEventTest extends WP_UnitTestCase {
 		) );
 		$this->assertEquals( 'http://my.com/image.png', $event->get_event_image_url(), 'Event image URL should be accessible' );
 		$this->assertEquals( 'http://my.com/image.png', $event->get_from_format( '{event_image_url}' ), '{event_image_url} tag should work' );
-		$this->assertEquals( '<img src="http://my.com/image.png" />', $event->get_from_format( '{event_image}' ), '{event_image} tag should work' );
+		$this->assertEquals( '<img src="http://my.com/image.png" alt="" />', $event->get_from_format( '{event_image}' ), '{event_image} tag should work' );
 	}
 
 	function testLocationPhone() {

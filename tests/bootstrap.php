@@ -1,16 +1,37 @@
 <?php
-// Load WordPress test environment
-// https://unit-tests.svn.wordpress.org/trunk/
-//
-// The path to wordpress-tests
-$_tests_dir = getenv('WP_TESTS_DIR');
-require_once $_tests_dir . '/includes/bootstrap.php';
+/**
+ * PHPUnit bootstrap file
+ *
+ * @package Event_Calendar_Newsletter
+ */
 
-// Include the main plugin files
-require( dirname( __FILE__ ) . '/../../event-calendar-newsletter-pro/event-calendar-newsletter-pro.php' );
-$license_data = new stdClass;
-$license_data->license_limit = 5;
-update_option( ECN_EDD_LICENSE_DATA, $license_data );
+$_tests_dir = getenv( 'WP_TESTS_DIR' );
 
-ecn_pro_add_core();
-//require( dirname( __FILE__ ) . '/../event-calendar-newsletter.php' );
+if ( ! $_tests_dir ) {
+	$_tests_dir = rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress-tests-lib';
+}
+
+if ( ! file_exists( $_tests_dir . '/includes/functions.php' ) ) {
+	echo "Could not find $_tests_dir/includes/functions.php, have you run bin/install-wp-tests.sh ?" . PHP_EOL; // WPCS: XSS ok.
+	exit( 1 );
+}
+
+// Give access to tests_add_filter() function.
+require_once $_tests_dir . '/includes/functions.php';
+
+/**
+ * Manually load the plugin being tested.
+ */
+function _manually_load_plugin() {
+	require dirname( dirname( __FILE__ ) ) . '/../event-calendar-newsletter-pro/event-calendar-newsletter-pro.php';
+    require dirname( dirname( __FILE__ ) ) . '/../the-events-calendar/the-events-calendar.php';
+
+//    $license_data = new stdClass;
+//    $license_data->license_limit = 5;
+//    update_option( ECN_EDD_LICENSE_DATA, $license_data );
+//    ecn_pro_add_core();
+}
+tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
+
+// Start up the WP testing environment.
+require $_tests_dir . '/includes/bootstrap.php';

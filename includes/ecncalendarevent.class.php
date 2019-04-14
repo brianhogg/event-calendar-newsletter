@@ -621,14 +621,17 @@ class ECNCalendarEvent {
 	 * @return string $output modified
 	 */
 	function replace_conditional_tag( $tag, $condition, $output ) {
-		if ( false !== strpos( $output, '{' . $tag . '}' ) and
-		     false !== strpos( $output, '{/' . $tag . '}', strpos( $output, '{' . $tag . '}' ) ) ) {
-			if ( $condition ) {
-				$output = str_replace( '{' . $tag . '}', '', $output );
-				$output = str_replace( '{/' . $tag . '}', '', $output );
-			} else {
-				$output = preg_replace( '~{' . $tag . '}(.*){/' . $tag . '}~s', '', $output );
-			}
+        while ( false !== strpos( $output, '{' . $tag . '}' ) and
+                false !== strpos( $output, '{/' . $tag . '}', strpos( $output, '{' . $tag . '}' ) ) ) {
+            if ( $condition ) {
+                $output = str_replace( '{' . $tag . '}', '', $output );
+                $output = str_replace( '{/' . $tag . '}', '', $output );
+            } else {
+                // Handle each conditional separate in case they use the same conditional more than once on a page
+                $start = strpos( $output, '{' . $tag . '}' );
+                $end = strpos( $output, '{/' . $tag . '}', $start ) + strlen( '{/' . $tag . '}' );
+                $output = substr_replace( $output, '', $start, $end - $start );
+            }
 		}
 		return $output;
 	}

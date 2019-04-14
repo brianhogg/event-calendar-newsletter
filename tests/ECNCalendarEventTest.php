@@ -124,6 +124,8 @@ http://truedoe.bandcamp.com
 			'all_day' => true,
 		) );
 		$this->assertEquals( '', $event->get_from_format( '{if_end_time}-{end_time}{/if_end_time}' ), 'Should not show end time text if all day' );
+        $this->assertEquals( ' other stuff  and other', $event->get_from_format( '{if_end_time}-{end_time}{/if_end_time} other stuff {if_end_time}+{end_time}{/if_end_time} and other' ), 'Should look at multiple conditions separately' );
+
 	}
 
 	function testLocationNameConditional() {

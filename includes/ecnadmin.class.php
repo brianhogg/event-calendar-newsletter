@@ -336,7 +336,7 @@ class ECNAdmin {
 	 *
 	 * @param $data array of options:
 	 *
-	 * events_future_in_days - number of days from now to fetch events, or 0 if custom
+	 * events_future_in_days - number of days from now to fetch events, 0 if custom, or -1 to do current day only
 	 * event_calendar - the identifier of the calendar to fetch events from
 	 * format - the format for a single event with tags like {title} and {link}
 	 * group_events - whether to group events or not, or 'normal' if missing
@@ -351,18 +351,21 @@ class ECNAdmin {
 		return $this->get_output_from_events( $data['events'], $data );
 	}
 
-	/**
-	 * Get the events based on the given data
-	 *
-	 * @param $data array See get_output_from_data()
-	 * @return ECNCalendarEvent[]
-	 */
+    /**
+     * Get the events based on the given data
+     *
+     * @param $data array See get_output_from_data()
+     *
+     * @return ECNCalendarEvent[]
+     * @throws Exception
+     */
 	function get_events( $data ) {
 		$feed = ECNCalendarFeedFactory::create( $data['event_calendar'] );
 
 		// grab the start and end dates, and have the period end at midnight on the end date
 		$start_date = strtotime( current_time( 'Y-m-d' ) . ' 00:00:00' );
-		$end_date = $start_date + ( 86400 * ( $data['events_future_in_days'] + 1 ) );
+        $future_in_days = ( intval( $data['events_future_in_days'] ) >= 0 ) ? intval( $data['events_future_in_days'] ) : 0;
+		$end_date = $start_date + ( 86400 * ( $future_in_days + 1 ) );
 		if ( ECN_CUSTOM_DATE_RANGE_DAYS == $data['events_future_in_days'] and isset( $data['custom_date_from'], $data['custom_date_to'] ) and FALSE !== strtotime( $data['custom_date_from'] ) and FALSE !== strtotime( $data['custom_date_to'] ) ) {
 			$start_date = strtotime( $data['custom_date_from'] . ' 00:00:00' );
 			// Calculate the end date as the very beginning of the next day

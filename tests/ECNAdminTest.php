@@ -70,10 +70,7 @@ class ECNAdminTest extends WP_UnitTestCase {
 			'end_date' => '2015-01-06 16:00:00',
 			'title' => 'Test Title',
 		) );
-		// TODO: The filter on ecn_output_format (in compact and default.php) is not firing on this call, but is
-        // TODO: for other tests?
-        var_dump('testing get output on events in testDefaultDesign');
-        $this->assertEquals( '<p>Test Title</p><p></p><p>January 6, 2015 1:00pm - 4:00pm</p>', $ecn_admin_class->get_output_from_events( array( $event ), array( 'format' => '<p>{title}</p>', 'design' => 'default' ) ), 'Default design should override given format' );
+        $this->assertEquals( "\n<h2>Test Title</h2>\n\n<p>January 6, 2015 @ 1:00 pm to 4:00 pm</p>\n<p></p>\n<p></p>", $ecn_admin_class->get_output_from_events( array( $event ), array( 'format' => '<p>{title}</p>', 'design' => 'default' ) ), 'Default design should override given format' );
 	}
 
 	function testCompactDesign() {
@@ -84,8 +81,7 @@ class ECNAdminTest extends WP_UnitTestCase {
 			'end_date' => '2015-01-06 16:00:00',
 			'title' => 'Test Title',
 		) );
-		var_dump("testCompactDesign");
-		$this->assertEquals( '<p>Test Title</p><p></p><p>January 6, 2015 1:00pm - 4:00pm</p>', $ecn_admin_class->get_output_from_events( array( $event ), array( 'format' => '<p>{title}</p>', 'design' => 'compact' ) ), 'Compact/minimal design should override given format' );
+		$this->assertEquals( "\n" . '<div><strong>January 6, 2015</strong> - Test Title 1:00 pm-4:00 pm </div>', $ecn_admin_class->get_output_from_events( array( $event ), array( 'format' => '<p>{title}</p>', 'design' => 'compact' ) ), 'Compact/minimal design should override given format' );
 	}
 
 }

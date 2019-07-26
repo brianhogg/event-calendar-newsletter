@@ -672,7 +672,7 @@ class ECNCalendarEvent {
     }
 
     function replace_end_date_with_format( $matches ) {
-        return date_i18n( $matches[0], $this->get_end_date() );
+        return date_i18n( $matches[1], $this->get_end_date() );
     }
 
 	function handle_format_tags( $output, $options = array() ) {
@@ -696,18 +696,23 @@ class ECNCalendarEvent {
 					break;
 				case 'start_time':
 					$output = str_replace( '{start_time}', apply_filters( 'ecn_start_time_output', date_i18n( apply_filters( 'ecn_start_time_format', get_option( 'time_format' ) ), $this->get_start_date() ), $this, $options ), $output );
-					break;
+                    $output = preg_replace_callback( '/\{start_time\|([^\}]+)\}/', array( $this, 'replace_start_date_with_format' ), $output );
+                    break;
 				case 'end_date':
-					if ( $this->get_instant_event() )
+					if ( $this->get_instant_event() ) {
 						$output = str_replace( '{end_date}', '', $output );
-					else
+                    } else {
 						$output = str_replace( '{end_date}', apply_filters( 'ecn_end_date_output', date_i18n( apply_filters( 'ecn_end_date_format', get_option( 'date_format' ) ), $this->get_end_date() ), $this, $options ), $output );
+                        $output = preg_replace_callback( '/\{end_date\|([^\}]+)\}/', array( $this, 'replace_end_date_with_format' ), $output );
+                    }
 					break;
 				case 'end_time':
-					if ( $this->get_instant_event() )
+					if ( $this->get_instant_event() ) {
 						$output = str_replace( '{end_time}', '', $output );
-					else
+                    } else {
 						$output = str_replace( '{end_time}', date_i18n( apply_filters( 'ecn_end_time_format', get_option( 'time_format' ) ), $this->get_end_date() ), $output );
+                        $output = preg_replace_callback( '/\{end_time\|([^\}]+)\}/', array( $this, 'replace_end_date_with_format' ), $output );
+                    }
 					break;
 				case 'instant_event':
 					$output = str_replace( '{instant_event}', ( $this->get_instant_event() ? 'instant' : '' ), $output );

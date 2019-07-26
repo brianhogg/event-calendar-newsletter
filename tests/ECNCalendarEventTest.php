@@ -60,7 +60,19 @@ class ECNCalendarEventTest extends WP_UnitTestCase {
 		$this->assertEquals( '905-333-4444', $event->get_from_format( '{location_phone}' ), 'Get event phone' );
 	}
 
-	function testGenerateExcerpt() {
+    function testStartAndEndDateFormatting() {
+        $event = new ECNCalendarEvent( array(
+            'start_date' => '2019-07-26 13:00:00',
+            'end_date' => '2019-07-26 17:00:00',
+        ) );
+        $this->assertEquals( 'Wednesday, July 26, 2019', $event->get_from_format( '{start_date|l, f j, Y}' ), 'Get event start date formatted' );
+        $this->assertEquals( 'Wednesday, July 26, 2019', $event->get_from_format( '{end_date|l, f j, Y}' ), 'Get event end date formatted' );
+        $this->assertEquals( '13', $event->get_from_format( '{start_time|G}' ), 'Get event start time formatted' );
+        $this->assertEquals( '17', $event->get_from_format( '{end_time|G}' ), 'Get event end time formatted' );
+
+    }
+
+    function testGenerateExcerpt() {
 		$event = new ECNCalendarEvent( array(
 			'description' => 'Get out of the office and join us for a walk in the park!
 

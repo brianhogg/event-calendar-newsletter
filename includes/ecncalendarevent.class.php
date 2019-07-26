@@ -667,6 +667,14 @@ class ECNCalendarEvent {
 		return '<a href="' . esc_url( get_term_link( $category ) ) . '" alt="' . esc_attr( sprintf( __( 'View all events in %s', 'event-calendar-newsletter' ), $category->name ) ) . '">' . esc_html( $category->name ) . '</a>';
 	}
 
+	function replace_start_date_with_format( $matches ) {
+        return date_i18n( $matches[1], $this->get_start_date() );
+    }
+
+    function replace_end_date_with_format( $matches ) {
+        return date_i18n( $matches[0], $this->get_end_date() );
+    }
+
 	function handle_format_tags( $output, $options = array() ) {
 		foreach ( apply_filters( 'ecn_available_format_tags', self::get_available_format_tags( $this->get_plugin() ) ) as $tag => $description ) {
 			switch ( $tag ) {
@@ -684,6 +692,7 @@ class ECNCalendarEvent {
 					break;
 				case 'start_date':
 					$output = str_replace( '{start_date}', apply_filters( 'ecn_start_date_output', date_i18n( apply_filters( 'ecn_start_date_format', get_option( 'date_format' ) ), $this->get_start_date() ), $this, $options ), $output );
+                    $output = preg_replace_callback( '/\{start_date\|([^\}]+)\}/', array( $this, 'replace_start_date_with_format' ), $output );
 					break;
 				case 'start_time':
 					$output = str_replace( '{start_time}', apply_filters( 'ecn_start_time_output', date_i18n( apply_filters( 'ecn_start_time_format', get_option( 'time_format' ) ), $this->get_start_date() ), $this, $options ), $output );

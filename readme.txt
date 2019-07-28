@@ -95,6 +95,7 @@ If you don't already have your event calendar plugin installed and configured, y
 
 = 2.10 =
 * Adding ability to format start_date, start_time, end_time and end_date inline, ie. {start_date|l, F j, Y}
+* Fix for adding multiple of the same if_ condition tags
 
 = 2.9 =
 * Fix for if_end_date condition not really doing anything

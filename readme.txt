@@ -3,7 +3,7 @@ Contributors: brianhogg
 Donate link: https://eventcalendarnewsletter.com/
 Tags: events, calendar, event, newsletter, all-in-one, calendar manager, custom calendar, custom calendars, events feed, google calendar, google
 Requires at least: 4.1
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: 2.10
 Requires PHP: 5.3.3
 License: GPLv2 or later

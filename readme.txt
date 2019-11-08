@@ -1,7 +1,7 @@
-=== Plugin Name ===
+=== Event Calendar Newsletter ===
 Contributors: brianhogg
 Donate link: https://eventcalendarnewsletter.com/
-Tags: events, calendar, event, newsletter, all-in-one, calendar manager, custom calendar, custom calendars, events feed, google calendar, google
+Tags: Event Calendar Newsletter, WordPress events calendar, WordPress event calendar, The Events Calendar, All-in-One Event Calendar
 Requires at least: 4.1
 Tested up to: 5.3
 Stable tag: 2.10
@@ -9,63 +9,67 @@ Requires PHP: 5.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily put events from your WordPress event calendar inside of a newsletter. Quickly use an included design or create your own!
+Stop manually copying the events you’re promoting from your WordPress events calendar!
 
 == Description ==
 
-Stop manually copying, pasting and formatting events you're promoting from your WordPress events calendar!  Take your events calendar and turn it into a newsletter-friendly format, so you can quickly copy your events into your newsletters (ie. MailChimp, MailPoet, Active Campaign, or other newsletter sending service).
+**Stop manually copying the events you’re promoting from your WordPress events calendar!**
 
-All you have to do is select how far in the future you want events for your newsletter and click Generate.
+Event Calendar Newsletter lets you curate an events newsletter by pulling in event details directly from your WordPress events calendar, all without leaving your WordPress admin.
 
-There's no programming required.  You can preview the output then quickly copy/paste it into your newsletter.  Spend a lot less time creating newsletters of your upcoming events!
+You’ll be able to transform your events calendar into a newsletter-friendly format in just a few clicks, and copy-paste upcoming events into your newsletters in Mailchimp, MailPoet, Active Campaign, or any other newsletter sending service.
 
 [youtube https://www.youtube.com/watch?v=rTwus0wTzX4]
 
+> "I was always making errors when creating event newsletters based on the calendar on my WordPress website. Now I use this plug-in to generate newsletters from my calendar and it works like a charm!" – Kevin Browne, Software Hamilton
+
+> Want to filter and group events, save multiple templates, set custom or tighter date ranges, get premium support – and more? [Check out Events Calendar Newsletter Pro today](https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-readme&utm_content=description)
+
 **How it works**
 
-Event Calendar Newsletter pulls the events for your newsletter from a WordPress event calendar plugin installed on your site.
+Event Calendar Newsletter automatically pulls event details from the WordPress event calendar plugin you have installed on your site and generates a newsletter-friendly layout based on the specific event details you want to include.
 
-If you don't already have a WordPress event calendar, see [Setting up an Event Calendar on your WordPress site](https://eventcalendarnewsletter.com/docs/set-event-calendar-wordpress-site/?utm_source=wordpress.org&utm_medium=link&utm_campaign=setup-calendar) or just install the plugin and it will guide you.
+If you have a WordPress event calendar installed on your website, you can begin using Event Calendar Newsletter right away. If you don’t have a WordPress event calendar, install one! You can use one of five free plugins (see below, [more in Pro](https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-readme&utm_content=description)). You’ll just need to install the Event Calendar Newsletter plugin and follow the instructions on [setting up an event calendar in WordPress](https://eventcalendarnewsletter.com/docs/set-event-calendar-wordpress-site/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-readme&utm_content=description).
 
-The plugin currently supports the following calendars:
+Event Calendar Newsletter works seamlessly with the following WordPress event calendars:
 
-* [The Events Calendar by Modern Tribe](https://wordpress.org/plugins/the-events-calendar/)
-* [All-in-One Event Calendar by Time.ly](https://wordpress.org/plugins/all-in-one-event-calendar/)
-* [Event Organiser](https://wordpress.org/plugins/event-organiser/)
-* [Simple Calendar (aka Google Calendar Events)](https://wordpress.org/plugins/google-calendar-events/)
-* [Events Manager](https://wordpress.org/plugins/events-manager/)
+* The Events Calendar by Modern Tribe
+* All-in-One Event Calendar by Time.ly
+* Event Organiser
+* Simple Calendar (aka Google Calendar Events)
+* Events Manager
 
-the [pro version](https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=readme-pro-calendars&utm_content=description) additionally supports:
+Events Calendar Newsletter Pro supports all of the above-mentioned event calendars in addition to:
 
-* [Event Espresso](https://eventcalendarnewsletter.com/event-espresso/?utm_source=wordpress.org&utm_medium=link&utm_campaign=eventum-pro-calendar)
-* [EventON](http://www.myeventon.com/)
+* Event Espresso
+* EventON
 * Calendarize it!
-* [Eventum (by Templatic)](https://eventcalendarnewsletter.com/eventum/?utm_source=wordpress.org&utm_medium=link&utm_campaign=eventum-pro-calendar)
+* Eventum (by Templatic)
 
-**Free version**
+**Event Calendar Newsletter Main Features**
 
-* Get events from 1 week to 12 months to add to your newsletter
-* Customize the formatting and add the information you want in your newsletter using a visual or HTML editor
-* Quickly copy and paste the output into your newsletter
+* **Specify time frame** – Automatically curate a list of upcoming events (from one week to 12 months into the future) to share with your mailing list.
+* **Decide which event details to include** – Use a drop-down menu to add the event details you’d like to include in your event newsletter including event start date, event end date, title, location details, contact information, and much more!
+* **Customize the newsletter** – Customize the newsletter’s formatting and layout using a WYSIWYG or HTML text editor.
+* **One-click generator** – Quickly generate newsletter formatted events and copy-paste the results into your email newsletter tool.
 
-**PRO version**
+> Five stars: "Easy to use. Does exactly what it says." – Phil Derksen - Founder, WP Simple Pay
 
-Event Calendar Newsletter is available as a pro version with lots of extra features to save you even more time and get more people attending your events!
+**Event Calendar Newsletter Pro Features**
 
-* Filter events - by category, tag or a specific calendar so you get only the events you want in your newsletter
-* Group events - by day or month so they're easier to read
-* Save multiple templates - quickly get the events you want in the right format
-* Ability to automatically insert events into MailChimp, MailPoet and Newsletter plugins for WordPress, Active Campaign, Aweber and others
-* Ability to configure automatic mailings and reminders of upcoming events
-* Selecting less than a week (1-6 days) of events
-* Custom date range - select only the events you want, ie. if you're creating a future newsletter in advance
-* Start from date - start events a number of days in the future, letting you easily create sections in your newsletter (ie. next week, next weekend)
-* Email support - get questions quickly answered and submit feature requests
+[Event Calendar Newsletter Pro makes it easier than ever to turn your events into newsletters](https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-readme&utm_content=description), making your workflow easier – and getting better attendance – from $99:
 
-[https://eventcalendarnewsletter.com](https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-readme&utm_content=description)
+* **Filter events** – Filter events by category, tag, or event calendar in the back-end to only include the events you want to share in the event newsletter.
+* **Group events** – Group events together by day or month along with a header for each group to increase event newsletter readability.
+* **Save multiple newsletter templates** – Create and save event newsletter templates to get event details in the right format and layout everytime.
+* **Integration with email providers** – Event Calendar Newsletter supports integration with MailChimp, MailPoet, Active Campaign, Aweber, and others making it easy for you to automatically insert event details into your newsletter.
+* **Automate newsletter mailings and reminders** – Configure mailings and reminders for upcoming events.
+* **Specify a tighter time frame – Ability to select less than a week (i.e. 1 to 6 days) of upcoming events.
+* **Set a custom date range** – Ability to hand-pick only the events you want to share in your event newsletter; perfect for creating newsletters in advance.
+* **Set a start from date** – Include events that start on a specific date in the future; perfect for creating sections in your newsletter (i.e. events upcoming in the next week or events upcoming in the next weekend or all events after Christmas)
+* **Premium support** – Get questions answered quickly via email and submit feature requests.
 
-[Read Reviews &raquo;](https://eventcalendarnewsletter.com/testimonials/ "Event Calendar Newsletter WordPress Plugin")
-
+[Check out Event Calendar Newsletter Pro here.](https://eventcalendarnewsletter.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-readme&utm_content=description)
 
 == Installation ==
 

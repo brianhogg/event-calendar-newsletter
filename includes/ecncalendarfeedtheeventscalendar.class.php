@@ -40,6 +40,7 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
 	        'tag_links',
 	        'all_day',
 	        'recurring',
+	        'featured',
         );
     }
 
@@ -105,6 +106,7 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
                 'event_cost' => tribe_get_formatted_cost(),
 	            'event_website' => ( function_exists( 'tribe_get_event_website_url' ) ? tribe_get_event_website_url() : '' ),
                 'all_day' => tribe_event_is_all_day(),
+	            'featured' => get_post_meta( get_the_ID(), '_tribe_featured', true ) ? true : false,
 	            'gcal_link_url' => ( function_exists( 'tribe_get_gcal_link' ) ? Tribe__Events__Main::instance()->esc_gcal_url( tribe_get_gcal_link() ) : '' ),
 	            'ical_link_url' => ( function_exists( 'tribe_get_single_ical_link' ) ? esc_url( tribe_get_single_ical_link() ) : '' ),
 				'recurrence_text' => ( function_exists( 'tribe_get_recurrence_text' ) ? tribe_get_recurrence_text() : '' ),

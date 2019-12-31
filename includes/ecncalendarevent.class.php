@@ -678,6 +678,14 @@ class ECNCalendarEvent {
 	function handle_format_tags( $output, $options = array() ) {
 		foreach ( apply_filters( 'ecn_available_format_tags', self::get_available_format_tags( $this->get_plugin() ) ) as $tag => $description ) {
 			switch ( $tag ) {
+                case 'excerpt':
+                    $output = str_replace( '{excerpt}', $this->get_excerpt(), $output );
+                    $output = apply_filters( 'ecn_excerpt_replaced', $output, $this, $options );
+                    break;
+                case 'description':
+                    $output = str_replace( '{description}', $this->get_description(), $output );
+                    $output = apply_filters( 'ecn_description_replaced', $output, $this, $options );
+                    break;
 				case 'tags':
 					$output = str_replace( '{tags}', implode( ', ', array_map( array( $this, 'get_taxonomy_name' ), $this->get_tags() ) ), $output );
 					break;
@@ -747,13 +755,14 @@ class ECNCalendarEvent {
 					$output = str_replace( '{link_url}', ( $this->get_link() ? $this->get_link() : '' ), $output );
 					break;
 				default:
-					if ( method_exists( $this, "get_$tag" ) )
+					if ( method_exists( $this, "get_$tag" ) ) {
 						$output = str_replace( '{' . $tag . '}', $this->{"get_$tag"}(), $output );
-					elseif ( array_key_exists( $tag, $this->get_additional_data() ) ) {
+                    } elseif ( array_key_exists( $tag, $this->get_additional_data() ) ) {
 						$additional_data = $this->get_additional_data();
 						$output = str_replace( '{' . $tag . '}', $additional_data[$tag], $output );
-					} elseif ( apply_filters( 'ecn_handle_tag_output', false, $tag, $this ) )
+					} elseif ( apply_filters( 'ecn_handle_tag_output', false, $tag, $this ) ) {
 						$output = str_replace( '{' . $tag . '}', apply_filters( 'ecn_generate_custom_output', '', $tag, $this ), $output );
+                    }
 			}
 		}
 		return $output;		

@@ -54,7 +54,8 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
         global $post;
         $retval = array();
 
-	    $events = tribe_get_events( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => -1, 'hide_upcoming' => true, 'post_status' => 'publish', 'start_date' => date( 'Y-m-d H:i', $start_date ), 'end_date' => date( 'Y-m-d H:i', $end_date ) ), $start_date, $end_date, $data ) );
+        $args = apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => -1, 'hide_upcoming' => true, 'post_status' => 'publish', 'start_date' => date( 'Y-m-d H:i', $start_date ), 'end_date' => date( 'Y-m-d H:i', $end_date ) ), $start_date, $end_date, $data );
+	    $events = tribe_get_events( $args );
 
         foreach ( $events as $post ) {
 			setup_postdata( $post );
@@ -62,10 +63,12 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
             do_action( 'tribe_events_inside_before_loop' );
 	        $current_start_date = tribe_get_start_date( null, true, 'Y-m-d H:i:s' );
 	        $current_end_date = tribe_get_end_date( null, true, 'Y-m-d H:i:s' );
-	        if ( strtotime( $current_start_date ) < $start_date )
-		        continue;
-	        if ( strtotime( $current_start_date ) > $end_date )
-		        break;
+            if ( ! isset( $data['in_progress_events'] ) || ! $data['in_progress_events'] ) {
+                if ( strtotime( $current_start_date ) < $start_date )
+                    continue;
+                if ( strtotime( $current_start_date ) > $end_date )
+                    break;
+            }
             $image_src = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), apply_filters( 'ecn_image_size', 'medium', get_the_ID() ) );
             if ( !empty( $image_src ) ) {
                 $image_url = $image_src[0];

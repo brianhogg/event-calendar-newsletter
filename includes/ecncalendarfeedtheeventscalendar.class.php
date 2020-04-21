@@ -116,6 +116,7 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
             ) ) );
             do_action( 'tribe_events_inside_after_loop' );
         }
+        $retval = $this->sort_events_by_start_date( $retval );
         return $retval;
     }
 

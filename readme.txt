@@ -4,7 +4,7 @@ Donate link: https://eventcalendarnewsletter.com/
 Tags: Event Calendar Newsletter, WordPress events calendar, WordPress event calendar, The Events Calendar, All-in-One Event Calendar
 Requires at least: 4.1
 Tested up to: 5.4
-Stable tag: 2.11
+Stable tag: 2.12
 Requires PHP: 5.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -36,13 +36,16 @@ Event Calendar Newsletter works seamlessly with the following WordPress event ca
 * The Events Calendar by Modern Tribe
 * All-in-One Event Calendar by Time.ly
 * Event Organiser
-* Simple Calendar (aka Google Calendar Events)
 * Events Manager
+* Simple Calendar (aka Google Calendar Events)
 
 Events Calendar Newsletter Pro supports all of the above-mentioned event calendars in addition to:
 
+* Modern Events Calendar
 * Event Espresso
 * EventON
+* Church Content (with a supported theme)
+* Geodirectory Events
 * Calendarize it!
 * Eventum (by Templatic)
 
@@ -96,6 +99,9 @@ If you don't already have your event calendar plugin installed and configured, y
 4. Choose which events to include by how far in the future, Pro version can filter by categories or tags
 
 == Changelog ==
+
+= 2.12 =
+* Better onboarding and updated wording when no compatible calendar is found
 
 = 2.11 =
 * Adding featured tag for The Events Calendar

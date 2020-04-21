@@ -84,12 +84,12 @@ if ( ! function_exists( 'ecn_load_textdomain' ) ) {
     add_action( 'plugins_loaded', 'ecn_load_textdomain' );
 }
 
-if ( ! class_exists( 'ECNPro' ) ) {
-    /**
-     * Check if a pro-only calendar exists, and what that calendar is
-     *
-     * @return string[]
-     */
+/**
+ * Check if a pro-only calendar exists, and what that calendar is
+ *
+ * @return string[]
+ */
+if ( ! function_exists( 'ecn_available_pro_calendars' ) ) {
     function ecn_available_pro_calendars() {
         $calendars = array();
 
@@ -127,7 +127,9 @@ if ( ! class_exists( 'ECNPro' ) ) {
 
         return $calendars;
     }
+}
 
+if ( ! class_exists( 'ECNPro' ) ) {
     /**
      * This function allows you to track usage of your plugin
      * Place in your main plugin file

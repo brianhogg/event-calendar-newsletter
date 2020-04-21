@@ -2,27 +2,37 @@
     <h2><?= esc_html( apply_filters( 'ecn_settings_title', _x( 'Event Calendar Newsletter', 'Settings title', 'event-calendar-newsletter' ) ) ) ?></h2>
 	<?php do_action( 'ecn_after_settings_title' ); ?>
     <?php if ( ! $data['available_plugins'] ): ?>
-	    <div id="no-supported-calendars">
-	        <h1><?= esc_html( __( 'No supported event calendar plugins available.', 'event-calendar-newsletter' ) ) ?></h1>
-		    <p>
-			    <?= esc_html( __( 'Event Calendar Newsletter takes the details of your upcoming events to put inside your newsletter from one of the supported WordPress event calendar plugins.', 'event-calendar-newsletter' ) ); ?>
-		    </p>
-	        <p>
-	            <strong><?= esc_html( __( 'Install one of the supported calendars, which include:', 'event-calendar-newsletter' ) ); ?></strong>
-	            <ul>
-	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&type=term&s=the+events+calendar' ); ?>">The Events Calendar by Modern Tribe, Inc</a></li>
-	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&s=simple+calendar+google' ); ?>">Simple Calendar - Google Calendar Events</a></li>
-	                <li><a href="<?= admin_url( 'plugin-install.php?tab=search&type=term&s=all+in+one+event+calendar+time.ly' ); ?>">All-in-One Event Calendar by time.ly</a></li>
-	            </ul>
-                <div><?= sprintf( esc_html( __( 'Note that certain calendars like %sEvent Espresso%s are only supported %sin the PRO version of Event Calendar Newsletter%s', 'event-calendar-newsletter' ) ), '<a href="https://eventcalendarnewsletter.com/features/#calendars?utm_source=plugin&utm_campaign=pro-cal-support-ee" target="_blank">', '</a>', '<a href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_campaign=pro-cal-support" target="_blank">', '</a>' ); ?></div>
-		    </p>
-		    <p><?= sprintf( esc_html( __( "Have another events calendar you'd like supported?  %sLet us know%s!", 'event-calendar-newsletter' ) ), '<a href="mailto:info@eventcalendarnewsletter.com">', '</a>' ); ?></p>
-		    <p>
-			    <?= sprintf( esc_html( __( 'Still need help?  View %sfull instructions for setting up a supported calendar%s' ) ), '<a target="_blank" href="https://eventcalendarnewsletter.com/docs/set-event-calendar-wordpress-site/">', '</a>' ); ?>
-		    </p>
-		    <h1><?php echo esc_html__( 'Preview of Event Calendar Newsletter', 'event-calendar-newsletter' ); ?></h1>
-		    <iframe width="560" height="315" src="https://www.youtube.com/embed/rTwus0wTzX4" frameborder="0" allowfullscreen></iframe>
-	    </div>
+      <?php $calendars = ecn_available_pro_calendars(); ?>
+      <?php if ( count( $calendars ) ): ?>
+            <div id="no-supported-calendars">
+                <h2><?= _n( 'Your calendar requires the pro version to function:', 'Your calendar requires the pro version to function', count( $calendars ), 'event-calendar-newsletter' ) ?></h2>
+                <?php foreach ( $calendars as $calendar ): ?>
+                    <p><strong><?= esc_html( $calendar ) ?></strong></p>
+                <?php endforeach; ?>
+                <p>Not all calendars are supported in the free version.</p>
+                <p>You can either install a calendar supported with the free version (like The Events Calendar by Modern Tribe), or upgrade to pro. This will allow support for all calendars, along with other features like automatic sending with Mailchimp, Mailpoet, and more.</p>
+                <p><?php echo sprintf( esc_html__( '%sLearn More About Event Calendar Newsletter Pro%s', 'event-calendar-newsletter' ), '<a class="ecs-button upgrade" target="_blank" href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_medium=link&utm_campaign=ecn-pro-only-calendar&utm_content=description">', '</a>' ); ?></p>            </div>
+            </div>
+        <?php else: ?>
+          <div id="no-supported-calendars">
+              <h2><?= esc_html( __( 'No supported event calendar plugin available.', 'event-calendar-newsletter' ) ) ?></h2>
+            <p>
+              <?= esc_html( __( 'Event Calendar Newsletter takes the details of your upcoming events to put inside your newsletter from one of the supported WordPress event calendar plugins.', 'event-calendar-newsletter' ) ); ?>
+            </p>
+              <p>
+                  <strong><?= esc_html( __( 'Install one of the supported calendars, which include:', 'event-calendar-newsletter' ) ); ?></strong>
+                  <p><a href="<?= admin_url( 'plugin-install.php?tab=search&type=term&s=the+events+calendar' ); ?>">The Events Calendar by Modern Tribe</a></p>
+                  <p><a href="<?= admin_url( 'plugin-install.php?tab=search&s=events+manager' ); ?>">Events Manager</a></p>
+                  <p><a href="<?= admin_url( 'plugin-install.php?tab=search&s=event+organiser' ); ?>">Event Organiser</a></p>
+                  <div><?= sprintf( esc_html( __( 'Note that %scertain calendars%s are only supported %sin the pro version of Event Calendar Newsletter%s', 'event-calendar-newsletter' ) ), '<a href="https://eventcalendarnewsletter.com/features/#calendars?utm_source=plugin&utm_campaign=pro-cal-support-ee" target="_blank">', '</a>', '<a href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_campaign=pro-cal-support" target="_blank">', '</a>' ); ?></div>
+               </p>
+            <h1><?php echo esc_html__( 'Preview of Event Calendar Newsletter', 'event-calendar-newsletter' ); ?></h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rTwus0wTzX4" frameborder="0" allowfullscreen></iframe>
+              <p>
+                  <?= sprintf( esc_html( __( 'Still need help?  View %sfull instructions for setting up a supported calendar%s or %sreach out to support%s, we are here to help :)' ) ), '<a target="_blank" href="https://eventcalendarnewsletter.com/docs/set-event-calendar-wordpress-site/">', '</a>', '<a href="https://wordpress.org/support/plugin/event-calendar-newsletter/#new-post" target="_blank">', '</a>' ); ?>
+              </p>
+          </div>
+      <?php endif; ?>
     <?php else: ?>
         <div id="ecn-admin">
             <?php wp_nonce_field( 'ecn_admin', 'wp_ecn_admin_nonce' ); ?>
@@ -135,7 +145,7 @@
                 <div class="result">
 	                <?php do_action( 'ecn_main_before_results' ); ?>
 
-                    <div id="copy_paste_info"><?php echo sprintf( esc_html__( 'Copy and paste the result into your MailChimp, ActiveCampaign, MailPoet or other newsletter sending service.  You will likely want to use the "Results (HTML)" version. %sView a Quick Demo%s', 'event-calendar-newsletter' ), '<a target="_blank" href="http://www.youtube.com/watch?v=4oSIlU541Bo">', '</a>' ); ?></div>
+                    <div id="copy_paste_info"><?php echo sprintf( esc_html__( 'Copy and paste the result into your Mailchimp, ActiveCampaign, MailPoet or other newsletter sending service.  You will likely want to use the "Results (HTML)" version. %sView a Quick Demo%s', 'event-calendar-newsletter' ), '<a target="_blank" href="http://www.youtube.com/watch?v=4oSIlU541Bo">', '</a>' ); ?></div>
 
                     <h2 class="nav-tab-wrapper">
                         <a id="results_tab" class="nav-tab nav-tab-active"><?= esc_html( __( 'Result', 'event-calendar-newsletter' ) ) ?></a>

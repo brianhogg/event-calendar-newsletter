@@ -6,9 +6,10 @@
 #ecn-admin .leftcol { width: 70%; float: left; }
 #ecn-admin .rightcol { width: 25%; float: right; }
 #ecn-admin .clearfix { clear: both; }
+#no-supported-calendars { max-width: 700px; }
 #no-supported-calendars p { font-size: 16px; }
 #output_columns { clear: left; }
-#save_results_box .upgrade {
+#save_results_box .upgrade, #no-supported-calendars .upgrade {
     background-color: #f77530;
     border: 1px solid #e15409;
     box-shadow: 1px 0 #e15409;
@@ -17,6 +18,6 @@
 }
 #ecn-pro-description { padding: 10px; border: 2px solid #f77530; background: white; }
 #ecn-pro-description h3.additional-options { padding-top: 30px; }
-#ecn-pro-description .ecs-button { text-decoration: none; padding: 6px 12px; background-color: #f77530; color: white; display: inline-block; text-align: center; }
+#ecn-pro-description .ecs-button, #no-supported-calendars .ecs-button { text-decoration: none; padding: 6px 12px; background-color: #f77530; color: white; display: inline-block; text-align: center; }
 #ecn-pro-designs { text-align:center; }
 #ecn-pro-designs a { padding-bottom: 20px; }

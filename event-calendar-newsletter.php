@@ -86,6 +86,49 @@ if ( ! function_exists( 'ecn_load_textdomain' ) ) {
 
 if ( ! class_exists( 'ECNPro' ) ) {
     /**
+     * Check if a pro-only calendar exists, and what that calendar is
+     *
+     * @return string[]
+     */
+    function ecn_available_pro_calendars() {
+        $calendars = array();
+
+        if ( class_exists( 'plugin_righthere_calendar' ) ) {
+            $calendars[] = 'CalendarizeIt!';
+        }
+
+        if ( defined( 'CCT_MIDBI_VERSION' ) ) {
+            $calendars[] = 'CCT Cloud';
+        }
+
+        if ( class_exists( 'Church_Theme_Content' ) ) {
+            $calendars[] = 'Church Content';
+        }
+
+        if ( function_exists( 'espresso_version' ) ) {
+            $calendars[] = 'Event Espresso';
+        }
+
+        if ( class_exists( 'EventON' ) ) {
+            $calendars[] = 'EventON';
+        }
+
+        if ( defined( 'TEVOLUTION_EVENT_VERSION' ) ) {
+            $calendars[] = 'Tevolution Events / Eventum';
+        }
+
+        if ( ( defined( 'GDEVENTS_VERSION' ) || defined( 'GEODIR_EVENT_VERSION' ) ) ) {
+            $calendars[] = 'Geodirectory Events';
+        }
+
+        if ( class_exists( 'MEC_skins' ) ) {
+            $calendars[] = 'Modern Events Calendar';
+        }
+
+        return $calendars;
+    }
+
+    /**
      * This function allows you to track usage of your plugin
      * Place in your main plugin file
      * Refer to https://wisdomplugin.com/support for help

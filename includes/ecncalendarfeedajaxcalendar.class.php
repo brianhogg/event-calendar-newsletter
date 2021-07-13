@@ -69,7 +69,8 @@ class ECNCalendarFeedAjaxCalendar extends ECNCalendarFeed {
     }
 
     function is_feed_available() {
-        return is_plugin_active( 'ajax-event-calendar/ajax-event-calendar.php' );
+        // TODO: Switch to something that doesn't depend on is_plugin_active (ie. for Newsletter preview that's not loading admin-init)
+        return function_exists( 'is_plugin_active' ) and is_plugin_active( 'ajax-event-calendar/ajax-event-calendar.php' );
     }
 }
 }

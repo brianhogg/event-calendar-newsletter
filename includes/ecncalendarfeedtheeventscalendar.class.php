@@ -129,7 +129,7 @@ class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
     }
 
     function is_feed_available() {
-        return is_plugin_active( 'the-events-calendar/the-events-calendar.php' );
+        return class_exists( 'Tribe__Events__Main' );
     }
 }
 }

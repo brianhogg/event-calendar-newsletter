@@ -123,7 +123,8 @@ class ECNCalendarFeedAi1ec extends ECNCalendarFeed {
     }
 
     function is_feed_available() {
-        return is_plugin_active( 'all-in-one-event-calendar/all-in-one-event-calendar.php' );
+        // TODO: Switch to something that doesn't depend on is_plugin_active (ie. for Newsletter preview that's not loading admin-init)
+        return function_exists( 'is_plugin_active' ) and is_plugin_active( 'all-in-one-event-calendar/all-in-one-event-calendar.php' );
     }
 }
 }

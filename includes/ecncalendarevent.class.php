@@ -604,6 +604,16 @@ class ECNCalendarEvent {
 		return $this->_instant_event;
 	}
 
+	public function get_recurring() {
+        if ( $this->get_recurrence_text() ) {
+            return $this->get_recurrence_text();
+        } elseif ( $this->get_repeat_frequency() > 0 and $this->get_repeat_interval() ) {
+            return sprintf( _n( 'Occurs every %s %s', 'Occurs every %s %s', $this->get_repeat_frequency(), 'event-calendar-newsletter' ), $this->get_repeat_frequency(), $this->get_repeat_interval_text( $this->get_repeat_frequency() ) );
+        }
+
+        return '';
+    }
+
     public function get_from_format( $format, $options = array() ) {
         $retval = $format;
 	    $retval = $this->handle_conditional_tags( $retval, $options );
@@ -736,14 +746,6 @@ class ECNCalendarEvent {
 						$output = str_replace( '{event_cost}', $this->get_event_cost(), $output );
 					else
 						$output = str_replace( '{event_cost}', '', $output );
-					break;
-				case 'recurring':
-					if ( $this->get_recurrence_text() )
-						$output = str_replace( '{recurring}', $this->get_recurrence_text(), $output );
-					elseif ( $this->get_repeat_frequency() > 0 and $this->get_repeat_interval() )
-						$output = str_replace( '{recurring}', sprintf( _n( 'Occurs every %s %s', 'Occurs every %s %s', $this->get_repeat_frequency(), 'event-calendar-newsletter' ), $this->get_repeat_frequency(), $this->get_repeat_interval_text( $this->get_repeat_frequency() ) ), $output );
-					else
-						$output = str_replace( '{recurring}', '', $output );
 					break;
 				case 'link':
 					if ( $this->get_link() )

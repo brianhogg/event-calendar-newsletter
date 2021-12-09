@@ -18,6 +18,7 @@ class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
             'location_country',
             'contact_name',
             'contact_email',
+            'event_rsvp_available',
             'link',
 	        'link_url',
             'event_image',
@@ -61,7 +62,6 @@ class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
 	        if ( strtotime( $event->event_start_date . ' ' . $event->event_start_time ) > $end_date )
 		        break;
 
-
             $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), array(
 	            'plugin' => $this->get_identifier(),
                 'start_date' => $event->event_start_date . ' ' . $event->event_start_time,
@@ -83,6 +83,7 @@ class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
                 'link' => get_the_permalink( $post->ID ),
                 'event_image_url' => $image_url,
                 'all_day' => $event->event_all_day,
+                'event_rsvp_available' => $event->event_rsvp ? intval($event->event_rsvp) : 0,
 //                'repeat_frequency' => '', $aec_event->repeat_freq,
 //                'repeat_interval' => $this->get_repeat_frequency_from_feed_frequency( $aec_event->repeat_int ),
 //                'repeat_end' => $aec_event->repeat_end,

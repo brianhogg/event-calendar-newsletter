@@ -29,6 +29,7 @@ class ECNCalendarEvent {
 	private $_organizer_phone;
 	private $_event_website;
     private $_event_cost;
+    private $_event_rsvp_available;
     private $_excerpt;
     private $_event_image_url;
     private $_event_image_alt;
@@ -95,6 +96,8 @@ class ECNCalendarEvent {
             $this->set_contact_phone( $args['contact_phone'] );
         if ( isset( $args['contact_email'] ) )
             $this->set_contact_email( $args['contact_email'] );
+        if ( isset( $args['event_rsvp_available'] ) )
+            $this->set_event_rsvp_available( $args['event_rsvp_available'] );
 	    if ( isset( $args['organizer_name'] ) )
 		    $this->set_organizer_name( $args['organizer_name'] );
 	    if ( isset( $args['organizer_website'] ) )
@@ -184,6 +187,7 @@ class ECNCalendarEvent {
             'organizer_phone' => __( 'Organizer Phone', 'event-calendar-newsletter' ),
             'event_cost' => __( 'Event Cost', 'event-calendar-newsletter' ),
 	        'event_website' => __( 'Event/Ticket Website', 'event-calendar-newsletter' ),
+            'event_rsvp_available' => __( 'Event RSVP Available', 'event-calendar-newsletter' ),
             'excerpt' => __( 'Excerpt', 'event-calendar-newsletter' ),
             'event_image' => __( 'Event Image', 'event-calendar-newsletter' ),
 	        'event_image_url' => __( 'Event Image (URL only)', 'event-calendar-newsletter' ),
@@ -328,6 +332,14 @@ class ECNCalendarEvent {
 
     public function get_contact_email() {
         return $this->_contact_email;
+    }
+
+    public function set_event_rsvp_available( $event_rsvp_available ) {
+        $this->_event_rsvp_available = $event_rsvp_available;
+    }
+
+    public function get_event_rsvp_available() {
+        return $this->_event_rsvp_available;
     }
 
     public function set_location_website( $location_website ) {

@@ -1,0 +1,26 @@
+{
+    "name": "brianhogg/the-events-calendar-shortcode-pro",
+    "require": {
+        "wp-cli/wp-cli-bundle": "*"
+    },
+    "require-dev": {
+        "lucatume/wp-browser": "^3.0",
+        "codeception/module-asserts": "^1.0",
+        "codeception/module-phpbrowser": "^1.0",
+        "codeception/module-webdriver": "^1.0",
+        "codeception/module-db": "^1.0",
+        "codeception/module-filesystem": "^1.0",
+        "codeception/module-cli": "^1.0",
+        "codeception/util-universalframework": "^1.0",
+        "tareq1988/wp-php-cs-fixer": "dev-master",
+        "friendsofphp/php-cs-fixer": "^v2.17.5"
+    },
+    "scripts": {
+        "php-cs-fixer": "php-cs-fixer --config=./.php_cs"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tribe\\Events\\Test\\Factories\\": "tests/_support/Factories"
+        }
+    }
+}

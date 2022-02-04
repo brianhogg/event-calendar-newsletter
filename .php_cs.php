@@ -10,6 +10,7 @@ $finder = PhpCsFixer\Finder::create()
 
 $rules = WeDevs\Fixer\Fixer::rules();
 $rules['array_syntax'] = array( 'syntax' => 'long' );
+$rules['no_alternative_syntax'] = false;
 $rules['binary_operator_spaces'] = array(
     'align_double_arrow' => false,
     'align_equals' => false,

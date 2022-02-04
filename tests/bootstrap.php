@@ -1,19 +1,16 @@
 <?php
 /**
  * PHPUnit bootstrap file
- *
- * @package Event_Calendar_Newsletter
  */
-
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $_tests_dir ) {
-	$_tests_dir = rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress-tests-lib';
+    $_tests_dir = rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress-tests-lib';
 }
 
 if ( ! file_exists( $_tests_dir . '/includes/functions.php' ) ) {
-	echo "Could not find $_tests_dir/includes/functions.php, have you run bin/install-wp-tests.sh ?" . PHP_EOL; // WPCS: XSS ok.
-	exit( 1 );
+    echo "Could not find $_tests_dir/includes/functions.php, have you run bin/install-wp-tests.sh ?" . PHP_EOL; // WPCS: XSS ok.
+    exit( 1 );
 }
 
 // Give access to tests_add_filter() function.
@@ -23,8 +20,8 @@ require_once $_tests_dir . '/includes/functions.php';
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
-	require dirname( dirname( __FILE__ ) ) . '/../event-calendar-newsletter-pro/event-calendar-newsletter-pro.php';
-    require dirname( dirname( __FILE__ ) ) . '/../the-events-calendar/the-events-calendar.php';
+    require dirname( __DIR__ ) . '/../event-calendar-newsletter-pro/event-calendar-newsletter-pro.php';
+    require dirname( __DIR__ ) . '/../the-events-calendar/the-events-calendar.php';
 
 //    $license_data = new stdClass;
 //    $license_data->license_limit = 5;

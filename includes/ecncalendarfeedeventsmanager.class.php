@@ -91,10 +91,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventsManager' ) ) {
                 'event_image_url' => $image_url,
                 'all_day' => $event->event_all_day,
                 'event_rsvp_available' => $event->event_rsvp ? intval( $event->event_rsvp ) : 0,
-//                'repeat_frequency' => '', $aec_event->repeat_freq,
-//                'repeat_interval' => $this->get_repeat_frequency_from_feed_frequency( $aec_event->repeat_int ),
-//                'repeat_end' => $aec_event->repeat_end,
-            ), $post ) );
+            ), $post, $event ) );
             }
 
             return $retval;

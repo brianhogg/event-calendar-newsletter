@@ -2,9 +2,9 @@
 Contributors: brianhogg
 Donate link: https://eventcalendarnewsletter.com/
 Tags: Event Calendar Newsletter, WordPress events calendar, WordPress event calendar, The Events Calendar, All-in-One Event Calendar
-Requires at least: 4.1
+Requires at least: 5.6
 Tested up to: 6.0
-Stable tag: 2.13
+Stable tag: 2.14
 Requires PHP: 5.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -99,6 +99,10 @@ If you don't already have your event calendar plugin installed and configured, y
 4. Choose which events to include by how far in the future, Pro version can filter by categories or tags
 
 == Changelog ==
+
+= 2.14 =
+* Fix for TinyMCE not working with editor in certain cases
+* [Dev] Adding additional parameter for The Events Calendar filter
 
 = 2.12 =
 * Better onboarding and updated wording when no compatible calendar is found

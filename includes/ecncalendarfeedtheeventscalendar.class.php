@@ -121,7 +121,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                 'gcal_link_url' => ( function_exists( 'tribe_get_gcal_link' ) ? Tribe__Events__Main::instance()->esc_gcal_url( tribe_get_gcal_link() ) : '' ),
                 'ical_link_url' => ( function_exists( 'tribe_get_single_ical_link' ) ? esc_url( tribe_get_single_ical_link() ) : '' ),
                 'recurrence_text' => ( function_exists( 'tribe_get_recurrence_text' ) ? tribe_get_recurrence_text() : '' ),
-            ) ) );
+            ), $post ) );
                 do_action( 'tribe_events_inside_after_loop' );
             }
             $retval = $this->sort_events_by_start_date( $retval );

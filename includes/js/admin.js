@@ -150,7 +150,9 @@ var ecn = ecn || {};
             event.preventDefault();
 
             // Force updating the textareas
-            tinyMCE.triggerSave();
+            if (typeof tinyMCE !== 'undefined') {
+                tinyMCE.triggerSave();
+            }
 
             self.hideResults();
             self.selectTab('results_tab');

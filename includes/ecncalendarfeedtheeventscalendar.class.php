@@ -57,7 +57,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
             global $post;
             $retval = array();
 
-            $args = apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => -1, 'hide_upcoming' => true, 'post_status' => 'publish', 'start_date' => date( 'Y-m-d H:i', $start_date ), 'end_date' => date( 'Y-m-d H:i', $end_date ) ), $start_date, $end_date, $data );
+            $args = apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => -1, 'hide_upcoming' => true, 'post_status' => 'publish', 'meta_query' => array( 'relation' => 'AND', array( 'key' => '_EventEndDate', 'value' => array( date( 'Y-m-d H:i', $start_date ), date( 'Y-m-d H:i', $end_date ) ), 'compare' => 'BETWEEN', 'type' => 'DATETIME' ) ) ), $start_date, $end_date, $data );
             $events = tribe_get_events( $args );
 
             foreach ( $events as $post ) {

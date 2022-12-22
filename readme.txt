@@ -4,7 +4,7 @@ Donate link: https://eventcalendarnewsletter.com/
 Tags: Event Calendar Newsletter, WordPress events calendar, WordPress event calendar, The Events Calendar, All-in-One Event Calendar
 Requires at least: 5.6
 Tested up to: 6.1
-Stable tag: 2.14
+Stable tag: 2.14.1
 Requires PHP: 5.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -87,9 +87,8 @@ You can either search for Event Calendar Newsletter in the Plugins --> Add New a
 If you don't already have your event calendar plugin installed and configured, you'll also need to install that plugin.  Plugins currently supported:
 
 * [The Events Calendar](https://wordpress.org/plugins/the-events-calendar/)
-* [All-in-One Event Calendar by Time.ly](https://wordpress.org/plugins/all-in-one-event-calendar/)
+* [Events Manager](https://wordpress.org/plugins/events-manager/)
 * [Simple Calendar (aka Google Calendar Events)](https://wordpress.org/plugins/google-calendar-events/)
-* [Event Calendar](http://wordpress.org/plugins/ajax-event-calendar/)
 
 == Screenshots ==
 
@@ -99,6 +98,9 @@ If you don't already have your event calendar plugin installed and configured, y
 4. Choose which events to include by how far in the future, Pro version can filter by categories or tags
 
 == Changelog ==
+
+= 2.14.1 =
+* Adding note about what Events Manager we support
 
 = 2.14 =
 * Fix for TinyMCE not working with editor in certain cases

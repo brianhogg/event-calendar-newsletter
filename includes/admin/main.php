@@ -21,8 +21,8 @@
             </p>
               <p>
                   <strong><?php echo esc_html( __( 'Install one of the supported calendars, which include:', 'event-calendar-newsletter' ) ); ?></strong>
-                  <p><a href="<?php echo admin_url( 'plugin-install.php?tab=search&type=term&s=the+events+calendar' ); ?>">The Events Calendar by Modern Tribe</a></p>
-                  <p><a href="<?php echo admin_url( 'plugin-install.php?tab=search&s=events+manager' ); ?>">Events Manager</a></p>
+                  <p><a href="<?php echo admin_url( 'plugin-install.php?tab=search&type=term&s=the+events+calendar' ); ?>">The Events Calendar</a></p>
+                  <p><a href="<?php echo admin_url( 'plugin-install.php?tab=search&s=events+manager' ); ?>">Events Manager</a> (<a target="_blank" href="https://wordpress.org/plugins/events-manager/"><?php echo esc_html( __( 'this Events Manager', 'event-calendar-newsletter' ) ); ?></a>)</p>
                   <p><a href="<?php echo admin_url( 'plugin-install.php?tab=search&s=event+organiser' ); ?>">Event Organiser</a></p>
                   <div><?php echo sprintf( esc_html( __( 'Note that %scertain calendars%s are only supported %sin the pro version of Event Calendar Newsletter%s', 'event-calendar-newsletter' ) ), '<a href="https://eventcalendarnewsletter.com/features/#calendars?utm_source=plugin&utm_campaign=pro-cal-support-ee" target="_blank">', '</a>', '<a href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_campaign=pro-cal-support" target="_blank">', '</a>' ); ?></div>
                </p>

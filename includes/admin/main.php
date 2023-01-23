@@ -93,7 +93,7 @@
 				                        <?php do_action( 'ecn_additional_group_events_values', $data['group_events'] ); ?>
 			                        </select>
 		                        </div>
-		                        <div>
+		                        <div class="ecn-groupby-message">
 			                        <em>
 				                        <?php echo esc_html( __( 'If you have lots of events, you can group them together by day or month with a header for each group', 'event-calendar-newsletter' ) ); ?>
 				                        <?php if ( 'valid' != get_option( 'ecn_pro_license_status' ) ): ?>
@@ -116,7 +116,7 @@
 			                            <label><input type="radio" name="design" value="custom"<?php checked( 'custom', $data['design'] ); ?>> Custom</label><br />
 			                        </fieldset>
 	                            </div>
-	                            <div class="right">
+	                            <div class="right ecn-all-designs">
 		                            <a target="_blank" href="https://eventcalendarnewsletter.com/designs?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=design-link">See all designs</a>
 	                            </div>
 

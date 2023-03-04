@@ -28,7 +28,14 @@ License: GPL2
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
+define( 'ECN_PLUGINS_FILE', __FILE__ );
 define( 'ECN_PLUGINS_URL', plugins_url( '', __FILE__ ) );
+
+include __DIR__ . '/.env_dev.php';
+
+if ( !defined( 'ECN_PRODUCTION' ) ) {
+    define( 'ECN_PRODUCTION', true );
+}
 
 include_once __DIR__ . '/includes/wp-requirements.php';
 

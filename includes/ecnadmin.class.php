@@ -36,6 +36,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
 
                 if ( isset( $_GET['page'] ) and 'eventcalendarnewsletter' == $_GET['page'] ) {
                     add_action( 'admin_enqueue_scripts', array( &$this, 'enqueue_scripts' ) );
+                    add_filter( 'script_loader_tag', array( &$this, 'change_type_of_script_tags' ), 10, 3 );
                 }
                 add_action( 'admin_enqueue_scripts', array( $this, 'admin_menu_css' ) );
 
@@ -60,8 +61,23 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
         public function enqueue_scripts() {
             wp_register_script( 'ecn.admin.js', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery', 'backbone', 'underscore', 'jquery-ui-core', 'jquery-ui-sortable' ), ECN_VERSION );
             wp_enqueue_script( 'ecn.admin.js' );
+            wp_register_script(
+              'ecn.vue.admin.js',
+              ECN_PRODUCTION ? plugins_url( 'src/main.js', ECN_PLUGINS_FILE ) : 'http://127.0.0.1:5173/src/main.js',
+              array(),
+              ECN_VERSION,
+              true );
+            wp_enqueue_script( 'ecn.vue.admin.js' );
             wp_register_style( 'ecn.admin.css', plugins_url( 'css/admin.css', __FILE__ ), false, ECN_VERSION );
             wp_enqueue_style( 'ecn.admin.css' );
+        }
+
+        public function change_type_of_script_tags( $tag, $handle, $source ) {
+            if ( $handle === 'ecn.vue.admin.js' ) {
+                $tag = '<script src="' . esc_url( $source ) . '" type="module"></script>';
+            }
+
+            return $tag;
         }
 
         public function admin_menu() {

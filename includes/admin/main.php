@@ -34,6 +34,7 @@
           </div>
       <?php endif; ?>
     <?php else: ?>
+      <div id="app"></div>
         <div id="ecn-admin">
             <?php wp_nonce_field( 'ecn_admin', 'wp_ecn_admin_nonce' ); ?>
             <div class="leftcol">

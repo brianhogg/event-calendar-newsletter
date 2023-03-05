@@ -62,10 +62,11 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
             wp_register_script(
                 'ecn.vue.admin.js',
                 ECN_PRODUCTION ? plugins_url( 'src/main.js', ECN_PLUGINS_FILE ) : 'http://127.0.0.1:5173/src/main.js',
-                array(),
+                array( 'wp-i18n' ),
                 ECN_VERSION,
                 true );
             wp_enqueue_script( 'ecn.vue.admin.js' );
+            wp_set_script_translations( 'ecn.vue.admin.js', 'event-calendar-newsletter' );
             wp_register_script( 'ecn.admin.js', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery', 'backbone', 'underscore', 'jquery-ui-core', 'jquery-ui-sortable' ), ECN_VERSION );
             wp_enqueue_script( 'ecn.admin.js' );
             wp_register_style( 'ecn.admin.css', plugins_url( 'css/admin.css', __FILE__ ), false, ECN_VERSION );
@@ -453,6 +454,8 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
             'group_events' => $this->get_group_events_value(),
             'design' => $this->get_design(),
         ), $this->get_ecn_options() ) );
+
+            wp_localize_script( 'ecn.vue.admin.js', 'ecn_vue', $data );
 
             include __DIR__ . '/admin/main.php';
         }

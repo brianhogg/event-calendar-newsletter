@@ -6,7 +6,7 @@ import { RouterView } from 'vue-router'
   <header>
     <div class="wrapper">
       <select name="event_calendar">
-        <option>The Events Calendar</option>
+        <option value="the-events-calendar">The Events Calendar</option>
       </select>
     </div>
   </header>

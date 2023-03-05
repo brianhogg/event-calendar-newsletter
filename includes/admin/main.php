@@ -34,21 +34,18 @@
           </div>
       <?php endif; ?>
     <?php else: ?>
-      <div id="app"></div>
+
         <div id="ecn-admin">
+
             <?php wp_nonce_field( 'ecn_admin', 'wp_ecn_admin_nonce' ); ?>
             <div class="leftcol">
                 <form>
+                    <div id="app"></div>
                     <table class="form-table">
                         <tbody>
                         <tr>
                             <th scope="row"><?php echo esc_html( __( 'Event Calendar:', 'event-calendar-newsletter' ) ); ?></th>
                             <td>
-<!--                                <select name="event_calendar">-->
-<!--                                    --><?php //foreach ( $data['available_plugins'] as $plugin => $description ):?>
-<!--                                        <option value="--><?php //echo esc_attr( $plugin );?><!--"--><?php //echo  $plugin == $data['event_calendar'] ? ' SELECTED' : '';?><!-->--><?php //echo esc_html( $description );?><!--</option>-->
-<!--                                    --><?php //endforeach;?>
-<!--                                </select>-->
                                 <div>
                                     <em><?php echo sprintf( esc_html( __( "Can't find the calendar with your events that you'd like to use?  %sLet us know%s!", 'event-calendar-newsletter' ) ), '<a href="mailto:info@eventcalendarnewsletter.com">', '</a>' ); ?>
                                 </div>

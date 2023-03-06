@@ -1,10 +1,10 @@
 <script setup>
-const props = defineProps(['taco'])
+const props = defineProps(['availablePlugins'])
 </script>
 <template>
   <div>
     <select name="event_calendar">
-      <option v-for="(name, slug) in props.taco" :value="slug">{{ name }}</option>
+      <option v-for="(name, slug) in props.availablePlugins" :value="slug">{{ name }}</option>
     </select>
   </div>
 </template>

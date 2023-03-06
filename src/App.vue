@@ -9,10 +9,12 @@ const plugin = ecn_vue.available_plugins
 <template>
   <header>
     <div class="wrapper">
-      <div class="text-3xl italic text-red-400">
-        {{ __('Events Calendar:', 'event-calendar-newsletter') }}
+      <div class="grid grid-cols-2">
+        <div class="text-3xl italic text-red-400">
+          {{ __('Events Calendar:', 'event-calendar-newsletter') }}
+        </div>
+        <EventsCalendar :availablePlugins="plugin" />
       </div>
-      <EventsCalendar :availablePlugins="plugin" />
     </div>
   </header>
 

@@ -3,6 +3,7 @@ import { RouterView } from 'vue-router'
 import EventsCalendar from '@/EventsCalendar.vue'
 
 const { __, _x, _n, _nx } = wp.i18n
+const taco = ecn_vue.available_plugins
 </script>
 
 <template>
@@ -11,7 +12,7 @@ const { __, _x, _n, _nx } = wp.i18n
       <div class="text-3xl italic text-red-400">
         {{ __('Events Calendar:', 'event-calendar-newsletter') }}
       </div>
-      <EventsCalendar />
+      <EventsCalendar :taco="taco" />
     </div>
   </header>
 

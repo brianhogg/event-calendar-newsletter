@@ -1,12 +1,10 @@
+<script setup>
+const props = defineProps(['taco'])
+</script>
 <template>
   <div>
     <select name="event_calendar">
-      <option value="the-events-calendar">The Events Calendar</option>
+      <option v-for="(name, slug) in props.taco" :value="slug">{{ name }}</option>
     </select>
   </div>
 </template>
-<script>
-export default {
-  name: 'EventsCalendar'
-}
-</script>

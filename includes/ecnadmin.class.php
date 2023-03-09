@@ -393,14 +393,14 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
             $feed = ECNCalendarFeedFactory::create( $data['event_calendar'] );
 
             // grab the start and end dates, and have the period end at midnight on the end date
-            $start_date = strtotime( current_time( 'Y-m-d' ) . ' 00:00:00' );
+            $start_date = (new DateTimeImmutable( wp_date( 'Y-m-d' ) . ' 00:00:00', wp_timezone() ))->getTimestamp();
             $future_in_days = ( intval( $data['events_future_in_days'] ) >= 0 ) ? intval( $data['events_future_in_days'] ) : 0;
             $end_date = $start_date + ( 86400 * ( $future_in_days + 1 ) );
 
             if ( ECN_CUSTOM_DATE_RANGE_DAYS == $data['events_future_in_days'] and isset( $data['custom_date_from'], $data['custom_date_to'] ) and false !== strtotime( $data['custom_date_from'] ) and false !== strtotime( $data['custom_date_to'] ) ) {
-                $start_date = strtotime( $data['custom_date_from'] . ' 00:00:00' );
+                $start_date = (new DateTimeImmutable( $data['custom_date_from'] . ' 00:00:00', wp_timezone() ))->getTimestamp();
                 // Calculate the end date as the very beginning of the next day
-                $end_date = strtotime( $data['custom_date_to'] . ' 00:00:00' ) + 86400;
+                $end_date = (new DateTimeImmutable( $data['custom_date_to'] . ' 00:00:00', wp_timezone() ))->getTimestamp() + 86400;
             } elseif ( isset( $data['events_offset_in_days'] ) and ( intval( $data['events_offset_in_days'] ) > 0 or false !== strtotime( $data['events_offset_in_days'] ) ) ) {
                 if ( ! is_numeric( $data['events_offset_in_days'] ) && false !== strtotime( $data['events_offset_in_days'] ) ) {
                     $add_days = 0;

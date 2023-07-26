@@ -70,19 +70,19 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
 
         public function save_templates_notice() {
             ?>
-		<div id="poststuff">
-			<div id="save_results_box" class="postbox">
-				<h2 class="hndle">
-					<span><?php echo esc_html__( 'Save as Template', 'event-calendar-newsletter' ); ?></span>
-				</h2>
-				<div class="inside">
-					<p><?php echo esc_html__( 'This pro-only feature allows you to automatically add your events into newsletters with MailChimp, Active Campaign and more.  You can also save and quickly re-generate these results with Saved Templates.', 'event-calendar-newsletter' ); ?></p>
-					<a target="_blank" href="https://eventcalendarnewsletter.com/pro/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=savedtemplates" class="upgrade button button-primary"><?php echo esc_html__( 'Get Event Calendar Newsletter Pro', 'event-calendar-newsletter' ); ?></a>
-				</div>
-			</div>
-		</div>
+          <div id="poststuff">
+            <div id="save_results_box" class="postbox">
+              <h2 class="hndle">
+                <span><?php echo esc_html__( 'Save as Template', 'event-calendar-newsletter' ); ?></span>
+              </h2>
+              <div class="inside">
+                <p><?php echo esc_html__( 'This pro-only feature allows you to automatically add your events into newsletters with MailChimp, Active Campaign and more.  You can also save and quickly re-generate these results with Saved Templates.', 'event-calendar-newsletter' ); ?></p>
+                <a target="_blank" href="https://eventcalendarnewsletter.com/pro/?utm_source=wordpress.org&utm_medium=link&utm_campaign=event-cal-plugin&utm_content=savedtemplates" class="upgrade button button-primary"><?php echo esc_html__( 'Get Event Calendar Newsletter Pro', 'event-calendar-newsletter' ); ?></a>
+              </div>
+            </div>
+          </div>
 
-	<?php
+            <?php
         }
 
         public function get_available_calendar_feeds() {
@@ -221,9 +221,9 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
          */
         public function get_output_from_events( $events, $args = array() ) {
             $default = array(
-            'format' => '',
-            'group_events' => 'normal',
-        );
+                'format' => '',
+                'group_events' => 'normal',
+            );
             $args = wp_parse_args( $args, $default );
 
             // Load up any output templates found
@@ -291,10 +291,10 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
 
             if ( is_string( $output ) ) {
                 echo json_encode( array(
-                    'success' => true,
-                    'result' => $output,
-                )
-            );
+                        'success' => true,
+                        'result' => $output,
+                    )
+                );
             } else {
                 // Exception
                 echo json_encode( array( 'error' => true, 'message' => $output->getMessage() ) );
@@ -393,14 +393,15 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
             $feed = ECNCalendarFeedFactory::create( $data['event_calendar'] );
 
             // grab the start and end dates, and have the period end at midnight on the end date
-            $start_date = strtotime( current_time( 'Y-m-d' ) . ' 00:00:00' );
+            $start_date = ( new DateTimeImmutable( wp_date( 'Y-m-d' ) . ' 00:00:00', wp_timezone() ) );
             $future_in_days = ( intval( $data['events_future_in_days'] ) >= 0 ) ? intval( $data['events_future_in_days'] ) : 0;
-            $end_date = $start_date + ( 86400 * ( $future_in_days + 1 ) );
+            $end_date =  $start_date->modify( '+' . intval( $future_in_days + 1 ) . 'days' );
 
             if ( ECN_CUSTOM_DATE_RANGE_DAYS == $data['events_future_in_days'] and isset( $data['custom_date_from'], $data['custom_date_to'] ) and false !== strtotime( $data['custom_date_from'] ) and false !== strtotime( $data['custom_date_to'] ) ) {
-                $start_date = strtotime( $data['custom_date_from'] . ' 00:00:00' );
+                $start_date = ( new DateTimeImmutable( $data['custom_date_from'] . ' 00:00:00', wp_timezone() ) );
+
                 // Calculate the end date as the very beginning of the next day
-                $end_date = strtotime( $data['custom_date_to'] . ' 00:00:00' ) + 86400;
+                $end_date = ( new DateTimeImmutable( $data['custom_date_to'] . ' 00:00:00', wp_timezone() ) )->modify( '+1 day' );
             } elseif ( isset( $data['events_offset_in_days'] ) and ( intval( $data['events_offset_in_days'] ) > 0 or false !== strtotime( $data['events_offset_in_days'] ) ) ) {
                 if ( ! is_numeric( $data['events_offset_in_days'] ) && false !== strtotime( $data['events_offset_in_days'] ) ) {
                     $add_days = 0;
@@ -412,11 +413,11 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
                     $data['events_offset_in_days'] = $add_days + intval( ( strtotime( $data['events_offset_in_days'], current_time( 'timestamp' ) ) - strtotime( date( 'l', current_time( 'timestamp' ) ) ) ) / 86400 );
                 }
 
-                $start_date += ( 86400 * ( intval( $data['events_offset_in_days'] ) ) );
-                $end_date += ( 86400 * ( intval( $data['events_offset_in_days'] ) ) );
+                $start_date = $start_date->modify( '+' . intval( $data['events_offset_in_days'] ) . ' days' );
+                $end_date = $end_date->modify('+' . intval( $data['events_offset_in_days'] ) . ' days' );
             }
 
-            return $feed->get_events( $start_date, $end_date, $data );
+            return $feed->get_events( $start_date->getTimestamp(), $end_date->getTimestamp(), $data );
         }
 
         public function admin_page() {
@@ -430,13 +431,13 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
             }
 
             $data = apply_filters( 'ecn_settings_data', wp_parse_args( array(
-            'format' => $this->get_saved_format(),
-            'events_future_in_days' => $this->get_future_events_to_use(),
-            'event_calendar' => $this->get_event_calendar_plugin(),
-            'available_plugins' => $this->get_available_calendar_feeds(),
-            'group_events' => $this->get_group_events_value(),
-            'design' => $this->get_design(),
-        ), $this->get_ecn_options() ) );
+                'format' => $this->get_saved_format(),
+                'events_future_in_days' => $this->get_future_events_to_use(),
+                'event_calendar' => $this->get_event_calendar_plugin(),
+                'available_plugins' => $this->get_available_calendar_feeds(),
+                'group_events' => $this->get_group_events_value(),
+                'design' => $this->get_design(),
+            ), $this->get_ecn_options() ) );
 
             include __DIR__ . '/admin/main.php';
         }

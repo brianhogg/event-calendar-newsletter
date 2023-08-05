@@ -51,7 +51,9 @@ if ( ! class_exists( 'ECNCalendarFeedGoogleCalendarEvents' ) ) {
                             break;
                         }
 
-                        $retval[] = new ECNCalendarEvent( array(
+                        $is_existing = false;
+
+                        $event = new ECNCalendarEvent( array(
                             'start_date' => ( isset( $event->multiple_days ) && $event->multiple_days > 0 && $event->whole_day ) ? $ymd : $event->start_dt->toDateTimeString(),
                             'end_date' => $event->end_dt->toDateTimeString(),
                             'title' => stripslashes_deep( $event->title ),
@@ -60,8 +62,18 @@ if ( ! class_exists( 'ECNCalendarFeedGoogleCalendarEvents' ) ) {
                             'location_address' => $event->start_location['address'],
                             'link' => $event->link,
                             'all_day' => $event->whole_day,
-                        )
-                    );
+                        ) );
+
+                        foreach ( $retval as $existing_event ) {
+                            if ( $existing_event->get_guid() === $event->get_guid() ) {
+                                $is_existing = true;
+                                break;
+                            }
+                        }
+
+                        if ( ! $is_existing ) {
+                            $retval[] = $event;
+                        }
                     }
                 }
             }

@@ -395,7 +395,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
             // grab the start and end dates, and have the period end at midnight on the end date
             $start_date = ( new DateTimeImmutable( wp_date( 'Y-m-d' ) . ' 00:00:00', wp_timezone() ) );
             $future_in_days = ( intval( $data['events_future_in_days'] ) >= 0 ) ? intval( $data['events_future_in_days'] ) : 0;
-            $end_date =  $start_date->modify( '+' . intval( $future_in_days + 1 ) . 'days' );
+            $end_date = $start_date->modify( '+' . intval( $future_in_days + 1 ) . 'days' );
 
             if ( ECN_CUSTOM_DATE_RANGE_DAYS == $data['events_future_in_days'] and isset( $data['custom_date_from'], $data['custom_date_to'] ) and false !== strtotime( $data['custom_date_from'] ) and false !== strtotime( $data['custom_date_to'] ) ) {
                 $start_date = ( new DateTimeImmutable( $data['custom_date_from'] . ' 00:00:00', wp_timezone() ) );
@@ -414,7 +414,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
                 }
 
                 $start_date = $start_date->modify( '+' . intval( $data['events_offset_in_days'] ) . ' days' );
-                $end_date = $end_date->modify('+' . intval( $data['events_offset_in_days'] ) . ' days' );
+                $end_date = $end_date->modify( '+' . intval( $data['events_offset_in_days'] ) . ' days' );
             }
 
             return $feed->get_events( $start_date->getTimestamp(), $end_date->getTimestamp(), $data );

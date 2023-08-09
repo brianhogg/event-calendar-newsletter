@@ -127,6 +127,10 @@ if ( ! function_exists( 'ecn_available_pro_calendars' ) ) {
             $calendars[] = 'Modern Events Calendar';
         }
 
+        if ( class_exists( 'EventM_Event_Controller_List' ) ) {
+            $calendars[] = 'EventPrime';
+        }
+
         return $calendars;
     }
 }

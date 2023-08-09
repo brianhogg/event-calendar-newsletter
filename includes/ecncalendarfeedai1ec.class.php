@@ -52,8 +52,8 @@ if ( ! class_exists( 'ECNCalendarFeedAi1ec' ) ) {
             $settings = $ai1ec_registry->get( 'model.settings' );
 
             // Get localized time
-            $start_time->set_date_time( date( 'Y-m-d H:m:s', $start_date ), get_option( 'timezone_string' ) );
-            $end_time->set_date_time( date( 'Y-m-d H:m:s', $end_date ), get_option( 'timezone_string' ) );
+            $start_time->set_date_time( wp_date( 'Y-m-d H:m:s', $start_date ), get_option( 'timezone_string' ) );
+            $end_time->set_date_time( wp_date( 'Y-m-d H:m:s', $end_date ), get_option( 'timezone_string' ) );
 
             $filters = array(
             'cat_ids' => array(),

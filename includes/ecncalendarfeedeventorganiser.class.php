@@ -42,7 +42,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventOrganiser' ) ) {
             global $post;
             $retval = array();
 
-            $events = eo_get_events( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => 10000, 'post_status' => 'publish', 'event_start_after' => date( 'Y-m-d H:i', $start_date ), 'event_start_before' => date( 'Y-m-d H:i', $end_date ) ), $start_date, $end_date, $data ) );
+            $events = eo_get_events( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => 10000, 'post_status' => 'publish', 'event_start_after' => wp_date( 'Y-m-d H:i', $start_date ), 'event_start_before' => wp_date( 'Y-m-d H:i', $end_date ) ), $start_date, $end_date, $data ) );
 
             foreach ( $events as $post ) {
                 setup_postdata( $post );

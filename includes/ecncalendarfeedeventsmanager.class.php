@@ -44,7 +44,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventsManager' ) ) {
             $filters = array(
             'category' => array(),
             'tag' => array(),
-            'scope' => date( 'Y-m-d', $start_date ) . ',' . date( 'Y-m-d', $end_date + 86400 ),
+            'scope' => wp_date( 'Y-m-d', $start_date ) . ',' . wp_date( 'Y-m-d', $end_date + 86400 ),
         );
             $event_results = EM_Events::get( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), $filters, $start_date, $end_date, $data ) );
 

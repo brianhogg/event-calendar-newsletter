@@ -9,6 +9,8 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
         private $_tags = array();
 
+        private $_organizers = array();
+
         private $_start_date;
 
         private $_published_date;
@@ -106,6 +108,10 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
             if ( isset( $args['categories'] ) ) {
                 $this->set_categories( $args['categories'] );
+            }
+
+            if ( isset( $args['organizers'] ) ) {
+                $this->set_organizers( $args['organizers'] );
             }
 
             if ( isset( $args['tags'] ) ) {
@@ -334,6 +340,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             'recurring' => __( 'Recurring Description (if recurring)', 'event-calendar-newsletter' ),
             'categories' => __( 'Categories', 'event-calendar-newsletter' ),
             'category_links' => __( 'Category Links', 'event-calendar-newsletter' ),
+            'organizers' => __( 'Organizers', 'event-calendar-newsletter' ),
             'tags' => __( 'Tags', 'event-calendar-newsletter' ),
             'tag_links' => __( 'Tag Links', 'event-calendar-newsletter' ),
             'colour' => __( 'Colour', 'event-calendar-newsletter' ),
@@ -723,6 +730,16 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             return $this->_categories;
         }
 
+        public function get_organizers() {
+            return $this->_organizers;
+        }
+
+        public function set_organizers( $organizers ) {
+            if ( is_array( $organizers ) ) {
+                $this->_organizers = $organizers;
+            }
+        }
+
         public function set_tags( $tags ) {
             if ( is_array( $tags ) ) {
                 $this->_tags = $tags;
@@ -876,6 +893,10 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
                 case 'category_links':
                     $output = str_replace( '{category_links}', implode( ', ', array_map( array( $this, 'get_category_link' ), $this->get_categories() ) ), $output );
+                    break;
+
+                case 'organizers':
+                    $output = str_replace( '{organizers}', implode( ', ', array_map( array( $this, 'get_taxonomy_name' ), $this->get_organizers() ) ), $output );
                     break;
 
                 case 'start_date':

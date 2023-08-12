@@ -75,13 +75,13 @@
                             <?php
                             $current_plugin = $data['event_calendar'];
 
-                            if ( ! $current_plugin ) {
-                                $all_plugins = array_keys( $data['available_plugins'] );
-                                $current_plugin = $all_plugins[0];
-                            }
-                            do_action( 'ecn_additional_filters_settings_html-' . $current_plugin, $data );
-                            do_action( 'ecn_additional_filters_settings_html', $current_plugin, $data );
-                            ?>
+        if ( ! $current_plugin ) {
+            $all_plugins = array_keys( $data['available_plugins'] );
+            $current_plugin = $all_plugins[0];
+        }
+        do_action( 'ecn_additional_filters_settings_html-' . $current_plugin, $data );
+        do_action( 'ecn_additional_filters_settings_html', $current_plugin, $data );
+        ?>
                         </tbody>
                         <tbody>
                         <tr>
@@ -109,8 +109,8 @@
 	                            <div class="leftcol">
 		                            <fieldset>
 			                            <label><input type="radio" name="design" value="default"<?php if ( 'default' == $data['design'] or false === $data['design'] ) {
-                                checked( true );
-                            } ?>> Default</label><br />
+			                                checked( true );
+			                            } ?>> Default</label><br />
 			                            <label><input type="radio" name="design" value="compact"<?php checked( 'compact', $data['design'] ); ?>> Minimal/Compact</label><br />
 			                            <?php do_action( 'ecn_designs', $data ); ?>
 			                            <label><input type="radio" name="design" value="custom"<?php checked( 'custom', $data['design'] ); ?>> Custom</label><br />
@@ -130,7 +130,7 @@
 	                                &nbsp; <a target="_blank" href="https://eventcalendarnewsletter.com/docs/tags/">View documentation on available tags</a>
                                 </div>
                                 <div class="format_editor">
-	                                <?php wp_editor( $data['format'], 'format', array( 'editor_height' => 150, 'wpautop' => false, 'media_buttons' => false ) ); ?>
+	                                <?php wp_editor( $data['format'], 'format', [ 'editor_height' => 150, 'wpautop' => false, 'media_buttons' => false ] ); ?>
                                 </div>
 	                            <?php do_action( 'ecn_end_settings_page', $current_plugin, $data ); ?>
                             </td>
@@ -216,7 +216,7 @@
 					<!--End mc_embed_signup-->
 
 	                <hr/>
-	                <p><?php echo sprintf( wp_kses( __( "<strong>Like this plugin?</strong><br>We'd love if you could show your support by leaving a %s&#9733;&#9733;&#9733;&#9733;&#9733; 5 star review on WordPress.org%s!", 'event-calendar-newsletter' ), array( 'strong' => array(), 'br' => array() ) ), '<a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/event-calendar-newsletter?filter=5#postform">', '</a>' ); ?></p>
+	                <p><?php echo sprintf( wp_kses( __( "<strong>Like this plugin?</strong><br>We'd love if you could show your support by leaving a %s&#9733;&#9733;&#9733;&#9733;&#9733; 5 star review on WordPress.org%s!", 'event-calendar-newsletter' ), [ 'strong' => [], 'br' => [] ] ), '<a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/event-calendar-newsletter?filter=5#postform">', '</a>' ); ?></p>
                 <?php endif; ?>
 
             </div>

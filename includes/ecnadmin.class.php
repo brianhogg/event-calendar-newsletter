@@ -25,24 +25,24 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
     class ECNAdmin {
 
         public function __construct() {
-            add_action( 'init', array( &$this, 'init' ) );
+            add_action( 'init', [ &$this, 'init' ] );
 
             if ( is_admin() ) {
-                add_action( 'admin_init', array( &$this, 'admin_init' ) );
-                add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
-                add_action( 'wp_ajax_fetch_events', array( &$this, 'ajax_fetch_events' ) );
-                add_action( 'wp_ajax_fetch_other_plugin_options', array( &$this, 'ajax_fetch_other_plugin_options' ) );
-                add_action( 'wp_ajax_fetch_allowed_tags', array( &$this, 'ajax_fetch_allowed_tags' ) );
+                add_action( 'admin_init', [ &$this, 'admin_init' ] );
+                add_action( 'admin_menu', [ &$this, 'admin_menu' ] );
+                add_action( 'wp_ajax_fetch_events', [ &$this, 'ajax_fetch_events' ] );
+                add_action( 'wp_ajax_fetch_other_plugin_options', [ &$this, 'ajax_fetch_other_plugin_options' ] );
+                add_action( 'wp_ajax_fetch_allowed_tags', [ &$this, 'ajax_fetch_allowed_tags' ] );
 
                 if ( isset( $_GET['page'] ) and 'eventcalendarnewsletter' == $_GET['page'] ) {
-                    add_action( 'admin_enqueue_scripts', array( &$this, 'enqueue_scripts' ) );
+                    add_action( 'admin_enqueue_scripts', [ &$this, 'enqueue_scripts' ] );
                 }
-                add_action( 'admin_enqueue_scripts', array( $this, 'admin_menu_css' ) );
+                add_action( 'admin_enqueue_scripts', [ $this, 'admin_menu_css' ] );
 
-                add_action( 'ecn_main_before_results', array( &$this, 'save_templates_notice' ) );
+                add_action( 'ecn_main_before_results', [ &$this, 'save_templates_notice' ] );
 
                 // Load any additional settings for plugins
-                add_action( 'ecn_additional_filters_settings_html', array( &$this, 'load_additional_settings' ) );
+                add_action( 'ecn_additional_filters_settings_html', [ &$this, 'load_additional_settings' ] );
             }
         }
 
@@ -58,14 +58,14 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
         }
 
         public function enqueue_scripts() {
-            wp_register_script( 'ecn.admin.js', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery', 'backbone', 'underscore', 'jquery-ui-core', 'jquery-ui-sortable' ), ECN_VERSION );
+            wp_register_script( 'ecn.admin.js', plugins_url( 'js/admin.js', __FILE__ ), [ 'jquery', 'backbone', 'underscore', 'jquery-ui-core', 'jquery-ui-sortable' ], ECN_VERSION );
             wp_enqueue_script( 'ecn.admin.js' );
             wp_register_style( 'ecn.admin.css', plugins_url( 'css/admin.css', __FILE__ ), false, ECN_VERSION );
             wp_enqueue_style( 'ecn.admin.css' );
         }
 
         public function admin_menu() {
-            add_menu_page( __( 'Event Calendar Newsletter', 'event-calendar-newsletter' ), __( 'Event Calendar Newsletter', 'event-calendar-newsletter' ), apply_filters( 'ecn_admin_capability', 'add_users' ), 'eventcalendarnewsletter', array( &$this, 'admin_page' ), null, 41 );
+            add_menu_page( __( 'Event Calendar Newsletter', 'event-calendar-newsletter' ), __( 'Event Calendar Newsletter', 'event-calendar-newsletter' ), apply_filters( 'ecn_admin_capability', 'add_users' ), 'eventcalendarnewsletter', [ &$this, 'admin_page' ], null, 41 );
         }
 
         public function save_templates_notice() {
@@ -87,7 +87,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
 
         public function get_available_calendar_feeds() {
             $available_feed_objects = ECNCalendarFeedFactory::get_available_calendar_feeds();
-            $available_feeds = array();
+            $available_feeds = [];
 
             foreach ( $available_feed_objects as $feed_object ) {
                 $available_feeds[$feed_object->get_identifier()] = $feed_object->get_description();
@@ -105,7 +105,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
         }
 
         private function get_ecn_options() {
-            return get_option( ECN_SAVED_OPTIONS_NAME, array() );
+            return get_option( ECN_SAVED_OPTIONS_NAME, [] );
         }
 
         public function get_ecn_option( $option_name, $default = '' ) {
@@ -139,7 +139,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
 
         private function get_saved_format() {
             if ( ! $this->get_ecn_option( 'format', false ) ) {
-                return $this->get_ecn_option( 'saved_format', wp_kses( $this->get_default_format(), array( 'h2' => array(), 'p' => array() ) ) );
+                return $this->get_ecn_option( 'saved_format', wp_kses( $this->get_default_format(), [ 'h2' => [], 'p' => [] ] ) );
             }
 
             return $this->get_ecn_option( 'format' );
@@ -205,7 +205,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
             if ( ! wp_verify_nonce( $_POST['nonce'], 'ecn_admin' ) ) {
                 die();
             }
-            echo json_encode( array( 'success' => true, 'result' => ECNCalendarEvent::get_available_format_tags( $_POST['event_calendar'] ) ) );
+            echo json_encode( [ 'success' => true, 'result' => ECNCalendarEvent::get_available_format_tags( $_POST['event_calendar'] ) ] );
             die();
         }
 
@@ -214,16 +214,15 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
          *
          * Events are fetched via get_events() and data sanatized by process_and_sanitize_data()
          *
-         * @param $events
          * @param array $args
          *
          * @return string
          */
-        public function get_output_from_events( $events, $args = array() ) {
-            $default = array(
+        public function get_output_from_events( $events, $args = [] ) {
+            $default = [
                 'format' => '',
                 'group_events' => 'normal',
-            );
+            ];
             $args = wp_parse_args( $args, $default );
 
             // Load up any output templates found
@@ -253,9 +252,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
         /**
          * Get the output for an individual event
          *
-         * @param $event
          * @param $args array with format and group_events values
-         * @param $previous_date
          *
          * @return string
          */
@@ -283,21 +280,22 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
             parse_str( $_POST['data'], $data );
 
             if ( ! $this->is_data_valid( $data ) ) {
-                die( json_encode( array( 'error' => true, 'message' => 'Data not found' ) ) );
+                die( json_encode( [ 'error' => true, 'message' => 'Data not found' ] ) );
             }
             $data = $this->process_and_sanitize_data( $data );
             $this->save_last_run_data( $data );
             $output = $this->process_output( $data );
 
             if ( is_string( $output ) ) {
-                echo json_encode( array(
+                echo json_encode(
+                    [
                         'success' => true,
                         'result' => $output,
-                    )
+                    ]
                 );
             } else {
                 // Exception
-                echo json_encode( array( 'error' => true, 'message' => $output->getMessage() ) );
+                echo json_encode( [ 'error' => true, 'message' => $output->getMessage() ] );
             }
             die();
         }
@@ -312,8 +310,6 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
 
         /**
          * When run via the admin UI, save the options so the next time the page is loaded the options are preserved
-         *
-         * @param $data
          */
         public function save_last_run_data( $data ) {
             $this->save_format( $data['format'] );
@@ -329,8 +325,6 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
 
         /**
          * Sanitize the data coming in from the form where needed
-         *
-         * @param $data
          *
          * @return mixed
          */
@@ -430,14 +424,14 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
                 $this->save_event_calendar_plugin( '' );
             }
 
-            $data = apply_filters( 'ecn_settings_data', wp_parse_args( array(
+            $data = apply_filters( 'ecn_settings_data', wp_parse_args( [
                 'format' => $this->get_saved_format(),
                 'events_future_in_days' => $this->get_future_events_to_use(),
                 'event_calendar' => $this->get_event_calendar_plugin(),
                 'available_plugins' => $this->get_available_calendar_feeds(),
                 'group_events' => $this->get_group_events_value(),
                 'design' => $this->get_design(),
-            ), $this->get_ecn_options() ) );
+            ], $this->get_ecn_options() ) );
 
             include __DIR__ . '/admin/main.php';
         }

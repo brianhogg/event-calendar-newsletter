@@ -23,10 +23,10 @@ function _manually_load_plugin() {
     require dirname( __DIR__ ) . '/../event-calendar-newsletter-pro/event-calendar-newsletter-pro.php';
     require dirname( __DIR__ ) . '/../the-events-calendar/the-events-calendar.php';
 
-//    $license_data = new stdClass;
-//    $license_data->license_limit = 5;
-//    update_option( ECN_EDD_LICENSE_DATA, $license_data );
-//    ecn_pro_add_core();
+    //    $license_data = new stdClass;
+    //    $license_data->license_limit = 5;
+    //    update_option( ECN_EDD_LICENSE_DATA, $license_data );
+    //    ecn_pro_add_core();
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 

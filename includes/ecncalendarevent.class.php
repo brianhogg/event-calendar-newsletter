@@ -5,11 +5,11 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
         private $_plugin;
 
-        private $_categories = array();
+        private $_categories = [];
 
-        private $_tags = array();
+        private $_tags = [];
 
-        private $_organizers = array();
+        private $_organizers = [];
 
         private $_start_date;
 
@@ -91,7 +91,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
         private $_featured;
 
-        private $_additional_data = array();
+        private $_additional_data = [];
 
         const REPEAT_DAY = 'day';
 
@@ -101,7 +101,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
         const REPEAT_WEEK = 'week';
 
-        public function __construct( array $args = array() ) {
+        public function __construct( array $args = [] ) {
             if ( isset( $args['plugin'] ) ) {
                 $this->set_plugin( $args['plugin'] );
             }
@@ -300,7 +300,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
         }
 
         public static function get_available_format_tags( $plugin_slug = false ) {
-            $all_tags = array(
+            $all_tags = [
             'title' => __( 'Title', 'event-calendar-newsletter' ),
             'subtitle' => __( 'Subtitle', 'event-calendar-newsletter' ),
             'description' => __( 'Description', 'event-calendar-newsletter' ),
@@ -345,10 +345,10 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             'tag_links' => __( 'Tag Links', 'event-calendar-newsletter' ),
             'colour' => __( 'Colour', 'event-calendar-newsletter' ),
             'featured' => __( 'Featured', 'event-calendar-newsletter' ),
-        );
+        ];
 
             try {
-                $retval = array();
+                $retval = [];
                 $feed = ECNCalendarFeedFactory::create( $plugin_slug );
 
                 foreach ( $feed->get_available_format_tags() as $tag ) {
@@ -586,7 +586,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
         }
 
         public function set_repeat_interval( $repeat_interval ) {
-            if ( ! in_array( $repeat_interval, array( self::REPEAT_DAY, self::REPEAT_MONTH, self::REPEAT_WEEK, self::REPEAT_YEAR ) ) ) {
+            if ( ! in_array( $repeat_interval, [ self::REPEAT_DAY, self::REPEAT_MONTH, self::REPEAT_WEEK, self::REPEAT_YEAR ] ) ) {
                 $this->_repeat_interval = false;
             }
             $this->_repeat_interval = $repeat_interval;
@@ -792,7 +792,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             return '';
         }
 
-        public function get_from_format( $format, $options = array() ) {
+        public function get_from_format( $format, $options = [] ) {
             $retval = $format;
             $retval = $this->handle_conditional_tags( $retval, $options );
             $retval = $this->handle_format_tags( $retval, $options );
@@ -804,8 +804,6 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
          * Handle replacing a conditional tag
          *
          * @param $tag string - the tag without the {}
-         * @param $condition
-         * @param $output
          *
          * @return string $output modified
          */
@@ -826,7 +824,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             return $output;
         }
 
-        public function handle_conditional_tags( $output, $options = array() ) {
+        public function handle_conditional_tags( $output, $options = [] ) {
             $output = $this->replace_conditional_tag( 'if_end_time', ( $this->get_end_date() and ! $this->get_instant_event() and ( ! $this->get_all_day() and $this->get_start_date() != $this->get_end_date() or ( $this->get_all_day() and date( 'Y-m-d', $this->get_start_date() ) != date( 'Y-m-d', $this->get_end_date() ) ) ) ), $output );
             $output = $this->replace_conditional_tag( 'if_end_date', ( $this->get_end_date() && date( 'Y-m-d', $this->get_start_date() ) !== date( 'Y-m-d', $this->get_end_date() ) ), $output );
 
@@ -835,7 +833,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             $output = $this->replace_conditional_tag( 'if_not_all_day', ! ( (bool) $this->get_all_day() ), $output );
 
             foreach ( $this->get_available_format_tags( $this->get_plugin() ) as $format_tag => $description ) {
-                if ( ! in_array( $format_tag, array( 'end_time', 'end_date', 'all_day' ) ) ) {
+                if ( ! in_array( $format_tag, [ 'end_time', 'end_date', 'all_day' ] ) ) {
                     if ( array_key_exists( $format_tag, $this->get_additional_data() ) ) {
                         $additional_data = $this->get_additional_data();
                         $output = $this->replace_conditional_tag( 'if_' . $format_tag, $additional_data[$format_tag], $output );
@@ -866,108 +864,108 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             return date_i18n( $matches[1], $this->get_end_date() );
         }
 
-        public function handle_format_tags( $output, $options = array() ) {
+        public function handle_format_tags( $output, $options = [] ) {
             foreach ( apply_filters( 'ecn_available_format_tags', self::get_available_format_tags( $this->get_plugin() ) ) as $tag => $description ) {
                 switch ( $tag ) {
-                case 'excerpt':
-                    $output = str_replace( '{excerpt}', $this->get_excerpt(), $output );
-                    $output = apply_filters( 'ecn_excerpt_replaced', $output, $this, $options );
-                    break;
+                    case 'excerpt':
+                        $output = str_replace( '{excerpt}', $this->get_excerpt(), $output );
+                        $output = apply_filters( 'ecn_excerpt_replaced', $output, $this, $options );
+                        break;
 
-                case 'description':
-                    $output = str_replace( '{description}', $this->get_description(), $output );
-                    $output = apply_filters( 'ecn_description_replaced', $output, $this, $options );
-                    break;
+                    case 'description':
+                        $output = str_replace( '{description}', $this->get_description(), $output );
+                        $output = apply_filters( 'ecn_description_replaced', $output, $this, $options );
+                        break;
 
-                case 'tags':
-                    $output = str_replace( '{tags}', implode( ', ', array_map( array( $this, 'get_taxonomy_name' ), $this->get_tags() ) ), $output );
-                    break;
+                    case 'tags':
+                        $output = str_replace( '{tags}', implode( ', ', array_map( [ $this, 'get_taxonomy_name' ], $this->get_tags() ) ), $output );
+                        break;
 
-                case 'tag_links':
-                    $output = str_replace( '{tag_links}', implode( ', ', array_map( array( $this, 'get_category_link' ), $this->get_tags() ) ), $output );
-                    break;
+                    case 'tag_links':
+                        $output = str_replace( '{tag_links}', implode( ', ', array_map( [ $this, 'get_category_link' ], $this->get_tags() ) ), $output );
+                        break;
 
-                case 'categories':
-                    $output = str_replace( '{categories}', implode( ', ', array_map( array( $this, 'get_taxonomy_name' ), $this->get_categories() ) ), $output );
-                    break;
+                    case 'categories':
+                        $output = str_replace( '{categories}', implode( ', ', array_map( [ $this, 'get_taxonomy_name' ], $this->get_categories() ) ), $output );
+                        break;
 
-                case 'category_links':
-                    $output = str_replace( '{category_links}', implode( ', ', array_map( array( $this, 'get_category_link' ), $this->get_categories() ) ), $output );
-                    break;
+                    case 'category_links':
+                        $output = str_replace( '{category_links}', implode( ', ', array_map( [ $this, 'get_category_link' ], $this->get_categories() ) ), $output );
+                        break;
 
-                case 'organizers':
-                    $output = str_replace( '{organizers}', implode( ', ', array_map( array( $this, 'get_taxonomy_name' ), $this->get_organizers() ) ), $output );
-                    break;
+                    case 'organizers':
+                        $output = str_replace( '{organizers}', implode( ', ', array_map( [ $this, 'get_taxonomy_name' ], $this->get_organizers() ) ), $output );
+                        break;
 
-                case 'start_date':
-                    $output = str_replace( '{start_date}', apply_filters( 'ecn_start_date_output', date_i18n( apply_filters( 'ecn_start_date_format', get_option( 'date_format' ) ), $this->get_start_date() ), $this, $options ), $output );
-                    $output = preg_replace_callback( '/\{start_date\|([^\}]+)\}/', array( $this, 'replace_start_date_with_format' ), $output );
-                    break;
+                    case 'start_date':
+                        $output = str_replace( '{start_date}', apply_filters( 'ecn_start_date_output', date_i18n( apply_filters( 'ecn_start_date_format', get_option( 'date_format' ) ), $this->get_start_date() ), $this, $options ), $output );
+                        $output = preg_replace_callback( '/\{start_date\|([^\}]+)\}/', [ $this, 'replace_start_date_with_format' ], $output );
+                        break;
 
-                case 'start_time':
-                    $output = str_replace( '{start_time}', apply_filters( 'ecn_start_time_output', date_i18n( apply_filters( 'ecn_start_time_format', get_option( 'time_format' ) ), $this->get_start_date() ), $this, $options ), $output );
-                    $output = preg_replace_callback( '/\{start_time\|([^\}]+)\}/', array( $this, 'replace_start_date_with_format' ), $output );
-                    break;
+                    case 'start_time':
+                        $output = str_replace( '{start_time}', apply_filters( 'ecn_start_time_output', date_i18n( apply_filters( 'ecn_start_time_format', get_option( 'time_format' ) ), $this->get_start_date() ), $this, $options ), $output );
+                        $output = preg_replace_callback( '/\{start_time\|([^\}]+)\}/', [ $this, 'replace_start_date_with_format' ], $output );
+                        break;
 
-                case 'end_date':
-                    if ( $this->get_instant_event() ) {
-                        $output = str_replace( '{end_date}', '', $output );
-                    } else {
-                        $output = str_replace( '{end_date}', apply_filters( 'ecn_end_date_output', date_i18n( apply_filters( 'ecn_end_date_format', get_option( 'date_format' ) ), $this->get_end_date() ), $this, $options ), $output );
-                        $output = preg_replace_callback( '/\{end_date\|([^\}]+)\}/', array( $this, 'replace_end_date_with_format' ), $output );
-                    }
-                    break;
+                    case 'end_date':
+                        if ( $this->get_instant_event() ) {
+                            $output = str_replace( '{end_date}', '', $output );
+                        } else {
+                            $output = str_replace( '{end_date}', apply_filters( 'ecn_end_date_output', date_i18n( apply_filters( 'ecn_end_date_format', get_option( 'date_format' ) ), $this->get_end_date() ), $this, $options ), $output );
+                            $output = preg_replace_callback( '/\{end_date\|([^\}]+)\}/', [ $this, 'replace_end_date_with_format' ], $output );
+                        }
+                        break;
 
-                case 'end_time':
-                    if ( $this->get_instant_event() ) {
-                        $output = str_replace( '{end_time}', '', $output );
-                    } else {
-                        $output = str_replace( '{end_time}', date_i18n( apply_filters( 'ecn_end_time_format', get_option( 'time_format' ) ), $this->get_end_date() ), $output );
-                        $output = preg_replace_callback( '/\{end_time\|([^\}]+)\}/', array( $this, 'replace_end_date_with_format' ), $output );
-                    }
-                    break;
+                    case 'end_time':
+                        if ( $this->get_instant_event() ) {
+                            $output = str_replace( '{end_time}', '', $output );
+                        } else {
+                            $output = str_replace( '{end_time}', date_i18n( apply_filters( 'ecn_end_time_format', get_option( 'time_format' ) ), $this->get_end_date() ), $output );
+                            $output = preg_replace_callback( '/\{end_time\|([^\}]+)\}/', [ $this, 'replace_end_date_with_format' ], $output );
+                        }
+                        break;
 
-                case 'instant_event':
-                    $output = str_replace( '{instant_event}', ( $this->get_instant_event() ? 'instant' : '' ), $output );
-                    break;
+                    case 'instant_event':
+                        $output = str_replace( '{instant_event}', ( $this->get_instant_event() ? 'instant' : '' ), $output );
+                        break;
 
-                case 'all_day':
-                    if ( $this->get_all_day() ) {
-                        $output = str_replace( '{all_day}', __( 'All day', 'event-calendar-newsletter' ), $output );
-                    } else {
-                        $output = str_replace( '{all_day}', '', $output );
-                    }
-                    break;
+                    case 'all_day':
+                        if ( $this->get_all_day() ) {
+                            $output = str_replace( '{all_day}', __( 'All day', 'event-calendar-newsletter' ), $output );
+                        } else {
+                            $output = str_replace( '{all_day}', '', $output );
+                        }
+                        break;
 
-                case 'event_cost':
-                    if ( $this->get_event_cost() ) {
-                        $output = str_replace( '{event_cost}', $this->get_event_cost(), $output );
-                    } else {
-                        $output = str_replace( '{event_cost}', '', $output );
-                    }
-                    break;
+                    case 'event_cost':
+                        if ( $this->get_event_cost() ) {
+                            $output = str_replace( '{event_cost}', $this->get_event_cost(), $output );
+                        } else {
+                            $output = str_replace( '{event_cost}', '', $output );
+                        }
+                        break;
 
-                case 'link':
-                    if ( $this->get_link() ) {
-                        $output = str_replace( '{link}', '<a href="' . $this->get_link() . '">' . apply_filters( 'ecn_event_link_text', __( 'More information', 'event-calendar-newsletter' ) ) . '</a>', $output );
-                    } else {
-                        $output = str_replace( '{link}', '', $output );
-                    }
-                    break;
+                    case 'link':
+                        if ( $this->get_link() ) {
+                            $output = str_replace( '{link}', '<a href="' . $this->get_link() . '">' . apply_filters( 'ecn_event_link_text', __( 'More information', 'event-calendar-newsletter' ) ) . '</a>', $output );
+                        } else {
+                            $output = str_replace( '{link}', '', $output );
+                        }
+                        break;
 
-                case 'link_url':
-                    $output = str_replace( '{link_url}', ( $this->get_link() ? $this->get_link() : '' ), $output );
-                    break;
-                default:
-                    if ( method_exists( $this, "get_$tag" ) ) {
-                        $output = str_replace( '{' . $tag . '}', $this->{"get_$tag"}(), $output );
-                    } elseif ( array_key_exists( $tag, $this->get_additional_data() ) ) {
-                        $additional_data = $this->get_additional_data();
-                        $output = str_replace( '{' . $tag . '}', $additional_data[$tag], $output );
-                    } elseif ( apply_filters( 'ecn_handle_tag_output', false, $tag, $this ) ) {
-                        $output = str_replace( '{' . $tag . '}', apply_filters( 'ecn_generate_custom_output', '', $tag, $this ), $output );
-                    }
-            }
+                    case 'link_url':
+                        $output = str_replace( '{link_url}', ( $this->get_link() ? $this->get_link() : '' ), $output );
+                        break;
+                    default:
+                        if ( method_exists( $this, "get_$tag" ) ) {
+                            $output = str_replace( '{' . $tag . '}', $this->{"get_$tag"}(), $output );
+                        } elseif ( array_key_exists( $tag, $this->get_additional_data() ) ) {
+                            $additional_data = $this->get_additional_data();
+                            $output = str_replace( '{' . $tag . '}', $additional_data[$tag], $output );
+                        } elseif ( apply_filters( 'ecn_handle_tag_output', false, $tag, $this ) ) {
+                            $output = str_replace( '{' . $tag . '}', apply_filters( 'ecn_generate_custom_output', '', $tag, $this ), $output );
+                        }
+                }
             }
 
             return $output;

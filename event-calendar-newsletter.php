@@ -33,12 +33,12 @@ define( 'ECN_PLUGINS_URL', plugins_url( '', __FILE__ ) );
 include_once __DIR__ . '/includes/wp-requirements.php';
 
 // Check plugin requirements before loading plugin.
-$this_plugin_checks = new ECN_WP_Requirements( 'Event Calendar Newsletter', plugin_basename( __FILE__ ), array(
+$this_plugin_checks = new ECN_WP_Requirements( 'Event Calendar Newsletter', plugin_basename( __FILE__ ), [
     'PHP' => '5.3.3',
     'WordPress' => '4.1',
-    'Extensions' => array(
-    ),
-) );
+    'Extensions' => [
+    ],
+] );
 
 if ( $this_plugin_checks->pass() === false ) {
     $this_plugin_checks->halt();
@@ -67,9 +67,9 @@ require_once __DIR__ . '/includes/ecncalendarfeedeventorganiser.class.php';
 // Upgrade link
 if ( ! function_exists( 'ecn_add_action_links' ) ) {
     function ecn_add_action_links( $links ) {
-        $mylinks = array(
+        $mylinks = [
             '<a target="_blank" style="color:#3db634; font-weight: bold;" href="https://eventcalendarnewsletter.com/pro/?utm_source=plugin-list&utm_medium=upgrade-link&utm_campaign=plugin-list&utm_content=action-link">Upgrade</a>',
-        );
+        ];
 
         return array_merge( $links, $mylinks );
     }
@@ -93,7 +93,7 @@ if ( ! function_exists( 'ecn_load_textdomain' ) ) {
  */
 if ( ! function_exists( 'ecn_available_pro_calendars' ) ) {
     function ecn_available_pro_calendars() {
-        $calendars = array();
+        $calendars = [];
 
         if ( class_exists( 'plugin_righthere_calendar' ) ) {
             $calendars[] = 'CalendarizeIt!';
@@ -150,7 +150,7 @@ if ( ! class_exists( 'ECNPro' ) ) {
             $wisdom = new ECN_Plugin_Usage_Tracker(
                 __FILE__,
                 'https://track.eventcalendarnewsletter.com/',
-                array( 'ecn_saved_options' ),
+                [ 'ecn_saved_options' ],
                 true,
                 true,
                 2

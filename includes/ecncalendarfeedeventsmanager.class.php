@@ -4,7 +4,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventsManager' ) ) {
     class ECNCalendarFeedEventsManager extends ECNCalendarFeed {
 
         public function get_available_format_tags() {
-            return array(
+            return [
             'start_date',
             'start_time',
             'end_date',
@@ -28,24 +28,24 @@ if ( ! class_exists( 'ECNCalendarFeedEventsManager' ) ) {
             'categories',
             'category_links',
             'all_day',
-        );
+        ];
         }
 
         /**
          * @param $start_date int
-         * @param $end_date int
-         * @param $data array
+         * @param $end_date   int
+         * @param $data       array
          *
          * @return ECNCalendarEvent[]
          */
-        public function get_events( $start_date, $end_date, $data = array() ) {
-            $retval = array();
+        public function get_events( $start_date, $end_date, $data = [] ) {
+            $retval = [];
 
-            $filters = array(
-            'category' => array(),
-            'tag' => array(),
+            $filters = [
+            'category' => [],
+            'tag' => [],
             'scope' => wp_date( 'Y-m-d', $start_date ) . ',' . wp_date( 'Y-m-d', $end_date + 86400 ),
-        );
+        ];
             $event_results = EM_Events::get( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), $filters, $start_date, $end_date, $data ) );
 
             foreach ( $event_results as $event ) {
@@ -69,7 +69,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventsManager' ) ) {
                     break;
                 }
 
-                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), array(
+                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), [
                 'plugin' => $this->get_identifier(),
                 'start_date' => $event->event_start_date . ' ' . $event->event_start_time,
                 'end_date' => $event->event_end_date . ' ' . $event->event_end_time,
@@ -91,7 +91,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventsManager' ) ) {
                 'event_image_url' => $image_url,
                 'all_day' => $event->event_all_day,
                 'event_rsvp_available' => $event->event_rsvp ? intval( $event->event_rsvp ) : 0,
-            ), $post, $event ) );
+            ], $post, $event ) );
             }
 
             return $retval;

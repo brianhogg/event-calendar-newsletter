@@ -4,7 +4,7 @@ if ( ! class_exists( 'ECNCalendarFeedAi1ec' ) ) {
     class ECNCalendarFeedAi1ec extends ECNCalendarFeed {
 
         public function get_available_format_tags() {
-            return array(
+            return [
             'start_date',
             'start_time',
             'end_date',
@@ -32,19 +32,19 @@ if ( ! class_exists( 'ECNCalendarFeedAi1ec' ) ) {
             'category_links',
             'all_day',
             'instant_event',
-        );
+        ];
         }
 
         /**
          * @param $start_date int
-         * @param $end_date int
-         * @param $data array
+         * @param $end_date   int
+         * @param $data       array
          *
          * @return ECNCalendarEvent[]
          */
-        public function get_events( $start_date, $end_date, $data = array() ) {
+        public function get_events( $start_date, $end_date, $data = [] ) {
             global $ai1ec_registry;
-            $retval = array();
+            $retval = [];
 
             $start_time = $ai1ec_registry->get( 'date.time' );
             $end_time = $ai1ec_registry->get( 'date.time' );
@@ -55,15 +55,15 @@ if ( ! class_exists( 'ECNCalendarFeedAi1ec' ) ) {
             $start_time->set_date_time( wp_date( 'Y-m-d H:m:s', $start_date ), get_option( 'timezone_string' ) );
             $end_time->set_date_time( wp_date( 'Y-m-d H:m:s', $end_date ), get_option( 'timezone_string' ) );
 
-            $filters = array(
-            'cat_ids' => array(),
-            'tag_ids' => array(),
-        );
+            $filters = [
+            'cat_ids' => [],
+            'tag_ids' => [],
+        ];
             $filters = apply_filters( 'ecn_ai1ec_filters', $filters, $data );
             $event_results = $search->get_events_between( $start_time, $end_time, $filters );
 
             // see app/model/event/entity.php for properties (private vars without initial $_)
-            $post_ids = array();
+            $post_ids = [];
 
             foreach ( $event_results as $event ) {
                 $post = get_post( $event->get( 'post_id' ) );
@@ -88,7 +88,7 @@ if ( ! class_exists( 'ECNCalendarFeedAi1ec' ) ) {
                     $permalink .= ( ( false !== strpos( $permalink, '?' ) ) ? '&instance_id=' : '?instance_id=' ) . intval( $event->get( 'instance_id' ) );
                 }
 
-                $retval[] = new ECNCalendarEvent( array(
+                $retval[] = new ECNCalendarEvent( [
                 'start_date' => $event->get( 'start' )->format( 'Y-m-d H:i:s', $event->get( 'timezone_name' ) ),
                 'instant_event' => $event->get( 'instant_event' ),
                 'end_date' => $event->get( 'end' )->format( 'Y-m-d H:i:s', $event->get( 'timezone_name' ) ),
@@ -115,7 +115,7 @@ if ( ! class_exists( 'ECNCalendarFeedAi1ec' ) ) {
 //                'repeat_frequency' => '', $aec_event->repeat_freq,
 //                'repeat_interval' => $this->get_repeat_frequency_from_feed_frequency( $aec_event->repeat_int ),
 //                'repeat_end' => $aec_event->repeat_end,
-            ) );
+            ] );
                 $retval = $this->sort_events_by_start_date( $retval );
             }
 

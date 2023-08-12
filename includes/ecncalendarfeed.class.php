@@ -14,24 +14,22 @@ if ( ! class_exists( 'ECNCalendarFeed' ) ) {
         /**
          * Translate local feed frequency into
          *
-         * @param $frequency
-         *
          * @return string
          */
         protected function get_repeat_frequency_from_feed_frequency( $frequency ) {
             switch ( $frequency ) {
-            case $this->REPEAT_DAY:
-                return ECNCalendarEvent::REPEAT_DAY;
+                case $this->REPEAT_DAY:
+                    return ECNCalendarEvent::REPEAT_DAY;
 
-            case $this->REPEAT_WEEK:
-                return ECNCalendarEvent::REPEAT_WEEK;
+                case $this->REPEAT_WEEK:
+                    return ECNCalendarEvent::REPEAT_WEEK;
 
-            case $this->REPEAT_MONTH:
-                return ECNCalendarEvent::REPEAT_MONTH;
+                case $this->REPEAT_MONTH:
+                    return ECNCalendarEvent::REPEAT_MONTH;
 
-            case $this->REPEAT_YEAR:
-                return ECNCalendarEvent::REPEAT_YEAR;
-        }
+                case $this->REPEAT_YEAR:
+                    return ECNCalendarEvent::REPEAT_YEAR;
+            }
 
             return false;
         }
@@ -39,13 +37,11 @@ if ( ! class_exists( 'ECNCalendarFeed' ) ) {
         /**
          * Fetch events in the given date range
          *
-         * @param $start_date
-         * @param $end_date
          * @param $data array
          *
          * @return ECNCalendarEvent[]
          */
-        abstract public function get_events( $start_date, $end_date, $data = array() );
+        abstract public function get_events( $start_date, $end_date, $data = [] );
 
         /**
          * Sort events by the start date
@@ -55,7 +51,7 @@ if ( ! class_exists( 'ECNCalendarFeed' ) ) {
          * @return ECNCalendarEvent[]
          */
         public function sort_events_by_start_date( $events ) {
-            usort( $events, array( $this, 'compare_event_start_date' ) );
+            usort( $events, [ $this, 'compare_event_start_date' ] );
 
             return $events;
         }

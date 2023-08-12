@@ -20,8 +20,8 @@
 				<td>
 					<?php foreach ( get_editable_roles() as $role => $role_details ): ?>
 						<?php if ( 'administrator' == $role ) {
-    continue;
-} ?>
+						    continue;
+						} ?>
 						<label><input type="checkbox" name="role[]" value="<?php echo esc_attr( $role ); ?>" <?php echo  get_role( $role )->has_cap( 'ecn_admin' ) ? ' checked' : ''; ?>> <?php echo esc_html( $role_details['name'] ); ?></label><br />
 					<?php endforeach; ?>
 				</td>

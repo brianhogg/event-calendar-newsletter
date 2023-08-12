@@ -4,7 +4,7 @@ if ( ! class_exists( 'ECNCalendarFeedGoogleCalendarEvents' ) ) {
     class ECNCalendarFeedGoogleCalendarEvents extends ECNCalendarFeed {
 
         public function get_available_format_tags() {
-            return array(
+            return [
             'start_date',
             'start_time',
             'end_date',
@@ -16,20 +16,20 @@ if ( ! class_exists( 'ECNCalendarFeedGoogleCalendarEvents' ) ) {
             'link',
             'link_url',
             'all_day',
-        );
+        ];
         }
 
         /**
          * @param $start_date int
-         * @param $end_date int
+         * @param $end_date   int
          *
          * @return ECNCalendarEvent[]
          */
-        public function get_events( $start_date, $end_date, $data = array() ) {
-            $retval = array();
+        public function get_events( $start_date, $end_date, $data = [] ) {
+            $retval = [];
 
             // Grab all published calendars
-            $calendar_posts = get_posts( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'post_type' => 'calendar', 'posts_per_page' => 100 ), $start_date, $end_date, $data ) );
+            $calendar_posts = get_posts( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), [ 'post_type' => 'calendar', 'posts_per_page' => 100 ], $start_date, $end_date, $data ) );
 
             foreach ( $calendar_posts as $calendar_post ) {
                 if ( isset( $data['force_fetching'] ) and $data['force_fetching'] ) {
@@ -53,7 +53,7 @@ if ( ! class_exists( 'ECNCalendarFeedGoogleCalendarEvents' ) ) {
 
                         $is_existing = false;
 
-                        $event = new ECNCalendarEvent( array(
+                        $event = new ECNCalendarEvent( [
                             'start_date' => ( isset( $event->multiple_days ) && $event->multiple_days > 0 && $event->whole_day ) ? $ymd : $event->start_dt->toDateTimeString(),
                             'end_date' => $event->end_dt->toDateTimeString(),
                             'title' => stripslashes_deep( $event->title ),
@@ -62,7 +62,7 @@ if ( ! class_exists( 'ECNCalendarFeedGoogleCalendarEvents' ) ) {
                             'location_address' => $event->start_location['address'],
                             'link' => $event->link,
                             'all_day' => $event->whole_day,
-                        ) );
+                        ] );
 
                         foreach ( $retval as $existing_event ) {
                             if ( $existing_event->get_guid() === $event->get_guid() ) {
@@ -79,7 +79,7 @@ if ( ! class_exists( 'ECNCalendarFeedGoogleCalendarEvents' ) ) {
             }
 
             // Sort the results by timestamp, if we have multiple calendars
-            uasort( $retval, array( $this, 'cmp_event_date' ) );
+            uasort( $retval, [ $this, 'cmp_event_date' ] );
 
             return $retval;
         }

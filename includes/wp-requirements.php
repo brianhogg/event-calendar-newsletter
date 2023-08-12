@@ -16,10 +16,10 @@ if ( ! class_exists( 'ECN_WP_Requirements' ) ) {
     class ECN_WP_Requirements {
 
         /**
-         * Plugin name.
-         *
-         * @var string
-         */
+                 * Plugin name.
+                 *
+                 * @var string
+                 */
         private $name = '';
 
         /**
@@ -57,7 +57,7 @@ if ( ! class_exists( 'ECN_WP_Requirements' ) ) {
          *
          * @var array
          */
-        private $requirements = array();
+        private $requirements = [];
 
         /**
          * Results failures.
@@ -66,7 +66,7 @@ if ( ! class_exists( 'ECN_WP_Requirements' ) ) {
          *
          * @var array
          */
-        private $failures = array();
+        private $failures = [];
 
         /**
          * Admin notice.
@@ -88,14 +88,15 @@ if ( ! class_exists( 'ECN_WP_Requirements' ) ) {
             $this->requirements = $requirements;
 
             if ( ! empty( $requirements ) && is_array( $requirements ) ) {
-                $failures = $extensions = array();
+                $failures = $extensions = [];
 
                 $requirements = array_merge(
-                    array(
+                    [
                         'WordPress' => '',
                         'PHP' => '',
                         'Extensions' => '',
-                    ), $requirements
+                    ],
+                    $requirements
                 );
 
                 // Check for WordPress version.
@@ -157,11 +158,11 @@ if ( ! class_exists( 'ECN_WP_Requirements' ) ) {
          * @return bool
          */
         public function pass() {
-            if ( in_array( false, array(
+            if ( in_array( false, [
                 $this->wp,
                 $this->php,
                 $this->extensions,
-            ) ) ) {
+            ] ) ) {
                 return false;
             }
 
@@ -191,17 +192,17 @@ if ( ! class_exists( 'ECN_WP_Requirements' ) ) {
                     if ( 'Extensions' == $requirement ) {
                         if ( is_array( $found ) ) {
                             $notice .= sprintf(
-                                           'Required PHP Extension(s) not found: %s.',
-                                           join( ', ', $found )
-                                       ) . '<br>';
+                                'Required PHP Extension(s) not found: %s.',
+                                join( ', ', $found )
+                            ) . '<br>';
                         }
                     } else {
                         $notice .= sprintf(
-                                       'Required %1$s version: %2$s - Version found: %3$s',
-                                       $requirement,
-                                       $required,
-                                       $found
-                                   ) . '<br>';
+                            'Required %1$s version: %2$s - Version found: %3$s',
+                            $requirement,
+                            $required,
+                            $found
+                        ) . '<br>';
                     }
                 }
 
@@ -242,8 +243,8 @@ if ( ! class_exists( 'ECN_WP_Requirements' ) ) {
             $this->notice = $this->get_notice( $message );
 
             if ( $this->notice && function_exists( 'add_action' ) ) {
-                add_action( 'admin_notices', array( $this, 'print_notice' ) );
-                add_action( 'admin_init', array( $this, 'deactivate_plugin' ) );
+                add_action( 'admin_notices', [ $this, 'print_notice' ] );
+                add_action( 'admin_init', [ $this, 'deactivate_plugin' ] );
 
                 if ( isset( $_GET['activate'] ) ) {
                     unset( $_GET['activate'] );

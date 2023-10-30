@@ -3,7 +3,7 @@ Contributors: brianhogg
 Donate link: https://eventcalendarnewsletter.com/
 Tags: Event Calendar Newsletter, WordPress events calendar, WordPress event calendar, The Events Calendar, All-in-One Event Calendar
 Requires at least: 5.8
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 2.16
 Requires PHP: 7.4
 License: GPLv2 or later

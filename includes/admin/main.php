@@ -183,37 +183,20 @@
                         <p><?php echo sprintf( esc_html__( '%sLearn More About Event Calendar Newsletter Pro%s', 'event-calendar-newsletter' ), '<a class="ecs-button" target="_blank" href="https://eventcalendarnewsletter.com/?utm_source=plugin&utm_medium=link&utm_campaign=ecn-help-after-options&utm_content=description">', '</a>' ); ?></p>
                     </div>
                     <hr/>
-	                <p><h2><?php echo esc_html__( 'Get 20% Off!', 'event-calendar-newsletter' ); ?></h2></p>
-	                <p><h4><?php echo esc_html__( "Just enter your name and email and we'll send you a coupon for 20% off your upgrade to the Pro version", 'event-calendar-newsletter' ); ?></h4></p>
+
+                  <form action="https://track.bentonow.com/forms/a8894430afd88aaaebff8ff7e8077553/$ecn_free?hardened=true" method="POST" enctype="multipart/form-data" class="bento-formkit">
+                    <div class="bento-formkit-headline"><?php echo esc_html__( 'Get 20% Off!', 'event-calendar-newsletter' ); ?></div>
+                    <div class="bento-formkit-subheader"><?php echo esc_html__( "Just enter your name and email and we'll send you a coupon for 20% off your upgrade to the Pro version", 'event-calendar-newsletter' ); ?></div>
+                    <input type="hidden" name="redirect" value="https://eventcalendarnewsletter.com/thank-you/">
+                    <input type="email" name="email" placeholder="Email ..." class="bento-formkit-input" />
+                    <input type="text" name="fields_first_name" class="bento-formkit-input" placeholder="<?php echo esc_attr__( 'First Name' ); ?>"/>
+                    <button type="submit" class="bento-formkit-button"><?php echo esc_html__( 'Send me the coupon', 'event-calendar-newsletter' ); ?></button>
+                  </form>
+                  <style>.bento-formkit { width: 100%; line-height:1.5em; max-width: 400px; box-sizing: border-box; padding: 20px; border-radius: 8px; background: #fff; border: 1px solid rgba(0, 0, 0, 0.15); box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1); position: relative;}.bento-formkit-headline { font-size: 18px; font-weight: bold; color: #333; }.bento-formkit-subheader { font-size: 16px; color: #666; }.bento-formkit input { display: block; width: 100%; background-color: #fff; border-radius: 8px; border: 1px solid #ccc; color: #333; cursor: text; margin: 8px 0 12px; padding: 9px 10px; box-sizing: border-box;}.bento-formkit button { text-align: center; background-color: #0095FF; font-weight: 800; color: white; padding: 12px 20px; margin: 0px 0 0; border: none; cursor: pointer; width: 100%; border-radius: 8px; box-sizing: border-box; box-shadow: 0 4px 12px 0 rgba(0,0,0,0.1);}</style>
 
 	                <?php $current_user = wp_get_current_user(); ?>
 
-	                <!-- Begin MailChimp Signup Form -->
-					<div id="mc_embed_signup">
-					<form action="https://brianhogg.us3.list-manage.com/subscribe/post?u=98b752164e5f27815c50336ea&amp;id=f67eaf5c6b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-					    <div id="mc_embed_signup_scroll">
-					<div class="mc-field-group">
-						<input type="email" value="<?php echo esc_attr( $current_user->user_email ); ?>" name="EMAIL" class="required email" placeholder="<?php echo __( 'Email', 'event-calendar-newsletter' ); ?>" id="mce-EMAIL">
-					</div>
-					<div class="mc-field-group">
-						<input type="text" placeholder="<?php echo __( 'First name', 'event-calendar-newsletter' ); ?>" value="<?php echo esc_attr( $current_user->user_firstname ); ?>" name="FNAME" class="" id="mce-FNAME">
-					</div>
-					<input type="hidden" name="SIGNUP" id="SIGNUP" value="plugin" />
-                            <input type="hidden" value="1" name="group[18831][1]" id="mce-group[18831]-18831-0">
-						<div id="mce-responses" class="clear">
-							<div class="response" id="mce-error-response" style="display:none"></div>
-							<div class="response" id="mce-success-response" style="display:none"></div>
-						</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_98b752164e5f27815c50336ea_f67eaf5c6b" tabindex="-1" value=""></div>
-					    <div class="clear"><input type="submit" value="<?php echo esc_attr__( 'Send me the coupon', 'event-calendar-newsletter' ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-					    </div>
-					</form>
-					</div>
-
-
-					<p color="#555555"><?php echo esc_html__( 'We promise not to use your email for anything else and you can unsubscribe with 1-click anytime.', 'event-calendar-newsletter' ); ?></p>
-
-					<!--End mc_embed_signup-->
+					        <p color="#555555"><?php echo esc_html__( 'We promise not to use your email for anything else and you can unsubscribe with 1-click anytime.', 'event-calendar-newsletter' ); ?></p>
 
 	                <hr/>
 	                <p><?php echo sprintf( wp_kses( __( "<strong>Like this plugin?</strong><br>We'd love if you could show your support by leaving a %s&#9733;&#9733;&#9733;&#9733;&#9733; 5 star review on WordPress.org%s!", 'event-calendar-newsletter' ), [ 'strong' => [], 'br' => [] ] ), '<a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/event-calendar-newsletter?filter=5#postform">', '</a>' ); ?></p>

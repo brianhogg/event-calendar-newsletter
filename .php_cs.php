@@ -9,18 +9,22 @@ $finder = PhpCsFixer\Finder::create()
 ;
 
 $rules = WeDevs\Fixer\Fixer::rules();
-$rules['array_syntax'] = array( 'syntax' => 'long' );
-$rules['no_alternative_syntax'] = false;
-$rules['binary_operator_spaces'] = array(
-    'align_double_arrow' => false,
-    'align_equals' => false,
-);
+$rules['binary_operator_spaces'] = [
+    'operators' => [
+        '=>' => 'single_space',
+    ],
+];
+$rules['no_alternative_syntax'] = ['fix_non_monolithic_code' => false];
+$rules['curly_braces_position'] = [
+    'functions_opening_brace' => 'same_line',
+    'classes_opening_brace' => 'same_line',
+];
 
-$config = PhpCsFixer\Config::create()
-    ->registerCustomFixers( array(
+$config = (new PhpCsFixer\Config())
+    ->registerCustomFixers( [
         new WeDevs\Fixer\SpaceInsideParenthesisFixer(),
         new WeDevs\Fixer\BlankLineAfterClassOpeningFixer(),
-    ) )
+    ] )
     ->setRiskyAllowed( true )
     ->setUsingCache( false )
     ->setRules( $rules )

@@ -22,7 +22,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
 
         private $plugin_name = '';
 
-        private $options = array();
+        private $options = [];
 
         private $require_optin = true;
 
@@ -39,15 +39,15 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
         /**
          * Class constructor
          *
-         * @param $_home_url				The URL to the site we're sending data to
-         * @param $_plugin_file				The file path for this plugin
-         * @param $_options					Plugin options to track
-         * @param $_require_optin			Whether user opt-in is required (always required on WordPress.org)
-         * @param $_include_goodbye_form	Whether to include a form when the user deactivates
-         * @param $_marketing				Marketing method:
-         *									0: Don't collect email addresses
-         *									1: Request permission same time as tracking opt-in
-         *									2: Request permission after opt-in
+         * @param $_home_url             The URL to the site we're sending data to
+         * @param $_plugin_file          The file path for this plugin
+         * @param $_options              Plugin options to track
+         * @param $_require_optin        Whether user opt-in is required (always required on WordPress.org)
+         * @param $_include_goodbye_form Whether to include a form when the user deactivates
+         * @param $_marketing            Marketing method:
+         *                                0: Don't collect email addresses
+         *                                1: Request permission same time as tracking opt-in
+         *                                2: Request permission after opt-in
          */
         public function __construct(
             $_plugin_file,
@@ -55,7 +55,8 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
             $_options,
             $_require_optin = true,
             $_include_goodbye_form = true,
-            $_marketing = false ) {
+            $_marketing = false
+        ) {
             $this->plugin_file = $_plugin_file;
             $this->home_url = trailingslashit( $_home_url );
 
@@ -82,11 +83,11 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
             // Schedule / deschedule tracking when activated / deactivated
             if ( $this->what_am_i == 'theme' ) {
                 // Need to think about scheduling for sites that have already activated the theme
-                add_action( 'after_switch_theme', array( $this, 'schedule_tracking' ) );
-                add_action( 'switch_theme', array( $this, 'deactivate_this_plugin' ) );
+                add_action( 'after_switch_theme', [ $this, 'schedule_tracking' ] );
+                add_action( 'switch_theme', [ $this, 'deactivate_this_plugin' ] );
             } else {
-                register_activation_hook( $this->plugin_file, array( $this, 'schedule_tracking' ) );
-                register_deactivation_hook( $this->plugin_file, array( $this, 'deactivate_this_plugin' ) );
+                register_activation_hook( $this->plugin_file, [ $this, 'schedule_tracking' ] );
+                register_deactivation_hook( $this->plugin_file, [ $this, 'deactivate_this_plugin' ] );
             }
 
             // Get it going
@@ -109,22 +110,22 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
             }
 
             // Hook our do_tracking function to the weekly action
-            add_filter( 'cron_schedules', array( $this, 'schedule_weekly_event' ) );
+            add_filter( 'cron_schedules', [ $this, 'schedule_weekly_event' ] );
             // It's called weekly, but in fact it could be daily, weekly or monthly
-            add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
+            add_action( 'put_do_weekly_action', [ $this, 'do_tracking' ] );
 
             // Use this action for local testing
             // add_action( 'admin_init', array( $this, 'do_tracking' ) );
 
             // Display the admin notice on activation
-            add_action( 'admin_init', array( $this, 'set_notification_time' ) );
-            add_action( 'admin_notices', array( $this, 'optin_notice' ) );
-            add_action( 'admin_notices', array( $this, 'marketing_notice' ) );
+            add_action( 'admin_init', [ $this, 'set_notification_time' ] );
+            add_action( 'admin_notices', [ $this, 'optin_notice' ] );
+            add_action( 'admin_notices', [ $this, 'marketing_notice' ] );
 
             // Deactivation
-            add_filter( 'plugin_action_links_' . plugin_basename( $this->plugin_file ), array( $this, 'filter_action_links' ) );
-            add_action( 'admin_footer-plugins.php', array( $this, 'goodbye_ajax' ) );
-            add_action( 'wp_ajax_goodbye_form', array( $this, 'goodbye_form_callback' ) );
+            add_filter( 'plugin_action_links_' . plugin_basename( $this->plugin_file ), [ $this, 'filter_action_links' ] );
+            add_action( 'admin_footer-plugins.php', [ $this, 'goodbye_ajax' ] );
+            add_action( 'wp_ajax_goodbye_form', [ $this, 'goodbye_form_callback' ] );
         }
 
         /**
@@ -148,14 +149,14 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          * @since 1.2.3
          */
         public function schedule_weekly_event( $schedules ) {
-            $schedules['weekly'] = array(
+            $schedules['weekly'] = [
                 'interval' => 604800,
                 'display' => __( 'Once Weekly' ),
-            );
-            $schedules['monthly'] = array(
+            ];
+            $schedules['monthly'] = [
                 'interval' => 2635200,
                 'display' => __( 'Once Monthly' ),
-            );
+            ];
 
             return $schedules;
         }
@@ -180,10 +181,9 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          *
          * @since 1.0.0
          *
-         * @param $force	Force tracking if it's not time
+         * @param $force Force tracking if it's not time
          */
         public function do_tracking( $force = false ) {
-
             // If the home site hasn't been defined, we just drop out. Nothing much we can do.
             if ( ! $this->home_url ) {
                 return;
@@ -230,7 +230,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
         public function send_data( $body ) {
             $request = wp_remote_post(
                 esc_url( $this->home_url . '?usage_tracker=hello' ),
-                array(
+                [
                     'method' => 'POST',
                     'timeout' => 20,
                     'redirection' => 5,
@@ -238,7 +238,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                     'blocking' => true,
                     'body' => $body,
                     'user-agent' => 'PUT/1.0.0; ' . home_url(),
-                )
+                ]
             );
 
             $this->set_track_time();
@@ -254,12 +254,11 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          * @since 1.0.0
          */
         public function get_data() {
-
             // Use this to pass error messages back if necessary
             $body['message'] = '';
 
             // Use this array to send data back
-            $body = array(
+            $body = [
                 'plugin_slug' => sanitize_text_field( $this->plugin_name ),
                 'url' => home_url(),
                 'site_name' => get_bloginfo( 'name' ),
@@ -271,7 +270,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                 'multisite' => is_multisite(),
                 'file_location' => __FILE__,
                 'product_type' => esc_html( $this->what_am_i ),
-            );
+            ];
 
             // Collect the email if the correct option has been set
             if ( $this->get_can_collect_email() ) {
@@ -287,7 +286,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
             }
 
             $plugins = array_keys( get_plugins() );
-            $active_plugins = get_option( 'active_plugins', array() );
+            $active_plugins = get_option( 'active_plugins', [] );
 
             foreach ( $plugins as $key => $plugin ) {
                 if ( in_array( $plugin, $active_plugins ) ) {
@@ -341,7 +340,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
              * @since 1.0.0
              */
             $options = $this->options;
-            $plugin_options = array();
+            $plugin_options = [];
 
             if ( ! empty( $options ) && is_array( $options ) ) {
                 foreach ( $options as $option ) {
@@ -447,7 +446,6 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          * @since 1.0.0
          */
         public function get_is_tracking_allowed() {
-
             // First, check if the user has changed their mind and opted out of tracking
             if ( $this->has_user_opted_out() ) {
                 $this->set_is_tracking_allowed( false, $this->plugin_name );
@@ -462,7 +460,6 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                     return true;
                 }
             } else {
-
                 // The wisdom_allow_tracking option is an array of plugins that are being tracked
                 $allow_tracking = get_option( 'wisdom_allow_tracking' );
                 // If this plugin is in the array, then tracking is allowed
@@ -481,7 +478,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          *
          * @since 1.0.0
          *
-         * @param $is_allowed	Boolean		true if tracking is allowed, false if not
+         * @param $is_allowed Boolean		true if tracking is allowed, false if not
          */
         public function set_is_tracking_allowed( $is_allowed, $plugin = null ) {
             if ( empty( $plugin ) ) {
@@ -508,7 +505,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                 } else {
                     if ( empty( $allow_tracking ) || ! is_array( $allow_tracking ) ) {
                         // If nothing exists in the option yet, start a new array with the plugin name
-                        $allow_tracking = array( $plugin => $plugin );
+                        $allow_tracking = [ $plugin => $plugin ];
                     } else {
                         // Else add the plugin name to the array
                         $allow_tracking[$plugin] = $plugin;
@@ -569,7 +566,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          */
         public function get_is_time_to_track() {
             // Let's see if we're due to track this plugin yet
-            $track_times = get_option( 'wisdom_last_track_time', array() );
+            $track_times = get_option( 'wisdom_last_track_time', [] );
 
             if ( ! isset( $track_times[$this->plugin_name] ) ) {
                 // If we haven't set a time for this plugin yet, then we must track it
@@ -601,7 +598,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          */
         public function set_track_time() {
             // We've tracked, so record the time
-            $track_times = get_option( 'wisdom_last_track_time', array() );
+            $track_times = get_option( 'wisdom_last_track_time', [] );
             // Set different times according to plugin, in case we are tracking multiple plugins
             $track_times[$this->plugin_name] = time();
             update_option( 'wisdom_last_track_time', $track_times );
@@ -614,7 +611,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          * @since 1.2.4
          */
         public function set_notification_time() {
-            $notification_times = get_option( 'wisdom_notification_times', array() );
+            $notification_times = get_option( 'wisdom_notification_times', [] );
             // Set different times according to plugin, in case we are tracking multiple plugins
             if ( ! isset( $notification_times[$this->plugin_name] ) ) {
                 $delay_notification = apply_filters( 'wisdom_delay_notification_' . $this->plugin_name, 0 );
@@ -633,7 +630,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          * @return bool
          */
         public function get_is_notification_time() {
-            $notification_times = get_option( 'wisdom_notification_times', array() );
+            $notification_times = get_option( 'wisdom_notification_times', [] );
             $time = time();
             // Set different times according to plugin, in case we are tracking multiple plugins
             if ( isset( $notification_times[$this->plugin_name] ) ) {
@@ -661,7 +658,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
 
             if ( empty( $block_notice ) || ! is_array( $block_notice ) ) {
                 // If nothing exists in the option yet, start a new array with the plugin name
-                $block_notice = array( $plugin => $plugin );
+                $block_notice = [ $plugin => $plugin ];
             } else {
                 // Else add the plugin name to the array
                 $block_notice[$plugin] = $plugin;
@@ -692,7 +689,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          *
          * @since 1.0.0
          *
-         * @param $can_collect	Boolean		true if collection is allowed, false if not
+         * @param $can_collect Boolean		true if collection is allowed, false if not
          */
         public function set_can_collect_email( $can_collect, $plugin = null ) {
             if ( empty( $plugin ) ) {
@@ -704,7 +701,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
             if ( $can_collect ) {
                 if ( empty( $collect_email ) || ! is_array( $collect_email ) ) {
                     // If nothing exists in the option yet, start a new array with the plugin name
-                    $collect_email = array( $plugin => $plugin );
+                    $collect_email = [ $plugin => $plugin ];
                 } else {
                     // Else add the plugin name to the array
                     $collect_email[$plugin] = $plugin;
@@ -740,8 +737,8 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          * There might be more than one admin on the site
          * So we only use the first admin's email address
          *
-         * @param $email	Email address to set
-         * @param $plugin	Plugin name to set email address for
+         * @param $email  Email address to set
+         * @param $plugin Plugin name to set email address for
          *
          * @since 1.1.2
          */
@@ -762,7 +759,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
 
             if ( empty( $admin_emails ) || ! is_array( $admin_emails ) ) {
                 // If nothing exists in the option yet, start a new array with the plugin name
-                $admin_emails = array( $plugin => sanitize_email( $email ) );
+                $admin_emails = [ $plugin => sanitize_email( $email ) ];
             } elseif ( empty( $admin_emails[$plugin] ) ) {
                 // Else add the email address to the array, if not already set
                 $admin_emails[$plugin] = sanitize_email( $email );
@@ -784,7 +781,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                 if ( $action == 'yes' ) {
                     $this->set_is_tracking_allowed( true, $plugin );
                     // Run this straightaway
-                    add_action( 'admin_init', array( $this, 'force_tracking' ) );
+                    add_action( 'admin_init', [ $this, 'force_tracking' ] );
                 } else {
                     $this->set_is_tracking_allowed( false, $plugin );
                 }
@@ -822,17 +819,16 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
             if ( $is_local ) {
                 $this->update_block_notice();
             } else {
-
                 // Display the notice requesting permission to track
                 // Retrieve current plugin information
                 $plugin = $this->plugin_data();
                 $plugin_name = $plugin['Name'];
 
                 // Args to add to query if user opts in to tracking
-                $yes_args = array(
+                $yes_args = [
                     'plugin' => $this->plugin_name,
                     'plugin_action' => 'yes',
-                );
+                ];
 
                 // Decide how to request permission to collect email addresses
                 if ( $this->marketing == 1 ) {
@@ -843,10 +839,10 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                     $yes_args['marketing'] = 'yes';
                 }
                 $url_yes = add_query_arg( $yes_args );
-                $url_no = add_query_arg( array(
+                $url_no = add_query_arg( [
                     'plugin' => $this->plugin_name,
                     'plugin_action' => 'no',
-                ) );
+                ] );
 
                 // Decide on notice text
                 if ( $this->marketing != 1 ) {
@@ -896,14 +892,14 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                 $plugin = $this->plugin_data();
                 $plugin_name = $plugin['Name'];
 
-                $url_yes = add_query_arg( array(
+                $url_yes = add_query_arg( [
                     'plugin' => $this->plugin_name,
                     'marketing_optin' => 'yes',
-                ) );
-                $url_no = add_query_arg( array(
+                ] );
+                $url_no = add_query_arg( [
                     'plugin' => $this->plugin_name,
                     'marketing_optin' => 'no',
-                ) );
+                ] );
 
                 $marketing_text = sprintf(
                     __( 'Thank you for opting in to tracking. Would you like to receive occasional news about this %s, including details of new features and special offers?', 'singularity' ),
@@ -950,10 +946,10 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
          * @since 1.0.0
          */
         public function form_default_text() {
-            $form = array();
+            $form = [];
             $form['heading'] = __( 'Sorry to see you go', 'singularity' );
             $form['body'] = __( 'Before you deactivate the plugin, would you quickly give us your reason for doing so?', 'singularity' );
-            $form['options'] = array(
+            $form['options'] = [
                 __( 'Set up is too difficult', 'singularity' ),
                 __( 'Lack of documentation', 'singularity' ),
                 __( 'Not the features I wanted', 'singularity' ),
@@ -961,7 +957,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                 __( 'Installed by mistake', 'singularity' ),
                 __( 'Only required temporarily', 'singularity' ),
                 __( 'Didn\'t work', 'singularity' ),
-            );
+            ];
             $form['details'] = __( 'Details (optional)', 'singularity' );
 
             return $form;

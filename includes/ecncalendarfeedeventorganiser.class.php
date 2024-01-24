@@ -4,7 +4,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventOrganiser' ) ) {
     class ECNCalendarFeedEventOrganiser extends ECNCalendarFeed {
 
         public function get_available_format_tags() {
-            return array(
+            return [
             'start_date',
             'start_time',
             'end_date',
@@ -28,21 +28,21 @@ if ( ! class_exists( 'ECNCalendarFeedEventOrganiser' ) ) {
             'categories',
             'category_links',
             'all_day',
-        );
+        ];
         }
 
         /**
          * @param $start_date int
-         * @param $end_date int
-         * @param $data array
+         * @param $end_date   int
+         * @param $data       array
          *
          * @return ECNCalendarEvent[]
          */
-        public function get_events( $start_date, $end_date, $data = array() ) {
+        public function get_events( $start_date, $end_date, $data = [] ) {
             global $post;
-            $retval = array();
+            $retval = [];
 
-            $events = eo_get_events( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => 10000, 'post_status' => 'publish', 'event_start_after' => wp_date( 'Y-m-d H:i', $start_date ), 'event_start_before' => wp_date( 'Y-m-d H:i', $end_date ) ), $start_date, $end_date, $data ) );
+            $events = eo_get_events( apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), [ 'posts_per_page' => 10000, 'post_status' => 'publish', 'event_start_after' => wp_date( 'Y-m-d H:i', $start_date ), 'event_start_before' => wp_date( 'Y-m-d H:i', $end_date ) ], $start_date, $end_date, $data ) );
 
             foreach ( $events as $post ) {
                 setup_postdata( $post );
@@ -66,7 +66,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventOrganiser' ) ) {
                 }
 
                 $address = eo_get_venue_address();
-                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), array(
+                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), [
                 'plugin' => $this->get_identifier(),
                 'start_date' => $current_start_date,
                 'end_date' => $current_end_date,
@@ -86,7 +86,7 @@ if ( ! class_exists( 'ECNCalendarFeedEventOrganiser' ) ) {
                 'event_image_url' => $image_url,
                 'colour' => eo_get_event_color(),
                 'all_day' => eo_is_all_day(),
-            ) ) );
+            ] ) );
             }
 
             return $retval;

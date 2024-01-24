@@ -13,14 +13,14 @@ class TheEventsCalendarTest extends WP_UnitTestCase {
         date_default_timezone_set( get_option( 'timezone_string' ) );
 
         require_once __DIR__ . '/../../the-events-calendar/the-events-calendar.php';
-        update_option( 'active_plugins', array( 'event-calendar-newsletter/event-calendar-newsletter.php', 'the-events-calendar/the-events-calendar.php' ) );
+        update_option( 'active_plugins', [ 'event-calendar-newsletter/event-calendar-newsletter.php', 'the-events-calendar/the-events-calendar.php' ] );
         Tribe__Events__Main::activate();
         self::$feed = ECNCalendarFeedFactory::create( 'the-events-calendar' );
         self::createSampleEvents();
     }
 
     public static function createSampleEvents() {
-        $venue_id = tribe_create_venue( array(
+        $venue_id = tribe_create_venue( [
             'post_status' => 'publish',
             'Venue' => 'The Pheasant Plucker',
             'Country' => 'CA',
@@ -29,16 +29,16 @@ class TheEventsCalendarTest extends WP_UnitTestCase {
             'Province' => 'Ontario',
             'Zip' => 'L8N 1P7',
             'Phone' => '(905) 529-9000',
-        ) );
-        $organizer_id = tribe_create_organizer( array(
+        ] );
+        $organizer_id = tribe_create_organizer( [
             'post_status' => 'publish',
             'Organizer' => 'Brian Hogg',
             'Email' => 'brian@brianhogg.com',
             'Website' => 'https://brianhogg.com',
             'Phone' => '905-555-2343',
-        ) );
+        ] );
 
-        tribe_create_event( array(
+        tribe_create_event( [
             'post_status' => 'publish',
             'post_title' => 'Evening Event',
             'post_content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit est eu est pellentesque posuere. Donec in nisi commodo, commodo velit a, convallis dui. Pellentesque ut est leo. Phasellus nec lobortis eros. Sed lacus mi, viverra in dolor quis, pharetra sollicitudin felis. Fusce neque massa, porttitor quis velit in, rutrum hendrerit massa. Mauris id diam a sem sollicitudin aliquet. Phasellus lobortis augue pulvinar efficitur sollicitudin. Duis imperdiet a urna a efficitur. Sed at augue ante. Vivamus ut lectus eros. Donec eget quam magna. Sed facilisis, lectus sit amet lacinia fringilla, leo felis congue purus, eget tristique massa risus at ipsum.
@@ -59,11 +59,11 @@ Nunc ut neque mi. Etiam consequat sollicitudin egestas. Nam elementum mollis nul
             'EventShowMapLink' => true,
             'EventShowMap' => true,
             'EventCost' => '50',
-            'Venue' => array( 'VenueID' => $venue_id ),
-            'Organizer' => array( 'OrganizerID' => $organizer_id ),
-        ) );
+            'Venue' => [ 'VenueID' => $venue_id ],
+            'Organizer' => [ 'OrganizerID' => $organizer_id ],
+        ] );
 
-        tribe_create_event( array(
+        tribe_create_event( [
             'post_status' => 'publish',
             'post_title' => 'All day in 4 days',
             'post_content' => 'Nullam nec ex consequat, volutpat justo vel, ullamcorper eros. Aliquam aliquet purus metus, in convallis libero placerat eu. Maecenas molestie blandit libero nec lacinia. Aliquam ac dui eget elit auctor luctus. Proin eget dui eleifend, fringilla metus quis, vestibulum ligula. Phasellus eget lorem ut orci pharetra aliquam. Fusce malesuada dolor ac urna pulvinar lobortis. Curabitur ac leo facilisis, imperdiet purus a, luctus enim. Curabitur iaculis dapibus nunc, in sodales diam gravida sed. Proin et orci maximus, mattis magna quis, hendrerit elit. Nunc rhoncus leo nisi, scelerisque volutpat enim ornare at.',
@@ -74,12 +74,12 @@ Nunc ut neque mi. Etiam consequat sollicitudin egestas. Nam elementum mollis nul
             'EventShowMapLink' => true,
             'EventShowMap' => true,
             'EventCost' => '0',
-            'Venue' => array( 'VenueID' => $venue_id ),
-            'Organizer' => array( 'OrganizerID' => $organizer_id ),
-        ) );
+            'Venue' => [ 'VenueID' => $venue_id ],
+            'Organizer' => [ 'OrganizerID' => $organizer_id ],
+        ] );
 
         // should not be included, hide from upcoming
-        $hidden_event_id = tribe_create_event( array(
+        $hidden_event_id = tribe_create_event( [
             'post_status' => 'publish',
             'post_title' => 'Event to ignore',
             'post_content' => 'Sed egestas libero eu neque sagittis laoreet. Quisque sed tortor ac orci posuere dignissim rutrum sed purus. Curabitur in nisl volutpat, commodo erat vel, ultricies odio. Donec euismod nisi et tortor pretium, a porta tellus sodales. Etiam facilisis, metus vitae ultrices malesuada, lorem turpis ultrices elit, sit amet accumsan ex mi nec mi. Nunc ac elit fermentum ipsum ultricies luctus. Nam non mollis erat. Aliquam egestas sapien sapien, nec suscipit ante lacinia eu. Fusce mollis eu risus a commodo. Nunc pretium id dolor sed volutpat. Suspendisse nec est bibendum, gravida ligula ut, sagittis magna. Nunc quis mauris diam. Aliquam at nulla nec diam pellentesque viverra vel quis purus. Nunc et eros nunc. Suspendisse potenti.',
@@ -90,9 +90,9 @@ Nunc ut neque mi. Etiam consequat sollicitudin egestas. Nam elementum mollis nul
             'EventShowMapLink' => true,
             'EventShowMap' => true,
             'EventCost' => '0',
-            'Venue' => array( 'VenueID' => $venue_id ),
-            'Organizer' => array( 'OrganizerID' => $organizer_id ),
-        ) );
+            'Venue' => [ 'VenueID' => $venue_id ],
+            'Organizer' => [ 'OrganizerID' => $organizer_id ],
+        ] );
         update_post_meta( $hidden_event_id, '_EventHideFromUpcoming', 'yes' );
     }
 
@@ -122,11 +122,11 @@ Nunc ut neque mi. Etiam consequat sollicitudin egestas. Nam elementum mollis nul
     public function testProcessOutput() {
         global $ecn_admin_class;
 
-        $data = array(
+        $data = [
             'events_future_in_days' => 4,
             'event_calendar' => 'the-events-calendar',
             'format' => '{title} {start_date} {start_time}',
-        );
+        ];
         $output = $ecn_admin_class->process_output( $data );
         $this->assertEquals( "\nEvening Event " . date_i18n( get_option( 'date_format' ), self::$time + ( 86400 * 2 ) ) . " 6:30 pm\nAll day in 4 days " . date_i18n( get_option( 'date_format' ), self::$time + ( 86400 * 4 ) ) . ' 12:00 am', $output, 'Should fetch right data output from the events calendar' );
     }

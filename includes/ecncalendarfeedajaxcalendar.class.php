@@ -12,7 +12,7 @@ if ( ! class_exists( 'ECNCalendarFeedAjaxCalendar' ) ) {
         protected $REPEAT_YEAR = 3;
 
         public function get_available_format_tags() {
-            return array(
+            return [
             'start_date',
             'end_date',
             'title',
@@ -30,11 +30,11 @@ if ( ! class_exists( 'ECNCalendarFeedAjaxCalendar' ) ) {
             'repeat_frequency',
             'repeat_interval',
             'repeat_end',
-        );
+        ];
         }
 
-        public function get_events( $start_date, $end_date, $data = array() ) {
-            $retval = array();
+        public function get_events( $start_date, $end_date, $data = [] ) {
+            $retval = [];
             $aec = new ajax_event_calendar();
             $aec_start_date = date( 'Y-m-d', $start_date );
             $aec_end_date = date( 'Y-m-d', $end_date );
@@ -42,7 +42,7 @@ if ( ! class_exists( 'ECNCalendarFeedAjaxCalendar' ) ) {
 
             foreach ( (array) $aec->process_events( $events, $aec_start_date, $aec_end_date, true ) as $event ) {
                 $aec_event = $aec->db_query_event( $event['id'] );
-                $retval[] = new ECNCalendarEvent( array(
+                $retval[] = new ECNCalendarEvent( [
                 'start_date' => $event['start'],
                 'end_date' => $event['end'],
                 'title' => stripslashes_deep( $event['title'] ),
@@ -60,7 +60,7 @@ if ( ! class_exists( 'ECNCalendarFeedAjaxCalendar' ) ) {
                 'repeat_frequency' => $aec_event->repeat_freq,
                 'repeat_interval' => $this->get_repeat_frequency_from_feed_frequency( $aec_event->repeat_int ),
                 'repeat_end' => $aec_event->repeat_end,
-            ) );
+            ] );
             }
 
             return $retval;

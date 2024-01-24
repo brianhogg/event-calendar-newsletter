@@ -3,14 +3,14 @@
 if ( ! class_exists( 'ECNCalendarFeedFactory' ) ) {
     class ECNCalendarFeedFactory {
 
-        private static $_plugins = array(
-        'AjaxCalendar',
-        'TheEventsCalendar',
-        'GoogleCalendarEvents',
-        'Ai1ec',
-        'EventsManager',
-        'EventOrganiser',
-    );
+        private static $_plugins = [
+                                                        'AjaxCalendar',
+                                                        'TheEventsCalendar',
+                                                        'GoogleCalendarEvents',
+                                                        'Ai1ec',
+                                                        'EventsManager',
+                                                        'EventOrganiser',
+                                                    ];
 
         public static function create( $identifier ) {
             foreach ( self::get_available_calendar_feeds() as $feed ) {
@@ -27,7 +27,7 @@ if ( ! class_exists( 'ECNCalendarFeedFactory' ) ) {
          * @return ECNCalendarFeed[]
          */
         public static function get_available_calendar_feeds() {
-            $retval = array();
+            $retval = [];
 
             foreach ( apply_filters( 'ecn_available_plugins', self::$_plugins ) as $plugin ) {
                 $class_name = "ECNCalendarFeed$plugin";

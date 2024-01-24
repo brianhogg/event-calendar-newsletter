@@ -4,7 +4,7 @@ Donate link: https://eventcalendarnewsletter.com/
 Tags: Event Calendar Newsletter, WordPress events calendar, WordPress event calendar, The Events Calendar, All-in-One Event Calendar
 Requires at least: 5.8
 Tested up to: 6.4
-Stable tag: 2.16
+Stable tag: 2.16.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,9 @@ If you don't already have your event calendar plugin installed and configured, y
 4. Choose which events to include by how far in the future, Pro version can filter by categories or tags
 
 == Changelog ==
+
+= 2.16.1 =
+* Updating discount form
 
 = 2.16 =
 * Improved date/time support for several other calendars

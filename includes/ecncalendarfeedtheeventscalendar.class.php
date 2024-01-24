@@ -4,7 +4,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
     class ECNCalendarFeedTheEventsCalendar extends ECNCalendarFeed {
 
         public function get_available_format_tags() {
-            return array(
+            return [
             'start_date',
             'start_time',
             'end_date',
@@ -43,21 +43,21 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
             'all_day',
             'recurring',
             'featured',
-        );
+        ];
         }
 
         /**
          * @param $start_date int
-         * @param $end_date int
-         * @param $data array
+         * @param $end_date   int
+         * @param $data       array
          *
          * @return ECNCalendarEvent[]
          */
-        public function get_events( $start_date, $end_date, $data = array() ) {
+        public function get_events( $start_date, $end_date, $data = [] ) {
             global $post;
-            $retval = array();
+            $retval = [];
 
-            $args = apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), array( 'posts_per_page' => -1, 'hide_upcoming' => true, 'post_status' => 'publish', 'meta_query' => array( 'relation' => 'AND', array( 'key' => '_EventEndDate', 'value' => array( wp_date( 'Y-m-d H:i', $start_date ), wp_date( 'Y-m-d H:i', $end_date ) ), 'compare' => 'BETWEEN', 'type' => 'DATETIME' ) ) ), $start_date, $end_date, $data );
+            $args = apply_filters( 'ecn_fetch_events_args-' . $this->get_identifier(), [ 'posts_per_page' => -1, 'hide_upcoming' => true, 'post_status' => 'publish', 'meta_query' => [ 'relation' => 'AND', [ 'key' => '_EventEndDate', 'value' => [ wp_date( 'Y-m-d H:i', $start_date ), wp_date( 'Y-m-d H:i', $end_date ) ], 'compare' => 'BETWEEN', 'type' => 'DATETIME' ] ] ], $start_date, $end_date, $data );
             $events = tribe_get_events( $args );
 
             foreach ( $events as $post ) {
@@ -85,7 +85,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                     $image_url = $image_alt = false;
                 }
 
-                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), array(
+                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), [
                 'plugin' => $this->get_identifier(),
                 'start_date' => $current_start_date,
                 'end_date' => $current_end_date,
@@ -121,7 +121,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                 'gcal_link_url' => ( function_exists( 'tribe_get_gcal_link' ) ? Tribe__Events__Main::instance()->esc_gcal_url( tribe_get_gcal_link() ) : '' ),
                 'ical_link_url' => ( function_exists( 'tribe_get_single_ical_link' ) ? esc_url( tribe_get_single_ical_link() ) : '' ),
                 'recurrence_text' => ( function_exists( 'tribe_get_recurrence_text' ) ? tribe_get_recurrence_text() : '' ),
-            ), $post ) );
+            ], $post ) );
                 do_action( 'tribe_events_inside_after_loop' );
             }
             $retval = $this->sort_events_by_start_date( $retval );

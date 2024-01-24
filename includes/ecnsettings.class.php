@@ -4,21 +4,21 @@ if ( ! class_exists( 'ECNSettings' ) ) {
 
         public function __construct() {
             if ( is_admin() ) {
-                add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
+                add_action( 'admin_menu', [ &$this, 'admin_menu' ] );
             }
-            add_filter( 'ecn_image_size', array( &$this, 'filter_image_size' ), 1 );
-            add_filter( 'ecn_admin_capability', array( &$this, 'filter_allowed_roles' ) );
+            add_filter( 'ecn_image_size', [ &$this, 'filter_image_size' ], 1 );
+            add_filter( 'ecn_admin_capability', [ &$this, 'filter_allowed_roles' ] );
         }
 
         public function admin_menu() {
             add_submenu_page(
-            'eventcalendarnewsletter',
-            __( 'Event Calendar Newsletter Pro', 'event-calendar-newsletter' ),
-            __( 'Settings', 'event-calendar-newsletter' ),
-            apply_filters( 'ecn_admin_capability', 'add_users' ),
-            'ecn-settings',
-            array( &$this, 'settings_page' )
-        );
+                'eventcalendarnewsletter',
+                __( 'Event Calendar Newsletter Pro', 'event-calendar-newsletter' ),
+                __( 'Settings', 'event-calendar-newsletter' ),
+                apply_filters( 'ecn_admin_capability', 'add_users' ),
+                'ecn-settings',
+                [ &$this, 'settings_page' ]
+            );
         }
 
         public function settings_page() {
@@ -28,11 +28,11 @@ if ( ! class_exists( 'ECNSettings' ) ) {
                 $this->settings_page_save();
             }
 
-            $data = array( 'image_size' => array() );
+            $data = [ 'image_size' => [] ];
 
             // Default image sizes for thumbnails
             foreach ( get_intermediate_image_sizes() as $_size ) {
-                if ( in_array( $_size, array( 'thumbnail', 'medium', 'medium_large', 'large' ) ) ) {
+                if ( in_array( $_size, [ 'thumbnail', 'medium', 'medium_large', 'large' ] ) ) {
                     $data['image_size'][$_size] = $_size . ' (' . get_option( "{$_size}_size_w" ) . 'x' . get_option( "{$_size}_size_h" ) . ')';
                 } elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
                     $data['image_size'][$_size] = $_size . ' (' . $_wp_additional_image_sizes[ $_size ]['width'] . 'x' . $_wp_additional_image_sizes[ $_size ]['height'] . ')';
@@ -97,8 +97,6 @@ if ( ! class_exists( 'ECNSettings' ) ) {
         /**
          * Default image size to use for output
          *
-         * @param $image_size
-         *
          * @return mixed
          */
         public function filter_image_size( $image_size ) {
@@ -107,8 +105,6 @@ if ( ! class_exists( 'ECNSettings' ) ) {
 
         /**
          * Filter using our custom ecn_admin capability, if set
-         *
-         * @param $cap
          */
         public function filter_allowed_roles( $cap ) {
             if ( get_role( 'administrator' )->has_cap( 'ecn_admin' ) ) {

@@ -886,7 +886,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                 $this->set_can_collect_email( sanitize_text_field( $_GET['marketing_optin'] ), $this->plugin_name );
                 // Do tracking
                 $this->do_tracking( true );
-            } elseif ( isset( $_GET['marketing'] ) && $_GET['marketing'] == 'yes' ) {
+            } elseif ( isset( $_GET['marketing'], $_GET['plugin'] ) && $_GET['marketing'] === 'yes' && $_GET['plugin'] === $this->plugin_name ) {
                 // Display the notice requesting permission to collect email address
                 // Retrieve current plugin information
                 $plugin = $this->plugin_data();
@@ -902,7 +902,7 @@ if ( ! class_exists( 'ECN_Plugin_Usage_Tracker' ) ) {
                 ] );
 
                 $marketing_text = sprintf(
-                    __( 'Thank you for opting in to tracking. Would you like to receive occasional news about this %s, including details of new features and special offers?', 'singularity' ),
+                    __( 'Thank you for opting in to tracking. Would you like to receive occasional news about this %s, including details of new features and special offers?', 'event-calendar-newsletter' ),
                     $this->what_am_i
                 );
                 $marketing_text = apply_filters( 'wisdom_marketing_text_' . esc_attr( $this->plugin_name ), $marketing_text ); ?>

@@ -33,8 +33,7 @@ If you have a WordPress event calendar installed on your website, you can begin 
 
 Event Calendar Newsletter works seamlessly with the following WordPress event calendars:
 
-* The Events Calendar by Modern Tribe
-* All-in-One Event Calendar by Time.ly
+* The Events Calendar by StellarWP (formerly by Modern Tribe)
 * Event Organiser
 * Events Manager
 * Simple Calendar (aka Google Calendar Events)
@@ -48,6 +47,7 @@ Events Calendar Newsletter Pro supports all of the above-mentioned event calenda
 * Geodirectory Events
 * Calendarize it!
 * Eventum (by Templatic)
+* EventPrime
 
 **Event Calendar Newsletter Main Features**
 

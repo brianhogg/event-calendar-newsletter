@@ -241,7 +241,7 @@ if ( ! class_exists( 'ECNAdmin' ) ) {
                 $output .= $this->get_output_from_event( $event, $args, $previous_date );
                 $previous_date = $event->get_start_date();
 
-                if ( apply_filters( 'ecn_limit_total_output', false, $args['event_number'] ) ) {
+                if ( apply_filters( 'ecn_limit_total_output', false, $args['event_number'], $args ) ) {
                     break;
                 }
             }

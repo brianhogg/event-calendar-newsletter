@@ -11,6 +11,8 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
         private $_organizers = [];
 
+        private $_venues = [];
+
         private $_start_date;
 
         private $_published_date;
@@ -112,6 +114,10 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
             if ( isset( $args['organizers'] ) ) {
                 $this->set_organizers( $args['organizers'] );
+            }
+
+            if ( isset( $args['venues'] ) ) {
+                $this->set_venues( $args['venues'] );
             }
 
             if ( isset( $args['tags'] ) ) {
@@ -309,6 +315,7 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             'end_date' => __( 'End Date', 'event-calendar-newsletter' ),
             'end_time' => __( 'End Time', 'event-calendar-newsletter' ),
             'instant_event' => __( 'No End Date Flag', 'event-calendar-newsletter' ),
+            'location_names' => __( 'Location Names', 'event-calendar-newsletter' ),
             'location_name' => __( 'Location Name', 'event-calendar-newsletter' ),
             'location_address' => __( 'Location Address', 'event-calendar-newsletter' ),
             'location_city' => __( 'Location City', 'event-calendar-newsletter' ),
@@ -740,6 +747,16 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             }
         }
 
+        public function get_venues() {
+            return $this->_venues;
+        }
+
+        public function set_venues( $venues ) {
+            if ( is_array( $venues ) ) {
+                $this->_venues = $venues;
+            }
+        }
+
         public function set_tags( $tags ) {
             if ( is_array( $tags ) ) {
                 $this->_tags = $tags;
@@ -852,6 +869,10 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
             return $taxonomy->name;
         }
 
+        public function get_venue_name( $venue ) {
+            return $venue->post_title;
+        }
+
         public function get_category_link( $category ) {
             return '<a href="' . esc_url( get_term_link( $category ) ) . '" alt="' . esc_attr( sprintf( __( 'View all events in %s', 'event-calendar-newsletter' ), $category->name ) ) . '">' . esc_html( $category->name ) . '</a>';
         }
@@ -895,6 +916,10 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
 
                     case 'organizers':
                         $output = str_replace( '{organizers}', implode( ', ', array_map( [ $this, 'get_taxonomy_name' ], $this->get_organizers() ) ), $output );
+                        break;
+
+                    case 'location_names':
+                        $output = str_replace( '{location_names}', implode( ', ', array_map( [ $this, 'get_venue_name' ], $this->get_venues() ) ), $output );
                         break;
 
                     case 'start_date':

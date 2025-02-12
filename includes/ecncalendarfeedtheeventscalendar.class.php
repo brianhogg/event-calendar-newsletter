@@ -125,7 +125,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                 ];
 
                 if ( function_exists( 'tribe_get_venues' ) ) {
-                    $data['venues'] = tribe_get_venues();
+                    $data['venues'] = tribe_get_venues( false, -1, true, [ 'event' => $event->ID ] );
                 }
 
                 $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), $data, $post ) );

@@ -983,10 +983,10 @@ if ( ! class_exists( 'ECNCalendarEvent' ) ) {
                         break;
                     default:
                         if ( method_exists( $this, "get_$tag" ) ) {
-                            $output = str_replace( '{' . $tag . '}', $this->{"get_$tag"}(), $output );
+                            $output = str_replace( '{' . $tag . '}', $this->{"get_$tag"}() ?? '', $output );
                         } elseif ( array_key_exists( $tag, $this->get_additional_data() ) ) {
                             $additional_data = $this->get_additional_data();
-                            $output = str_replace( '{' . $tag . '}', $additional_data[$tag], $output );
+                            $output = str_replace( '{' . $tag . '}', $additional_data[$tag] ?? '', $output );
                         } elseif ( apply_filters( 'ecn_handle_tag_output', false, $tag, $this ) ) {
                             $output = str_replace( '{' . $tag . '}', apply_filters( 'ecn_generate_custom_output', '', $tag, $this ), $output );
                         }

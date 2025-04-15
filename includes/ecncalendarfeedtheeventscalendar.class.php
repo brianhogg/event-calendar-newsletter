@@ -69,11 +69,20 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                 $current_end_date = tribe_get_end_date( null, true, 'Y-m-d H:i:s' );
 
                 if ( ! isset( $data['in_progress_events'] ) || ! $data['in_progress_events'] ) {
-                    if ( strtotime( $current_start_date ) < $start_date ) {
+                    try {
+                        $timezone = new DateTimeZone( get_post_meta( get_the_ID(), '_EventTimezone', true ) );
+                        $current_start_date_obj = new DateTime( $current_start_date, $timezone );
+                        $current_start_timestamp = $current_start_date_obj->getTimestamp();
+                    } catch ( Exception $e ) {
+                        error_log( 'Error creating DateTime object: ' . $e->getMessage() );
                         continue;
                     }
 
-                    if ( strtotime( $current_start_date ) > $end_date ) {
+                    if ( $current_start_timestamp < $start_date ) {
+                        continue;
+                    }
+
+                    if ( $current_start_timestamp > $end_date ) {
                         break;
                     }
                 }

@@ -146,7 +146,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                 $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), $data, $post ) );
                 do_action( 'tribe_events_inside_after_loop' );
             }
-            $retval = $this->sort_events_by_start_date( $retval );
+            $retval = apply_filters( 'ecn_get_events_retval', $this->sort_events_by_start_date( $retval ), $this, $args, $start_date, $end_date );
 
             return $retval;
         }

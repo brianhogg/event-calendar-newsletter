@@ -73,6 +73,17 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                     $timezone = get_post_meta( get_the_ID(), '_EventTimezone', true );
 
                     if ( $timezone ) {
+                        $timezone = get_post_meta( get_the_ID(), '_EventTimezone', true );
+
+                        // Something like UTC+0 is invalid for DateTimeZone, so we'd need to convert.
+                        if ( preg_match( '/^UTC([+-])(\d{1,2})(?::(\d{2}))?$/', $timezone, $matches ) ) {
+                            $sign  = $matches[1];
+                            $hours = str_pad( $matches[2], 2, '0', STR_PAD_LEFT );
+                            $mins  = isset( $matches[3] ) ? str_pad( $matches[3], 2, '0', STR_PAD_LEFT ) : '00';
+
+                            $timezone = $sign . $hours . $mins; // e.g. "+0130", "-0045"
+                        }
+
                         $timezone_obj = timezone_open( $timezone );
 
                         if ( $timezone_obj ) {
@@ -101,7 +112,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                     $image_url = $image_alt = false;
                 }
 
-                $data = [
+                $event_data = [
                     'plugin' => $this->get_identifier(),
                     'start_date' => $current_start_date,
                     'end_date' => $current_end_date,
@@ -140,10 +151,10 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                 ];
 
                 if ( function_exists( 'tribe_get_venues' ) ) {
-                    $data['venues'] = tribe_get_venues( false, -1, true, [ 'event' => $event->ID ] );
+                    $event_data['venues'] = tribe_get_venues( false, -1, true, [ 'event' => $event->ID ] );
                 }
 
-                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), $data, $post ) );
+                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), $event_data, $post ) );
                 do_action( 'tribe_events_inside_after_loop' );
             }
             $retval = apply_filters( 'ecn_get_events_retval', $this->sort_events_by_start_date( $retval ), $this, $args, $start_date, $end_date );

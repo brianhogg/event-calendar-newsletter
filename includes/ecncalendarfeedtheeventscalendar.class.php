@@ -77,9 +77,9 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
 
                         // Something like UTC+0 is invalid for DateTimeZone, so we'd need to convert.
                         if ( preg_match( '/^UTC([+-])(\d{1,2})(?::(\d{2}))?$/', $timezone, $matches ) ) {
-                            $sign  = $matches[1];
+                            $sign = $matches[1];
                             $hours = str_pad( $matches[2], 2, '0', STR_PAD_LEFT );
-                            $mins  = isset( $matches[3] ) ? str_pad( $matches[3], 2, '0', STR_PAD_LEFT ) : '00';
+                            $mins = isset( $matches[3] ) ? str_pad( $matches[3], 2, '0', STR_PAD_LEFT ) : '00';
 
                             $timezone = $sign . $hours . $mins; // e.g. "+0130", "-0045"
                         }

@@ -20,6 +20,7 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
             'location_country',
             'location_phone',
             'location_website',
+            'location_names',
             'contact_name',
             'contact_email',
             'contact_website',
@@ -66,13 +67,39 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                 do_action( 'tribe_events_inside_before_loop' );
                 $current_start_date = tribe_get_start_date( null, true, 'Y-m-d H:i:s' );
                 $current_end_date = tribe_get_end_date( null, true, 'Y-m-d H:i:s' );
+                $current_start_timestamp = strtotime( $current_start_date );
 
                 if ( ! isset( $data['in_progress_events'] ) || ! $data['in_progress_events'] ) {
-                    if ( strtotime( $current_start_date ) < $start_date ) {
+                    $timezone = get_post_meta( get_the_ID(), '_EventTimezone', true );
+
+                    if ( $timezone ) {
+                        $timezone = get_post_meta( get_the_ID(), '_EventTimezone', true );
+
+                        // Something like UTC+0 is invalid for DateTimeZone, so we'd need to convert.
+                        if ( preg_match( '/^UTC([+-])(\d{1,2})(?::(\d{2}))?$/', $timezone, $matches ) ) {
+                            $sign = $matches[1];
+                            $hours = str_pad( $matches[2], 2, '0', STR_PAD_LEFT );
+                            $mins = isset( $matches[3] ) ? str_pad( $matches[3], 2, '0', STR_PAD_LEFT ) : '00';
+
+                            $timezone = $sign . $hours . $mins; // e.g. "+0130", "-0045"
+                        }
+
+                        $timezone_obj = timezone_open( $timezone );
+
+                        if ( $timezone_obj ) {
+                            $current_start_date_obj = date_create( $current_start_date, $timezone_obj );
+
+                            if ( $current_start_date_obj ) {
+                                $current_start_timestamp = $current_start_date_obj->getTimestamp();
+                            }
+                        }
+                    }
+
+                    if ( $current_start_timestamp < $start_date ) {
                         continue;
                     }
 
-                    if ( strtotime( $current_start_date ) > $end_date ) {
+                    if ( $current_start_timestamp > $end_date ) {
                         break;
                     }
                 }
@@ -85,46 +112,52 @@ if ( ! class_exists( 'ECNCalendarFeedTheEventsCalendar' ) ) {
                     $image_url = $image_alt = false;
                 }
 
-                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), [
-                'plugin' => $this->get_identifier(),
-                'start_date' => $current_start_date,
-                'end_date' => $current_end_date,
-                'published_date' => get_the_date( 'Y-m-d H:i:s', $event->ID ),
-                'title' => stripslashes_deep( $event->post_title ),
-                'categories' => get_the_terms( $event->ID, 'tribe_events_cat' ),
-                'tags' => get_the_terms( $event->ID, 'post_tag' ),
-                'description' => stripslashes_deep( $event->post_content ),
-                'excerpt' => stripslashes_deep( $event->post_excerpt ),
-                'location_name' => tribe_get_venue(),
-                'location_address' => tribe_get_address(),
-                'location_city' => tribe_get_city(),
-                'location_state' => tribe_get_state(),
-                'location_zip' => tribe_get_zip(),
-                'location_country' => tribe_get_country(),
-                'location_phone' => tribe_get_phone(),
-                'location_website' => tribe_get_venue_website_url(),
-                'contact_name' => tribe_get_organizer(),
-                'contact_email' => ( tribe_get_organizer() ? tribe_get_organizer_email() : '' ),
-                'contact_website' => ( tribe_get_organizer() ? tribe_get_organizer_website_url() : '' ),
-                'contact_phone' => ( tribe_get_organizer() ? tribe_get_organizer_phone() : '' ),
-                'organizer_name' => tribe_get_organizer(),
-                'organizer_email' => ( tribe_get_organizer() ? tribe_get_organizer_email() : '' ),
-                'organizer_website' => ( tribe_get_organizer() ? tribe_get_organizer_website_url() : '' ),
-                'organizer_phone' => ( tribe_get_organizer() ? tribe_get_organizer_phone() : '' ),
-                'link' => get_the_permalink(),
-                'event_image_url' => $image_url,
-                'event_image_alt' => $image_alt,
-                'event_cost' => tribe_get_formatted_cost(),
-                'event_website' => ( function_exists( 'tribe_get_event_website_url' ) ? tribe_get_event_website_url() : '' ),
-                'all_day' => tribe_event_is_all_day(),
-                'featured' => get_post_meta( get_the_ID(), '_tribe_featured', true ) ? true : false,
-                'gcal_link_url' => ( function_exists( 'tribe_get_gcal_link' ) ? Tribe__Events__Main::instance()->esc_gcal_url( tribe_get_gcal_link() ) : '' ),
-                'ical_link_url' => ( function_exists( 'tribe_get_single_ical_link' ) ? esc_url( tribe_get_single_ical_link() ) : '' ),
-                'recurrence_text' => ( function_exists( 'tribe_get_recurrence_text' ) ? tribe_get_recurrence_text() : '' ),
-            ], $post ) );
+                $event_data = [
+                    'plugin' => $this->get_identifier(),
+                    'start_date' => $current_start_date,
+                    'end_date' => $current_end_date,
+                    'published_date' => get_the_date( 'Y-m-d H:i:s', $event->ID ),
+                    'title' => stripslashes_deep( $event->post_title ),
+                    'categories' => get_the_terms( $event->ID, 'tribe_events_cat' ),
+                    'tags' => get_the_terms( $event->ID, 'post_tag' ),
+                    'description' => stripslashes_deep( $event->post_content ),
+                    'excerpt' => stripslashes_deep( $event->post_excerpt ),
+                    'location_name' => tribe_get_venue(),
+                    'location_address' => tribe_get_address(),
+                    'location_city' => tribe_get_city(),
+                    'location_state' => tribe_get_state(),
+                    'location_zip' => tribe_get_zip(),
+                    'location_country' => tribe_get_country(),
+                    'location_phone' => tribe_get_phone(),
+                    'location_website' => tribe_get_venue_website_url(),
+                    'contact_name' => tribe_get_organizer(),
+                    'contact_email' => ( tribe_get_organizer() ? tribe_get_organizer_email() : '' ),
+                    'contact_website' => ( tribe_get_organizer() ? tribe_get_organizer_website_url() : '' ),
+                    'contact_phone' => ( tribe_get_organizer() ? tribe_get_organizer_phone() : '' ),
+                    'organizer_name' => tribe_get_organizer(),
+                    'organizer_email' => ( tribe_get_organizer() ? tribe_get_organizer_email() : '' ),
+                    'organizer_website' => ( tribe_get_organizer() ? tribe_get_organizer_website_url() : '' ),
+                    'organizer_phone' => ( tribe_get_organizer() ? tribe_get_organizer_phone() : '' ),
+                    'link' => get_the_permalink(),
+                    'event_image_url' => $image_url,
+                    'event_image_alt' => $image_alt,
+                    'event_cost' => tribe_get_formatted_cost(),
+                    'event_website' => ( function_exists( 'tribe_get_event_website_url' ) ? tribe_get_event_website_url() : '' ),
+                    'all_day' => tribe_event_is_all_day(),
+                    'featured' => get_post_meta( get_the_ID(), '_tribe_featured', true ) ? true : false,
+                    'gcal_link_url' => ( function_exists( 'tribe_get_gcal_link' ) ? Tribe__Events__Main::instance()->esc_gcal_url( tribe_get_gcal_link() ) : '' ),
+                    'ical_link_url' => ( function_exists( 'tribe_get_single_ical_link' ) ? esc_url( tribe_get_single_ical_link() ) : '' ),
+                    'recurrence_text' => ( function_exists( 'tribe_get_recurrence_text' ) ? tribe_get_recurrence_text() : '' ),
+                ];
+
+                if ( function_exists( 'tribe_get_venues' ) ) {
+                    $event_data['venues'] = tribe_get_venues( false, -1, true, [ 'event' => $event->ID ] );
+                }
+
+                $retval[] = new ECNCalendarEvent( apply_filters( 'ecn_create_calendar_event_args-' . $this->get_identifier(), $event_data, $post ) );
                 do_action( 'tribe_events_inside_after_loop' );
             }
-            $retval = $this->sort_events_by_start_date( $retval );
+            $retval = apply_filters( 'ecn_get_events_retval', $this->sort_events_by_start_date( $retval ), $this, $args, $start_date, $end_date );
 
             return $retval;
         }

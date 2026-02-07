@@ -4,7 +4,7 @@ Donate link: https://eventcalendarnewsletter.com/
 Tags: Event Calendar Newsletter, WordPress events calendar, WordPress event calendar, The Events Calendar, All-in-One Event Calendar
 Requires at least: 5.8
 Tested up to: 6.9
-Stable tag: 2.16.2
+Stable tag: 2.17
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,13 @@ If you don't already have your event calendar plugin installed and configured, y
 4. Choose which events to include by how far in the future, Pro version can filter by categories or tags
 
 == Changelog ==
+
+= 2.17 =
+* Adding "location names" option for The Events Calendar PRO
+* Additional error handling in case the timezone is incorrect, or there's some issue creating the datetime object vs. strtotime.
+* Fix if using UTC date/time zone.
+* Avoid overwriting the saved options ($data) array in the loop.
+* Avoid warning if replacement output is null
 
 = 2.16.2 =
 * Avoid showing marketing opt-in incorrectly
